@@ -22,7 +22,7 @@ const albertSans = localFont({
   display: 'swap',
 })
 
-const BASE_URL = 'https://abineshspotlight.online'
+const BASE_URL = 'https://www.abineshspotlight.online'
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
