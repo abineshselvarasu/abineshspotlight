@@ -297,35 +297,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Analytics />
 
-        {/* JSON-LD Structured Data */}
-        <Script
+        {/* JSON-LD Structured Data — inline so Googlebot reads them without JS execution */}
+        <script
           id="schema-person"
           type="application/ld+json"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
-        <Script
+        <script
           id="schema-localbusiness"
           type="application/ld+json"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
-        <Script
+        <script
           id="schema-website"
           type="application/ld+json"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
-        <Script
+        <script
           id="schema-webpage"
           type="application/ld+json"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
         />
-        <Script
+        <script
           id="schema-breadcrumb"
           type="application/ld+json"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
 
