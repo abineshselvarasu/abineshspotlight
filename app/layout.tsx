@@ -1,21 +1,23 @@
 import type { Metadata } from 'next'
-import { Albert_Sans, DM_Serif_Display } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import Script from 'next/script'
 import './globals.css'
 
-const dmSerifDisplay = DM_Serif_Display({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['normal', 'italic'],
+const dmSerifDisplay = localFont({
+  src: [
+    { path: './fonts/DMSerifDisplay-Regular.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/DMSerifDisplay-Italic.woff2',  weight: '400', style: 'italic' },
+  ],
   variable: '--font-display',
   display: 'swap',
 })
 
-const albertSans = Albert_Sans({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  style: ['normal', 'italic'],
+const albertSans = localFont({
+  src: [
+    { path: './fonts/AlbertSans-Normal-Variable.woff2', weight: '100 900', style: 'normal' },
+    { path: './fonts/AlbertSans-Italic-Variable.woff2', weight: '100 900', style: 'italic' },
+  ],
   variable: '--font-sans',
   display: 'swap',
 })
