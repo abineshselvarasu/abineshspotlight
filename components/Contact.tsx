@@ -1,5 +1,6 @@
 'use client'
 import ShootingStarsGrid from './ShootingStarsGrid'
+import AskAI from './AskAI'
 
 export default function Contact() {
   const navLinks = [
@@ -171,11 +172,12 @@ export default function Contact() {
 
       {/* ── Bottom Bar ── */}
       <div className="relative z-10 border-t border-canvas/10">
-        <div className="container mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-sm sm:text-base font-mono text-canvas/90">
+        <div className="container mx-auto px-6 py-5 flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm sm:text-base font-mono text-canvas/90 text-center sm:text-left">
             © {new Date().getFullYear()} <span className="text-canvas hover:text-accent transition-colors"><a href="#hero">abineshspotlight.online</a></span> · All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 flex-wrap justify-center">
+            <AskAI />
             <a
               href="#hero"
               className="group flex items-center gap-1.5 text-sm sm:text-base font-mono font-medium text-canvas hover:text-accent transition-colors"
