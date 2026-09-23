@@ -7,10 +7,11 @@ type Project = {
   role: string
   category: string
   group: 'FueInt' | 'independent'
-  subGroup?: 'global' | 'client' | 'utility' | 'domestic'
+  subGroup?: 'global' | 'client' | 'utility' | 'domestic' | 'plugin'
   featured?: boolean
   challenge: string
   stack: string[]
+  url?: string
 }
 
 const projects: Project[] = [
@@ -202,9 +203,20 @@ const projects: Project[] = [
     challenge: 'A customer support portal designed to centralise ticketing, knowledge base, and user communication for growing businesses.',
     stack: ['Next.js', 'React', 'Tailwind', 'Vercel'],
   },
+  {
+    name: 'WP SVG Engine',
+    role: 'WordPress Plugin Author',
+    category: 'WP Plugin',
+    group: 'independent',
+    subGroup: 'plugin',
+    featured: true,
+    challenge: 'Published on WordPress.org — enables safe SVG & SVGZ uploads with automated DOM sanitization, Media Library preview fixes, dimension detection, and fast client-side inlining.',
+    stack: ['PHP', 'WordPress', 'SVG', 'DOM Sanitization'],
+    url: 'https://wordpress.org/plugins/svigent-tools/',
+  },
 ]
 
-const filters = ['All', 'Enterprise', 'Independent', 'WordPress', 'Next.js', 'Flutter', 'CMS', 'Drupal']
+const filters = ['All', 'Enterprise', 'Independent', 'WordPress', 'Next.js', 'Flutter', 'CMS', 'Drupal', 'WP Plugin']
 
 import ShootingStarsGrid from './ShootingStarsGrid'
 
@@ -331,6 +343,7 @@ const SUBGROUP_BADGE: Record<string, string> = {
   utility:  'Utility Tool',
   domestic: 'Internal Project',
   global:   'Enterprise',
+  plugin:   'WP Plugin',
 }
 
 function BentoCard({ project, index, groupLabel }: { project: Project; index: number; groupLabel: string }) {
@@ -391,6 +404,21 @@ function BentoCard({ project, index, groupLabel }: { project: Project; index: nu
           </span>
         ))}
       </div>
+
+      {/* External Link */}
+      {project.url && (
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 mt-4 text-sm font-mono font-semibold text-accent hover:text-canvas transition-colors"
+        >
+          View on WordPress.org
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      )}
     </article>
   )
 }
