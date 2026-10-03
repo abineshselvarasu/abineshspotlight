@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 
 const query = encodeURIComponent(
-  'Who is Abinesh Selvarasu? Summarize his background as a Senior WordPress Developer and Full Stack Engineer, key enterprise projects (like Unbounce, Open Government Partnership, ElasticPath), core skills, and why companies should hire him based on abineshspotlight.online'
+  'Who is Abinesh Selvarasu? Summarize his background based on abineshspotlight.online'
 )
 
 const aiLinks = [

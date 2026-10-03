@@ -142,6 +142,7 @@ const personSchema = {
     'Senior WordPress Developer and Full Stack Engineer with 3+ years building production-grade web platforms for global enterprise clients.',
   knowsAbout: [
     'WordPress Development',
+    'WordPress Plugin Development',
     'ACF Pro',
     'Gutenberg Blocks',
     'Headless WordPress',
@@ -157,7 +158,7 @@ const personSchema = {
   sameAs: [
     'https://linkedin.com/in/abineshselvarasu',
     'https://github.com/abineshselvarasu',
-    'https://www.instagram.com/sak_abinesh',
+    'https://profiles.wordpress.org/abineshselvarasu/',
   ],
   address: {
     '@type': 'PostalAddress',
@@ -212,7 +213,7 @@ const localBusinessSchema = {
   sameAs: [
     'https://linkedin.com/in/abineshselvarasu',
     'https://github.com/abineshselvarasu',
-    'https://www.instagram.com/sak_abinesh',
+    'https://profiles.wordpress.org/abineshselvarasu/',
   ],
 }
 

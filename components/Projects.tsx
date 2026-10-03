@@ -214,6 +214,17 @@ const projects: Project[] = [
     stack: ['PHP', 'WordPress', 'SVG', 'DOM Sanitization'],
     url: 'https://wordpress.org/plugins/svigent-tools/',
   },
+  {
+    name: 'ClickReach – Social Share Buttons & Counter',
+    role: 'WordPress Plugin Author',
+    category: 'WP Plugin',
+    group: 'independent',
+    subGroup: 'plugin',
+    featured: true,
+    challenge: 'Published on WordPress.org — lightweight, privacy-friendly social sharing buttons with live click counters, zero bloat, pure inline SVGs, and Core Web Vitals friendly performance.',
+    stack: ['WordPress', 'PHP', 'JavaScript', 'REST API'],
+    url: 'https://wordpress.org/plugins/clickreach-social-share-buttons/',
+  },
 ]
 
 const filters = ['All', 'Enterprise', 'Independent', 'WordPress', 'Next.js', 'Flutter', 'CMS', 'Drupal', 'WP Plugin']
