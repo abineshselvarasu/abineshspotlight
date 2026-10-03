@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const navLinks = [
   { label: 'About',       url: '#about' },
@@ -54,28 +55,31 @@ export default function Nav() {
             ))}
           </nav>
 
-          <a
-            href="/resume"
-            className="hidden lg:inline-flex items-center gap-2 px-5 py-2 border border-rule text-base font-bold text-white bg-forest hover:bg-accent hover:text-forest transition-all z-50 rounded-full"
-          >
-            Resume
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
+          <div className="flex items-center gap-2.5 sm:gap-3 z-50">
+            <Link
+              href="/resume"
+              prefetch={true}
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-1.5 sm:py-2 border border-rule text-xs sm:text-sm lg:text-base font-bold text-white bg-forest hover:bg-accent hover:text-forest transition-all rounded-full shadow-sm"
+            >
+              Resume
+              <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
 
-          <button
-            id="mobile-nav-toggle"
-            className={`lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 z-50 relative${menuOpen ? ' is-open' : ''}`}
-            aria-label="Toggle mobile menu"
-            aria-expanded={menuOpen}
-            aria-controls="mobile-nav"
-            onClick={() => setMenuOpen((o) => !o)}
-          >
-            <span id="ham-line-1" className="block w-6 h-0.5 bg-ink transition-all duration-300 origin-center" />
-            <span id="ham-line-2" className="block w-6 h-0.5 bg-ink transition-all duration-300" />
-            <span id="ham-line-3" className="block w-4 h-0.5 bg-ink transition-all duration-300 origin-center ml-auto" />
-          </button>
+            <button
+              id="mobile-nav-toggle"
+              className={`lg:hidden flex flex-col justify-center items-center w-9 h-9 sm:w-10 sm:h-10 gap-1.5 relative${menuOpen ? ' is-open' : ''}`}
+              aria-label="Toggle mobile menu"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-nav"
+              onClick={() => setMenuOpen((o) => !o)}
+            >
+              <span id="ham-line-1" className="block w-5 sm:w-6 h-0.5 bg-ink transition-all duration-300 origin-center" />
+              <span id="ham-line-2" className="block w-5 sm:w-6 h-0.5 bg-ink transition-all duration-300" />
+              <span id="ham-line-3" className="block w-3.5 sm:w-4 h-0.5 bg-ink transition-all duration-300 origin-center ml-auto" />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -95,8 +99,9 @@ export default function Nav() {
             </a>
           ))}
         </nav>
-        <a
+        <Link
           href="/resume"
+          prefetch={true}
           onClick={close}
           className="group mobile-nav-link inline-flex items-center gap-3 px-8 py-4 border border-canvas border-opacity-20 text-base font-bold text-canvas hover:text-accent hover:border-accent transition-all rounded-full"
         >
@@ -104,7 +109,7 @@ export default function Nav() {
           <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </a>
+        </Link>
       </div>
     </>
   )

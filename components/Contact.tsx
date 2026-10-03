@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import ShootingStarsGrid from './ShootingStarsGrid'
 import AskAI from './AskAI'
 
@@ -8,6 +9,7 @@ export default function Contact() {
     { label: 'About',      href: '#about' },
     { label: 'Skills',     href: '#skills' },
     { label: 'Projects',   href: '#projects' },
+    { label: 'Resume',     href: '/resume' },
     { label: 'Blog',       href: '#blog' },
   ]
 
@@ -109,8 +111,9 @@ export default function Contact() {
               </div>
 
               {/* Resume CTA */}
-              <a
+              <Link
                 href="/resume"
+                prefetch={true}
                 className="group inline-flex items-center gap-2 mt-10 p-3.5 border border-accent/30 text-accent text-sm font-mono uppercase font-bold tracking-widest hover:bg-accent/10 transition-all rounded-full"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -121,7 +124,7 @@ export default function Contact() {
                   <polyline points="10 9 9 9 8 9" />
                 </svg>
                 View Resume
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -130,16 +133,30 @@ export default function Contact() {
             <p className="text-sm font-mono text-accent font-bold uppercase tracking-widest mb-6">Quick Links</p>
             <nav className="space-y-3.5">
               {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="group flex items-center gap-2 text-base sm:text-lg text-canvas/80 hover:text-accent transition-colors font-mono"
-                >
-                  <svg className="w-3.5 h-3.5 text-accent/30 group-hover:text-accent transition-all group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                  {link.label}
-                </a>
+                link.href.startsWith('/') ? (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    prefetch={true}
+                    className="group flex items-center gap-2 text-base sm:text-lg text-canvas/80 hover:text-accent transition-colors font-mono"
+                  >
+                    <svg className="w-3.5 h-3.5 text-accent/30 group-hover:text-accent transition-all group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="group flex items-center gap-2 text-base sm:text-lg text-canvas/80 hover:text-accent transition-colors font-mono"
+                  >
+                    <svg className="w-3.5 h-3.5 text-accent/30 group-hover:text-accent transition-all group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                    {link.label}
+                  </a>
+                )
               ))}
             </nav>
           </div>

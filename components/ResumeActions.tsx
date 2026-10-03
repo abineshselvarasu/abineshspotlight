@@ -24,6 +24,7 @@ export default function ResumeActions() {
           {/* Left: Back to Home */}
           <Link
             href="/"
+            prefetch={true}
             className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-mono text-canvas/80 hover:text-canvas hover:bg-canvas/10 transition-colors shrink-0"
             aria-label="Back to Portfolio"
           >
