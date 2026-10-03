@@ -55,14 +55,12 @@ export default function Nav() {
           </nav>
 
           <a
-            href="/resume/Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/resume"
             className="hidden lg:inline-flex items-center gap-2 px-5 py-2 border border-rule text-base font-bold text-white bg-forest hover:bg-accent hover:text-forest transition-all z-50 rounded-full"
           >
             Resume
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+              <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
 
@@ -98,15 +96,13 @@ export default function Nav() {
           ))}
         </nav>
         <a
-          href="/resume/Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/resume"
           onClick={close}
           className="group mobile-nav-link inline-flex items-center gap-3 px-8 py-4 border border-canvas border-opacity-20 text-base font-bold text-canvas hover:text-accent hover:border-accent transition-all rounded-full"
         >
-          Download Resume
-          <svg className="w-4 h-4 transition-transform group-hover:translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+          View Resume
+          <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </a>
       </div>

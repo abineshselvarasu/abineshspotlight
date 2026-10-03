@@ -82,14 +82,12 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href="/resume/Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/resume"
               className="px-4 py-2 border border-rule text-white text-base font-bold uppercase tracking-wider bg-forest hover:bg-accent hover:text-forest transition-all text-center flex items-center justify-center gap-1.5 shadow-sm rounded-full"
             >
               Resume
               <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
           </div>
