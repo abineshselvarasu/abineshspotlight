@@ -9,6 +9,7 @@ export default function RevealObserver() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
           }
         })
       },
@@ -23,17 +24,25 @@ export default function RevealObserver() {
 
     observeElements()
 
-    // Watch for dynamic DOM updates (e.g. project filter clicks)
-    const mutationObserver = new MutationObserver(() => {
-      observeElements()
-    })
+    // Watch for dynamic DOM updates only within the interactive projects container
+    let debounceTimer: ReturnType<typeof setTimeout>
+    const debouncedObserve = () => {
+      clearTimeout(debounceTimer)
+      debounceTimer = setTimeout(observeElements, 100)
+    }
 
-    mutationObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-    })
+    const projectsContainer = document.getElementById('projects')
+    const mutationObserver = new MutationObserver(debouncedObserve)
+
+    if (projectsContainer) {
+      mutationObserver.observe(projectsContainer, {
+        childList: true,
+        subtree: true,
+      })
+    }
 
     return () => {
+      clearTimeout(debounceTimer)
       observer.disconnect()
       mutationObserver.disconnect()
     }

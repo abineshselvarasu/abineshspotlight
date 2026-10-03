@@ -1,71 +1,24 @@
 'use client';
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 
-type Direction = 'lr' | 'rl' | 'tb' | 'bt';
-
-type Star = {
-  id: number;
-  dir: Direction;
-  pos: number;
-  duration: number;
-};
+// Fixed, static star configs along 40px grid lines with staggered delays.
+// Zero React re-renders, zero DOM insertions/deletions, 100% GPU compositor execution.
+const STARS = [
+  { id: 1, dir: 'lr', pos: '80px', delay: '0s', duration: '3.6s' },
+  { id: 2, dir: 'rl', pos: '160px', delay: '1.2s', duration: '4.2s' },
+  { id: 3, dir: 'tb', pos: '15%', delay: '0.5s', duration: '3.8s' },
+  { id: 4, dir: 'bt', pos: '35%', delay: '2.0s', duration: '4.5s' },
+  { id: 5, dir: 'lr', pos: '280px', delay: '2.5s', duration: '3.9s' },
+  { id: 6, dir: 'rl', pos: '400px', delay: '0.8s', duration: '4.1s' },
+  { id: 7, dir: 'tb', pos: '65%', delay: '1.7s', duration: '4.4s' },
+  { id: 8, dir: 'bt', pos: '85%', delay: '3.1s', duration: '3.7s' },
+  { id: 9, dir: 'lr', pos: '520px', delay: '1.5s', duration: '4.0s' },
+  { id: 10, dir: 'rl', pos: '640px', delay: '2.8s', duration: '3.5s' },
+];
 
 export default function ShootingStarsGrid() {
-  const [stars, setStars] = useState<Star[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let isVisible = true;
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-      },
-      { threshold: 0 }
-    );
-    observer.observe(container);
-
-    // Generate new stars rapidly when visible
-    const interval = setInterval(() => {
-      if (!isVisible || !containerRef.current) return;
-      const height = containerRef.current.offsetHeight;
-      const width = containerRef.current.offsetWidth;
-      const gridSpacing = 40; // match the grid pattern size
-      
-      const dirs: Direction[] = ['lr', 'rl', 'tb', 'bt'];
-      const dir = dirs[Math.floor(Math.random() * dirs.length)];
-      
-      // Snap to grid lines
-      let pos = 0;
-      if (dir === 'lr' || dir === 'rl') {
-        pos = Math.floor((Math.random() * height) / gridSpacing) * gridSpacing;
-      } else {
-        pos = Math.floor((Math.random() * width) / gridSpacing) * gridSpacing;
-      }
-
-      // Random speed between 1.2s and 2.2s for fast, dynamic movement
-      const duration = 1.2 + Math.random() * 1;
-      
-      const newStar: Star = {
-        id: Date.now() + Math.random(),
-        dir,
-        pos,
-        duration,
-      };
-      
-      setStars(prev => [...prev.slice(-14), newStar]); // Keep at most last 15 stars in DOM
-    }, 350); // Spawn a star very frequently
-
-    return () => {
-      observer.disconnect();
-      clearInterval(interval);
-    };
-  }, []);
-
   return (
-    <div ref={containerRef} className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none will-change-transform">
       {/* Faint Grid Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.08]"
@@ -81,10 +34,11 @@ export default function ShootingStarsGrid() {
       {/* Top and Bottom Fade to blend with other sections */}
       <div className="absolute inset-0 bg-gradient-to-b from-ink via-transparent to-ink" />
 
-      {/* Shooting Stars */}
-      {stars.map((star) => {
-        let style: React.CSSProperties = {
-          animationDuration: `${star.duration}s`,
+      {/* Shooting Stars - purely CSS animated, 0% main thread CPU overhead */}
+      {STARS.map((star) => {
+        const style: React.CSSProperties = {
+          animationDuration: star.duration,
+          animationDelay: star.delay,
         };
         let wrapperClass = '';
         let gradientStyle = '';
@@ -120,7 +74,6 @@ export default function ShootingStarsGrid() {
 
         return (
           <div key={star.id} className={wrapperClass} style={style}>
-            {/* Extremely crisp, sharp tip */}
             <div className={tipClass} />
           </div>
         );

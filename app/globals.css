@@ -61,6 +61,33 @@
   outline-offset: 3px;
 }
 
+/* ── Respect User Preferences (WCAG A11y) ──────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-text {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-shooting-star-lr,
+  .animate-shooting-star-rl,
+  .animate-shooting-star-tb,
+  .animate-shooting-star-bt,
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none !important;
+  }
+}
+
+/* ── Isolated section rendering for sub-10ms INP ───────────────── */
+#about,
+#skills,
+#projects,
+#blog,
+#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
 /* ── Custom scrollbar ──────────────────────────────────────────── */
 ::-webkit-scrollbar       { width: 4px; }
 ::-webkit-scrollbar-track { background: #F5F1EC; }

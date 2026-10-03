@@ -205,7 +205,7 @@ export default function Skills() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelectedSkill(null)
     }
-    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('keydown', handleKeyDown, { passive: true })
     const originalOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     return () => {

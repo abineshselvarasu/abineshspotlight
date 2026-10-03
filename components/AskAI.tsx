@@ -58,20 +58,22 @@ export default function AskAI() {
 
   // Mobile + Desktop click/touch outside to close
   useEffect(() => {
+    if (!open) return
+
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false)
       }
     }
-    document.addEventListener('mousedown', handleClickOutside)
-    document.addEventListener('touchstart', handleClickOutside)
+    document.addEventListener('mousedown', handleClickOutside, { passive: true })
+    document.addEventListener('touchstart', handleClickOutside, { passive: true })
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
       document.removeEventListener('touchstart', handleClickOutside)
       if (timeoutRef.current) clearTimeout(timeoutRef.current)
     }
-  }, [])
+  }, [open])
 
   return (
     <div
