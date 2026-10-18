@@ -1,5 +1,4 @@
-'use client';
-import React from 'react';
+import type { CSSProperties } from 'react';
 
 // Fixed, static star configs along 40px grid lines with staggered delays.
 // Zero React re-renders, zero DOM insertions/deletions, 100% GPU compositor execution.
@@ -14,13 +13,23 @@ const STARS = [
   { id: 8, dir: 'bt', pos: '85%', delay: '3.1s', duration: '3.7s' },
   { id: 9, dir: 'lr', pos: '520px', delay: '1.5s', duration: '4.0s' },
   { id: 10, dir: 'rl', pos: '640px', delay: '2.8s', duration: '3.5s' },
-];
+] as const;
+
+const TIP_BASE = 'absolute w-[2px] h-[2px] bg-white rounded-full shadow-[0_0_8px_2px_#DCBC7D]';
+
+// Per-direction: wrapper classes, which edge `pos` offsets from, starting edge, trail gradient, tip placement
+const DIRECTIONS = {
+  lr: { wrapper: 'h-[1px] w-[150px] animate-shooting-star-lr', posProp: 'top',  startProp: 'left',   gradient: 'to right',  tip: 'right-0 top-1/2 -translate-y-1/2' },
+  rl: { wrapper: 'h-[1px] w-[150px] animate-shooting-star-rl', posProp: 'top',  startProp: 'right',  gradient: 'to left',   tip: 'left-0 top-1/2 -translate-y-1/2' },
+  tb: { wrapper: 'w-[1px] h-[150px] animate-shooting-star-tb', posProp: 'left', startProp: 'top',    gradient: 'to bottom', tip: 'bottom-0 left-1/2 -translate-x-1/2' },
+  bt: { wrapper: 'w-[1px] h-[150px] animate-shooting-star-bt', posProp: 'left', startProp: 'bottom', gradient: 'to top',    tip: 'top-0 left-1/2 -translate-x-1/2' },
+} as const;
 
 export default function ShootingStarsGrid() {
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none will-change-transform">
       {/* Faint Grid Pattern */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage: `
@@ -30,51 +39,24 @@ export default function ShootingStarsGrid() {
           backgroundSize: '40px 40px'
         }}
       />
-      
+
       {/* Top and Bottom Fade to blend with other sections */}
       <div className="absolute inset-0 bg-gradient-to-b from-ink via-transparent to-ink" />
 
       {/* Shooting Stars - purely CSS animated, 0% main thread CPU overhead */}
       {STARS.map((star) => {
-        const style: React.CSSProperties = {
+        const d = DIRECTIONS[star.dir];
+        const style: CSSProperties = {
           animationDuration: star.duration,
           animationDelay: star.delay,
+          [d.posProp]: star.pos,
+          [d.startProp]: '-150px',
+          background: `linear-gradient(${d.gradient}, transparent, #DCBC7D)`,
         };
-        let wrapperClass = '';
-        let gradientStyle = '';
-        let tipClass = '';
-
-        if (star.dir === 'lr') {
-          wrapperClass = 'absolute h-[1px] w-[150px] animate-shooting-star-lr';
-          style.top = star.pos;
-          style.left = '-150px';
-          gradientStyle = 'linear-gradient(to right, transparent, #DCBC7D)';
-          tipClass = 'absolute right-0 top-1/2 -translate-y-1/2 w-[2px] h-[2px] bg-white rounded-full shadow-[0_0_8px_2px_#DCBC7D]';
-        } else if (star.dir === 'rl') {
-          wrapperClass = 'absolute h-[1px] w-[150px] animate-shooting-star-rl';
-          style.top = star.pos;
-          style.right = '-150px';
-          gradientStyle = 'linear-gradient(to left, transparent, #DCBC7D)';
-          tipClass = 'absolute left-0 top-1/2 -translate-y-1/2 w-[2px] h-[2px] bg-white rounded-full shadow-[0_0_8px_2px_#DCBC7D]';
-        } else if (star.dir === 'tb') {
-          wrapperClass = 'absolute w-[1px] h-[150px] animate-shooting-star-tb';
-          style.left = star.pos;
-          style.top = '-150px';
-          gradientStyle = 'linear-gradient(to bottom, transparent, #DCBC7D)';
-          tipClass = 'absolute bottom-0 left-1/2 -translate-x-1/2 w-[2px] h-[2px] bg-white rounded-full shadow-[0_0_8px_2px_#DCBC7D]';
-        } else if (star.dir === 'bt') {
-          wrapperClass = 'absolute w-[1px] h-[150px] animate-shooting-star-bt';
-          style.left = star.pos;
-          style.bottom = '-150px';
-          gradientStyle = 'linear-gradient(to top, transparent, #DCBC7D)';
-          tipClass = 'absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-[2px] bg-white rounded-full shadow-[0_0_8px_2px_#DCBC7D]';
-        }
-
-        style.background = gradientStyle;
 
         return (
-          <div key={star.id} className={wrapperClass} style={style}>
-            <div className={tipClass} />
+          <div key={star.id} className={`absolute ${d.wrapper}`} style={style}>
+            <div className={`${TIP_BASE} ${d.tip}`} />
           </div>
         );
       })}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import ShootingStarsGrid from './ShootingStarsGrid'
 
 type Project = {
   name: string
@@ -229,7 +230,6 @@ const projects: Project[] = [
 
 const filters = ['All', 'Enterprise', 'Independent', 'WordPress', 'Next.js', 'Flutter', 'CMS', 'Drupal', 'WP Plugin']
 
-import ShootingStarsGrid from './ShootingStarsGrid'
 
 export default function Projects() {
   const [active, setActive] = useState('All')
@@ -266,7 +266,7 @@ export default function Projects() {
         </div>
 
         {/* Filters */}
-        <div className="mb-12 reveal-text">
+        <div className="mb-12 reveal-text delay-300">
           <div className="flex flex-wrap gap-2.5">
             {filters.map((f) => (
               <button
@@ -288,13 +288,13 @@ export default function Projects() {
         {showEnterprise && (
           <div className="mb-16">
             {showBothGroups && (
-              <div className="flex items-center gap-4 mb-4">
+              <div className="reveal-text flex items-center gap-4 mb-4">
                 <span className="text-sm font-mono uppercase tracking-widest text-accent font-semibold">Enterprise experience</span>
                 <div className="flex-1 h-px bg-canvas/10" />
               </div>
             )}
 
-            <p className="text-canvas/50 text-base font-mono mb-8 border-l-2 border-accent/40 pl-4 leading-relaxed">
+            <p className="reveal-text text-canvas/50 text-base font-mono mb-8 border-l-2 border-accent/40 pl-4 leading-relaxed delay-100">
               Delivered under <span className="text-accent/90">FueInt Technologies</span> via{' '}
               <span className="text-accent/90">Dialed In Design (Canada)</span>. All trademarks belong to their respective owners.
             </p>
@@ -314,13 +314,13 @@ export default function Projects() {
         {showIndependent && (
           <div>
             {showBothGroups && (
-              <div className="flex items-center gap-4 mb-4">
+              <div className="reveal-text flex items-center gap-4 mb-4">
                 <span className="text-sm font-mono uppercase tracking-widest text-accent font-semibold">Independent Builds</span>
                 <div className="flex-1 h-px bg-canvas/10" />
               </div>
             )}
 
-            <p className="text-canvas/50 text-sm font-mono mb-8 border-l-2 border-accent/40 pl-4 leading-relaxed">
+            <p className="reveal-text text-canvas/50 text-sm font-mono mb-8 border-l-2 border-accent/40 pl-4 leading-relaxed delay-100">
               Client & utility builds shipped under{' '}
               <a
                 href="https://gradiolex.vercel.app/"
@@ -357,13 +357,17 @@ const SUBGROUP_BADGE: Record<string, string> = {
   plugin:   'WP Plugin',
 }
 
+// Indexed by (card number % 4): cards 1, 2, 3, 4 → no delay, 100, 200, 300ms
+const STAGGER_DELAYS = ['delay-300', '', 'delay-100', 'delay-200']
+
 function BentoCard({ project, index, groupLabel }: { project: Project; index: number; groupLabel: string }) {
   const badge = project.subGroup ? (SUBGROUP_BADGE[project.subGroup] ?? groupLabel) : groupLabel
   const isFeatured = !!project.featured
+  const staggerDelay = STAGGER_DELAYS[index % 4]
 
   return (
     <article
-      className={`group relative flex flex-col justify-between border border-canvas/10 hover:border-accent/50 bg-canvas/5 hover:bg-canvas/[0.08] transition-all duration-300 p-5 sm:p-6 rounded-2xl shadow-md ${
+      className={`reveal-text ${staggerDelay} group relative flex flex-col justify-between border border-canvas/10 hover:border-accent/50 bg-canvas/5 hover:bg-canvas/[0.08] transition-all duration-300 p-5 sm:p-6 rounded-2xl shadow-md ${
         isFeatured ? 'col-span-1 md:col-span-2 lg:col-span-2 border-accent/20 bg-canvas/[0.07]' : 'col-span-1'
       }`}
     >
@@ -372,16 +376,11 @@ function BentoCard({ project, index, groupLabel }: { project: Project; index: nu
 
       <div>
         {/* Header Badges */}
-        <div className="reveal-text flex items-center justify-between mb-4">
+        <div className="reveal-text flex items-center justify-between mb-4 delay-100">
           <span className="text-sm font-mono text-accent font-bold">
             {String(index).padStart(2, '0')}
           </span>
           <div className="flex items-center gap-1.5">
-{/*            {isFeatured && (
-              <span className="text-sm font-mono uppercase tracking-wider text-accent bg-accent/10 border border-accent/30 px-2.5 py-0.5 rounded-md font-semibold">
-                ★ Featured
-              </span>
-            )}*/}
             <span className="text-sm font-mono uppercase tracking-widest text-canvas/50 border border-canvas/10 group-hover:border-canvas/30 group-hover:text-canvas/80 px-2.5 py-0.5 rounded-md transition-colors">
               {badge}
             </span>
@@ -389,23 +388,23 @@ function BentoCard({ project, index, groupLabel }: { project: Project; index: nu
         </div>
 
         {/* Role Subtitle */}
-        <p className="reveal-text text-sm font-mono text-accent/80 uppercase tracking-widest mb-1.5 font-semibold delay-100">
+        <p className="reveal-text text-sm font-mono text-accent/80 uppercase tracking-widest mb-1.5 font-semibold delay-200">
           {project.role}
         </p>
 
         {/* Project Title */}
-        <h3 className="reveal-text font-display font-normal text-2xl sm:text-3xl text-canvas leading-tight mb-3 group-hover:text-accent transition-colors duration-300 delay-200">
+        <h3 className="reveal-text font-display font-normal text-2xl sm:text-3xl text-canvas leading-tight mb-3 group-hover:text-accent transition-colors duration-300 delay-300">
           {project.name}
         </h3>
 
         {/* Description — Always Visible */}
-        <p className="reveal-text text-canvas/70 text-sm sm:text-base leading-relaxed mb-5 delay-300">
+        <p className="reveal-text text-canvas/70 text-sm sm:text-base leading-relaxed mb-5 delay-400">
           {project.challenge}
         </p>
       </div>
 
       {/* Stack Tags */}
-      <div className="reveal-text flex flex-wrap gap-2 pt-4 border-t border-canvas/5 group-hover:border-canvas/10 transition-colors delay-400">
+      <div className="reveal-text flex flex-wrap gap-2 pt-4 border-t border-canvas/5 group-hover:border-canvas/10 transition-colors delay-500">
         {project.stack.map((s) => (
           <span
             key={s}
@@ -422,7 +421,7 @@ function BentoCard({ project, index, groupLabel }: { project: Project; index: nu
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 mt-4 text-sm font-mono font-semibold text-accent hover:text-canvas transition-colors"
+          className="reveal-text inline-flex items-center gap-1.5 mt-2.5 py-1.5 text-sm font-mono font-semibold text-accent hover:text-canvas transition-colors delay-600"
         >
           View on WordPress.org
           <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

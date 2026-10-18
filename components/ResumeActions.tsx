@@ -31,8 +31,8 @@ export default function ResumeActions() {
             <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M19 12H5M12 19l-7-7 7-7" />
             </svg>
-            <span className="hidden xs:inline sm:inline">Back to Portfolio</span>
-            <span className="inline xs:hidden sm:hidden">Portfolio</span>
+            <span className="hidden xs:inline">Back to Portfolio</span>
+            <span className="xs:hidden">Portfolio</span>
           </Link>
 
           {/* Right: Actions */}

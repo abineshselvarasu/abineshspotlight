@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 
 const ChevronLeft = ({ size = 24 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -22,10 +22,10 @@ interface CarouselProps {
   slidesToShow?: number;
 }
 
-const Carousel = ({ 
-    children: slides, 
-    autoSlide = true, 
-    autoSlideInterval = 5000, 
+const Carousel = ({
+    children: slides,
+    autoSlide = true,
+    autoSlideInterval = 5000,
     seamlessLoop = true,
     slidesToShow = 1
 }: CarouselProps) => {
@@ -35,14 +35,15 @@ const Carousel = ({
     const clonedCount = seamlessLoop ? slidesToShow : 0
     const [currentSlideIndex, setCurrentSlideIndex] = useState(clonedCount)
     const [isTransitioning, setIsTransitioning] = useState(true)
-    const [dragStart, setDragStart] = useState<number | null>(null)
-    const [dragEnd, setDragEnd] = useState<number | null>(null)
+    // Refs, not state: pointer positions don't affect rendering, so no re-render per mousemove
+    const dragStart = useRef<number | null>(null)
+    const dragEnd = useRef<number | null>(null)
 
     // Append and prepend clones to create the seamless illusion
-    const extendedSlides = seamlessLoop 
+    const extendedSlides = seamlessLoop
         ? [
-            ...slidesArray.slice(-clonedCount), 
-            ...slidesArray, 
+            ...slidesArray.slice(-clonedCount),
+            ...slidesArray,
             ...slidesArray.slice(0, clonedCount)
           ]
         : slidesArray
@@ -68,48 +69,33 @@ const Carousel = ({
     }, [currentSlideIndex, seamlessLoop, totalSlides, clonedCount, slidesToShow])
 
     // Drag / Swipe handlers
+    const clientX = (e: React.TouchEvent | React.MouseEvent) =>
+        'targetTouches' in e ? e.targetTouches[0].clientX : e.clientX
+
     const handleDragStart = (e: React.TouchEvent | React.MouseEvent) => {
-        setDragEnd(null)
-        if ('targetTouches' in e) {
-            setDragStart(e.targetTouches[0].clientX)
-        } else {
-            setDragStart((e as React.MouseEvent).clientX)
-        }
+        dragEnd.current = null
+        dragStart.current = clientX(e)
     }
 
     const handleDragMove = (e: React.TouchEvent | React.MouseEvent) => {
-        if (dragStart === null) return
-        if ('targetTouches' in e) {
-            setDragEnd(e.targetTouches[0].clientX)
-        } else {
-            setDragEnd((e as React.MouseEvent).clientX)
-        }
+        if (dragStart.current !== null) dragEnd.current = clientX(e)
     }
 
     const handleDragEnd = () => {
-        if (dragStart === null || dragEnd === null) {
-            setDragStart(null)
-            setDragEnd(null)
-            return
+        if (dragStart.current !== null && dragEnd.current !== null) {
+            const distance = dragStart.current - dragEnd.current
+            const minSwipeDistance = 50
+            if (distance > minSwipeDistance) goToNextSlide()
+            else if (distance < -minSwipeDistance) goToPreviousSlide()
         }
-        
-        const distance = dragStart - dragEnd
-        const minSwipeDistance = 50
-
-        if (distance > minSwipeDistance) {
-            goToNextSlide()
-        } else if (distance < -minSwipeDistance) {
-            goToPreviousSlide()
-        }
-        
-        setDragStart(null)
-        setDragEnd(null)
+        dragStart.current = null
+        dragEnd.current = null
     }
 
     // Handle seamless jumping when reaching clones
     useEffect(() => {
         if (!seamlessLoop) return
-        
+
         // If we slid past the last real slide into the cloned area
         if (currentSlideIndex === totalSlides + clonedCount) {
             const timeout = setTimeout(() => {
@@ -134,11 +120,19 @@ const Carousel = ({
         return () => clearInterval(slideInterval)
     }, [autoSlide, autoSlideInterval, goToNextSlide])
 
+    // Map the (clone-padded) track position back to a real slide index for the indicators
+    let activeIndex = currentSlideIndex
+    if (seamlessLoop) {
+        if (currentSlideIndex < clonedCount) activeIndex = totalSlides - clonedCount + currentSlideIndex
+        else if (currentSlideIndex >= totalSlides + clonedCount) activeIndex = currentSlideIndex - totalSlides - clonedCount
+        else activeIndex = currentSlideIndex - clonedCount
+    }
+
     return (
         <div className='relative w-full h-full overflow-hidden rounded-3xl group/carousel'>
             {/* Main Carousel Track */}
-            <div 
-                className={`flex w-full h-full cursor-grab active:cursor-grabbing touch-pan-y ${isTransitioning ? 'transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)]' : ''}`} 
+            <div
+                className={`flex w-full h-full cursor-grab active:cursor-grabbing touch-pan-y ${isTransitioning ? 'transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)]' : ''}`}
                 style={{ transform: `translateX(-${(currentSlideIndex * 100) / slidesToShow}%)` }}
                 onTouchStart={handleDragStart}
                 onTouchMove={handleDragMove}
@@ -150,8 +144,8 @@ const Carousel = ({
                 onDragStart={(e) => e.preventDefault()} // Prevent default HTML5 drag on links
             >
                 {extendedSlides.map((slide, idx) => (
-                    <div 
-                        key={idx} 
+                    <div
+                        key={idx}
                         className="h-full flex-shrink-0 relative"
                         style={{ width: `${100 / slidesToShow}%` }}
                     >
@@ -166,15 +160,15 @@ const Carousel = ({
 
             {/* Navigation Buttons (Visible on Hover) */}
             <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 pointer-events-none">
-                <button 
-                    onClick={goToPreviousSlide} 
+                <button
+                    onClick={goToPreviousSlide}
                     aria-label="Previous slide"
                     className='pointer-events-auto p-2 rounded-full backdrop-blur-md bg-ink/40 text-mist shadow-lg border border-accent/30 hover:bg-accent/80 hover:text-white hover:scale-110 transition-all duration-300'
                 >
                     <ChevronLeft size={24} />
                 </button>
-                <button 
-                    onClick={goToNextSlide} 
+                <button
+                    onClick={goToNextSlide}
                     aria-label="Next slide"
                     className='pointer-events-auto p-2 rounded-full backdrop-blur-md bg-ink/40 text-mist shadow-lg border border-accent/30 hover:bg-accent/80 hover:text-white hover:scale-110 transition-all duration-300'
                 >
@@ -183,37 +177,26 @@ const Carousel = ({
             </div>
 
             {/* Custom Modern Indicators */}
-            <div className='absolute bottom-6 right-0 left-0 pointer-events-none'>
-                <div className='flex items-center justify-center gap-3 pointer-events-auto'>
-                    {slidesArray.map((_, slideIndex) => {
-                        let activeIndex = currentSlideIndex;
-                        
-                        if (seamlessLoop) {
-                            if (currentSlideIndex < clonedCount) {
-                                activeIndex = totalSlides - clonedCount + currentSlideIndex;
-                            } else if (currentSlideIndex >= totalSlides + clonedCount) {
-                                activeIndex = currentSlideIndex - totalSlides - clonedCount;
-                            } else {
-                                activeIndex = currentSlideIndex - clonedCount;
-                            }
-                        }
-
-                        return (
-                            <button 
-                                key={slideIndex} 
-                                aria-label={`Go to slide ${slideIndex + 1}`}
-                                onClick={() => {
-                                    setIsTransitioning(true)
-                                    setCurrentSlideIndex(seamlessLoop ? slideIndex + clonedCount : slideIndex)
-                                }}
-                                className={`cursor-pointer transition-all duration-500 rounded-full ${
-                                    activeIndex === slideIndex 
-                                    ? "w-8 h-2 bg-accent shadow-[0_0_10px_rgba(var(--accent),0.8)]" 
-                                    : "w-2 h-2 bg-mist opacity-50 hover:opacity-100"
-                                }`} 
-                            />
-                        )
-                    })}
+            <div className='absolute bottom-4 right-0 left-0 pointer-events-none'>
+                <div className='flex items-center justify-center gap-1 pointer-events-auto'>
+                    {slidesArray.map((_, slideIndex) => (
+                        <button
+                            key={slideIndex}
+                            aria-label={`Go to slide ${slideIndex + 1}`}
+                            onClick={() => {
+                                setIsTransitioning(true)
+                                setCurrentSlideIndex(seamlessLoop ? slideIndex + clonedCount : slideIndex)
+                            }}
+                            // 24px hit area around the small visual dot
+                            className="group/dot p-2 cursor-pointer"
+                        >
+                            <span className={`block transition-all duration-500 rounded-full ${
+                                activeIndex === slideIndex
+                                ? "w-8 h-2 bg-accent shadow-[0_0_10px_rgba(220,188,125,0.8)]"
+                                : "w-2 h-2 bg-mist opacity-50 group-hover/dot:opacity-100"
+                            }`} />
+                        </button>
+                    ))}
                 </div>
             </div>
         </div>

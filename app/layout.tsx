@@ -1,7 +1,9 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import Script from 'next/script'
+import { SITE_URL } from '@/lib/site'
+import { JOB_TITLE, PERSON_NAME } from '@/lib/seo'
 import './globals.css'
 
 const dmSerifDisplay = localFont({
@@ -22,14 +24,12 @@ const albertSans = localFont({
   display: 'swap',
 })
 
-const BASE_URL = 'https://www.abineshspotlight.online'
-
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL(SITE_URL),
 
   title: {
-    default: 'Senior WordPress Developer & Full Stack Engineer | Abinesh Selvarasu',
-    template: '%s | Abinesh Selvarasu',
+    default: `${JOB_TITLE} | ${PERSON_NAME}`,
+    template: `%s | ${PERSON_NAME}`,
   },
 
   description:
@@ -55,279 +55,34 @@ export const metadata: Metadata = {
     'React Developer',
   ],
 
-  authors: [{ name: 'Abinesh Selvarasu', url: BASE_URL }],
-  creator: 'Abinesh Selvarasu',
-  publisher: 'Abinesh Selvarasu',
-
+  authors: [{ name: PERSON_NAME, url: SITE_URL }],
+  creator: PERSON_NAME,
+  publisher: PERSON_NAME,
   category: 'Technology',
 
-  alternates: {
-    canonical: BASE_URL,
-  },
-
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: BASE_URL,
-    siteName: 'Abinesh Selvarasu — Senior WordPress Developer & Full Stack Engineer',
-    title: 'Senior WordPress Developer & Full Stack Engineer | Abinesh Selvarasu',
-    description:
-      'Senior WordPress Developer & Full Stack Engineer with 3+ years architecting enterprise web platforms for global brands.',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Abinesh Selvarasu — Senior WordPress Developer & Full Stack Engineer',
-        type: 'image/png',
-      },
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Abinesh Selvarasu — Senior WordPress Developer & Full Stack Engineer',
-        type: 'image/jpeg',
-      },
-    ],
-  },
-
-  twitter: {
-    card: 'summary_large_image',
-    site: '@abineshselvarasu',
-    creator: '@abineshselvarasu',
-    title: 'Senior WordPress Developer & Full Stack Engineer | Abinesh Selvarasu',
-    description:
-      'Senior WordPress Developer & Full Stack Engineer with 3+ years architecting enterprise web platforms for global brands.',
-    images: ['/og-image.png'],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+  // Canonical, robots, Open Graph and JSON-LD are set per page (see lib/seo.ts) so
+  // nothing page-specific leaks into other routes such as the 404.
 
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
+    icon: { url: '/favicon.ico', sizes: 'any' },
     apple: '/apple-touch-icon.png',
-    shortcut: '/favicon-16x16.png',
-  },
-
-  manifest: '/site.webmanifest',
-}
-
-// ── JSON-LD Schemas ───────────────────────────────────────────────────────────
-
-const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  '@id': `${BASE_URL}/#person`,
-  name: 'Abinesh Selvarasu',
-  url: BASE_URL,
-  email: 'mailtoabineshselva@gmail.com',
-  telephone: '+919042972156',
-  jobTitle: 'Senior WordPress Developer & Full Stack Engineer',
-  description:
-    'Senior WordPress Developer and Full Stack Engineer with 3+ years building production-grade web platforms for global enterprise clients.',
-  knowsAbout: [
-    'WordPress Development',
-    'WordPress Plugin Development',
-    'ACF Pro',
-    'Gutenberg Blocks',
-    'Headless WordPress',
-    'Craft CMS',
-    'Drupal',
-    'PHP',
-    'JavaScript',
-    'Technical SEO',
-    'Core Web Vitals',
-    'Next.js',
-    'Tailwind CSS',
-  ],
-  sameAs: [
-    'https://linkedin.com/in/abineshselvarasu',
-    'https://github.com/abineshselvarasu',
-    'https://profiles.wordpress.org/abineshselvarasu/',
-  ],
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Coimbatore',
-    addressLocality: 'Coimbatore',
-    addressRegion: 'Tamil Nadu',
-    postalCode: '641001',
-    addressCountry: 'IN',
-  },
-  alumniOf: {
-    '@type': 'EducationalOrganization',
-    name: 'Vidyaa Vikas College of Engineering',
-    url: 'https://www.vvcengg.com',
-  },
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Independent / Freelance',
   },
 }
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  '@id': `${BASE_URL}/#localbusiness`,
-  name: 'Abinesh Selvarasu — Senior WordPress Developer & Full Stack Engineer',
-  image: `${BASE_URL}/og-image.png`,
-  url: BASE_URL,
-  telephone: '+919042972156',
-  email: 'mailtoabineshselva@gmail.com',
-  priceRange: '$$',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Coimbatore',
-    addressLocality: 'Coimbatore',
-    addressRegion: 'Tamil Nadu',
-    postalCode: '641001',
-    addressCountry: 'IN',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 11.0168,
-    longitude: 76.9558,
-  },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '18:00',
-    },
-  ],
-  sameAs: [
-    'https://linkedin.com/in/abineshselvarasu',
-    'https://github.com/abineshselvarasu',
-    'https://profiles.wordpress.org/abineshselvarasu/',
-  ],
-}
-
-const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  '@id': `${BASE_URL}/#website`,
-  url: BASE_URL,
-  name: 'Abinesh Selvarasu — Portfolio',
-  description:
-    'Portfolio of Abinesh Selvarasu — Senior WordPress Developer & Full Stack Engineer based in Tamil Nadu, India.',
-  publisher: { '@id': `${BASE_URL}/#person` },
-  inLanguage: 'en-US',
-  copyrightYear: new Date().getFullYear(),
-}
-
-const webPageSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
-  '@id': `${BASE_URL}/#webpage`,
-  url: BASE_URL,
-  name: 'Senior WordPress Developer & Full Stack Engineer | Abinesh Selvarasu',
-  description:
-    'Personal portfolio of Abinesh Selvarasu — Senior WordPress Developer & Full Stack Engineer. Showcases enterprise projects, technical skills, career journey, and contact information.',
-  isPartOf: { '@id': `${BASE_URL}/#website` },
-  mainEntity: personSchema,
-  about: { '@id': `${BASE_URL}/#person` },
-  inLanguage: 'en-US',
-  dateCreated: '2023-01-01T08:00:00+05:30',
-  dateModified: new Date().toISOString(),
-  breadcrumb: { '@id': `${BASE_URL}/#breadcrumb` },
-}
-
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  '@id': `${BASE_URL}/#breadcrumb`,
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Home',
-      item: `${BASE_URL}/#hero`,
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'About & Journey',
-      item: `${BASE_URL}/#about`,
-    },
-    {
-      '@type': 'ListItem',
-      position: 3,
-      name: 'Skills',
-      item: `${BASE_URL}/#skills`,
-    },
-    {
-      '@type': 'ListItem',
-      position: 4,
-      name: 'Projects',
-      item: `${BASE_URL}/#projects`,
-    },
-    {
-      '@type': 'ListItem',
-      position: 5,
-      name: 'Writing',
-      item: `${BASE_URL}/#blog`,
-    },
-    {
-      '@type': 'ListItem',
-      position: 6,
-      name: 'Contact',
-      item: `${BASE_URL}/#contact`,
-    },
-  ],
+export const viewport: Viewport = {
+  themeColor: '#0F3728',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${dmSerifDisplay.variable} ${albertSans.variable} scroll-smooth`}>
-      <body className="font-sans bg-canvas text-ink antialiased">
+      <body className="font-sans bg-canvas text-ink antialiased overflow-x-hidden min-h-screen">
         {children}
         <Analytics />
 
-        {/* JSON-LD Structured Data — inline so Googlebot reads them without JS execution */}
-        <script
-          id="schema-person"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-        />
-        <script
-          id="schema-localbusiness"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-        />
-        <script
-          id="schema-website"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          id="schema-webpage"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
-        />
-        <script
-          id="schema-breadcrumb"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        />
-
-        {/* Google Analytics */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-P18SXZK5DY" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
+        {/* Google Analytics — loaded when the browser is idle so it never competes with first render or input (TBT/INP) */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-P18SXZK5DY" strategy="lazyOnload" />
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

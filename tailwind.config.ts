@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 const config: Config = {
   content: [
@@ -6,6 +7,11 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    // `xs` must precede the defaults so min-width variants cascade in order
+    screens: {
+      xs: '475px',
+      ...defaultTheme.screens,
+    },
     extend: {
       colors: {
         canvas: '#F5F1EC',
@@ -23,12 +29,10 @@ const config: Config = {
         mono:    ['var(--font-sans)', 'monospace'],
       },
       animation: {
-        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'shooting-star-lr': 'shooting-star-lr 4s linear infinite',
         'shooting-star-rl': 'shooting-star-rl 4.5s linear infinite',
         'shooting-star-tb': 'shooting-star-tb 4.2s linear infinite',
         'shooting-star-bt': 'shooting-star-bt 4.8s linear infinite',
-        'timeline-flow': 'timeline-flow 2s linear infinite',
       },
       keyframes: {
         'shooting-star-lr': {
@@ -54,10 +58,6 @@ const config: Config = {
           '10%': { opacity: '1' },
           '70%': { opacity: '1' },
           '100%': { transform: 'translateY(calc(-120vh - 250px))', opacity: '0' },
-        },
-        'timeline-flow': {
-          '0%': { strokeDashoffset: '48' },
-          '100%': { strokeDashoffset: '0' },
         },
       },
       transitionDelay: {

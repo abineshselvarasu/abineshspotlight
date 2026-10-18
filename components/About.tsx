@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import ShootingStarsGrid from './ShootingStarsGrid'
+import { GitHubIcon, LinkedInIcon, WordPressIcon } from './icons'
 
 const tags = [
   'WordPress Customization', 'Custom Themes', 'Custom Hooks',
@@ -10,100 +11,140 @@ const tags = [
   'JavaScript', 'Tailwind CSS', 'Figma to Code',
 ]
 
-const milestones = [
+interface RailMilestone {
+  step: string
+  durationLabel: string
+  period: string
+  role: string
+  company: string
+  summary: string
+  deliverables: string[]
+  tags: string[]
+  isDefault?: boolean // stage selected on first render
+}
+
+// Stages 01–04 are kept in sync with the resume (app/resume/page.tsx): titles, dates, and metrics should match.
+// Freelance work lives on gradiolex.vercel.app, so it's intentionally not a roadmap stage.
+const railMilestones: RailMilestone[] = [
   {
-    year: '2016',
-    end: '2020',
-    type: 'education',
-    title: 'B.E. Computer Science & Engineering',
-    company: 'Vidyaa Vikas College of Engineering — Anna University',
-    location: 'Tamil Nadu, India',
-    desc: 'Foundational study in algorithms, data structures, databases, and web technologies — building the engineering base for production software development.',
-    tags: [],
+    step: '01',
+    durationLabel: '4 Years',
+    period: '2016 — 2020',
+    role: 'B.E. Computer Science & Engineering',
+    company: 'Vidyaa Vikas College of Engineering · Anna University',
+    summary: 'Bachelor of Engineering in Computer Science — foundations in software engineering, algorithms, databases, and web architecture.',
+    deliverables: [
+      'Graduated with CGPA 7.04 / 10',
+      'Data Structures & Algorithm Complexity',
+      'Relational Database Management (SQL)',
+    ],
+    tags: ['Algorithms', 'Data Structures', 'C++', 'Java', 'SQL'],
   },
   {
-    year: 'Jul 2022',
-    end: 'Dec 2022',
-    type: 'work',
-    title: 'Intern — Web Developer',
+    step: '02',
+    durationLabel: '6 Months',
+    period: 'JUL — DEC 2022',
+    role: 'Web Developer',
     company: 'FueInt Technologies',
-    location: 'Tamil Nadu, India',
-    desc: 'Gained hands-on agency experience — WordPress theme customization, responsive UI implementation, bug fixing, and version control workflows.',
-    tags: ['WordPress', 'HTML', 'CSS', 'PHP', 'Git'],
+    summary: 'Joined FueInt Technologies, Coimbatore — customised WordPress themes, built responsive interfaces, and resolved production bugs.',
+    deliverables: [
+      'Mastered WordPress theme hierarchy & hooks',
+      'Mobile-first responsive UI implementations',
+      'Git version control in production sprints',
+    ],
+    tags: ['WordPress', 'HTML5', 'CSS3', 'PHP', 'Git'],
   },
   {
-    year: 'Jan 2023',
-    end: 'Dec 2024',
-    type: 'work',
-    title: 'Frontend Developer & WordPress Developer',
-    company: 'FueInt Technologies',
-    location: 'Tamil Nadu, India',
-    desc: 'Converted Figma designs into pixel-perfect WordPress websites. Built custom Gutenberg blocks and ACF Pro components for North American enterprise clients.',
-    tags: ['WordPress', 'Drupal', 'ACF Pro', 'PHP', 'Gutenberg', 'SCSS', 'Figma'],
+    step: '03',
+    durationLabel: '2 Years',
+    period: 'JAN 2023 — DEC 2024',
+    role: 'Frontend & WordPress Developer',
+    company: 'FueInt Technologies · via Dialed In Design (Canada)',
+    summary: 'Built custom WordPress themes and plugins from Figma across 20+ international client sites in Agile/Scrum teams.',
+    deliverables: [
+      'Custom themes & plugins for 20+ client sites',
+      'Reusable Gutenberg & ACF Pro components (~25% faster delivery)',
+      'JSON-LD schemas lifting organic CTR by ~15%',
+    ],
+    tags: ['WordPress', 'PHP', 'Gutenberg', 'ACF Pro', 'JSON-LD', 'Figma'],
   },
   {
-    year: 'Jan 2025',
-    end: 'May 2026',
-    type: 'work',
-    title: 'Web Developer & WordPress Developer',
-    company: 'FueInt Technologies',
-    location: 'Tamil Nadu, India',
-    desc: 'Architected enterprise CMS solutions across WordPress, Drupal, and Craft CMS for global brands — Unbounce, ElasticPath, OpenGovernmentPartnership, and Premier Boxing Champions. Reduced LCP by ~30% via deep asset and rendering optimizations.',
-    tags: ['WordPress', 'Craft CMS', 'ACF Pro', 'Tailwind CSS', 'TypeScript','Next.js', 'React', 'Core Web Vitals', 'Technical SEO'],
+    step: '04',
+    durationLabel: '1.5 Years',
+    period: 'JAN 2025 — MAY 2026',
+    role: 'Senior WordPress Developer',
+    company: 'FueInt Technologies · via Dialed In Design (Canada)',
+    summary: 'Led enterprise CMS delivery across WordPress, Drupal, and Craft CMS for Unbounce, Open Government Partnership, ElasticPath, and PBC.',
+    deliverables: [
+      'Bespoke Gutenberg block suite for Unbounce (React)',
+      '~30% LCP reduction & 1,700+ URL sitemap fix',
+      'PHP 7.4 → 8.x upgrades for OGP, PBC & ElasticPath',
+    ],
+    tags: ['WordPress', 'Drupal', 'Craft CMS', 'React', 'Core Web Vitals', 'Pantheon'],
+    isDefault: true,
+  },
+  {
+    step: '05',
+    durationLabel: 'Future / Next',
+    period: 'PRESENT — FUTURE',
+    role: 'Open to Full-Time Senior Engineering Roles',
+    company: 'Global Remote / Enterprise',
+    summary: 'Ready to lead CMS architecture, headless WordPress solutions, and performance-critical frontend systems.',
+    deliverables: [
+      'Available for full-time senior developer positions',
+      'Specialized in CMS architecture & Core Web Vitals',
+      'Global remote collaboration experience',
+    ],
+    tags: ['WordPress', 'Next.js', 'React', 'TypeScript', 'SEO'],
   },
 ]
 
-const TYPE_STYLES = {
-  education: { dot: 'bg-accent border-accent',    label: 'Education',  labelClass: 'text-accent border-accent/40 rounded-full' },
-  work:      { dot: 'bg-accent border-accent', label: 'Full-Time',  labelClass: 'text-accent border-accent/40 rounded-full' },
-}
+const DEFAULT_STAGE_IDX = Math.max(0, railMilestones.findIndex((m) => m.isDefault))
 
 export default function About() {
-  const timelineContainerRef = useRef<HTMLDivElement>(null)
-  const dotRefs = useRef<(HTMLDivElement | null)[]>([])
-  const [svgPath, setSvgPath] = useState('')
+  const [activeStageIdx, setActiveStageIdx] = useState(DEFAULT_STAGE_IDX)
+  const currentStage = railMilestones[activeStageIdx]
+  const railScrollRef = useRef<HTMLDivElement>(null)
+  const nodeRefs = useRef<(HTMLButtonElement | null)[]>([])
 
+  // Auto-center the active node inside the horizontal rail (tablet/desktop).
+  // Scrolls only the container, never the page, so this is safe on mount.
   useEffect(() => {
-    const updatePath = () => {
-      if (!timelineContainerRef.current) return
-      const containerRect = timelineContainerRef.current.getBoundingClientRect()
-      
-      const points: { x: number; y: number }[] = []
-      dotRefs.current.forEach((dot) => {
-        if (dot) {
-          const rect = dot.getBoundingClientRect()
-          const x = rect.left + rect.width / 2 - containerRect.left
-          const y = rect.top + rect.height / 2 - containerRect.top
-          points.push({ x, y })
-        }
+    const center = (container: HTMLElement | null, el: HTMLElement | null | undefined) => {
+      if (!container || !el) return
+      container.scrollTo({
+        left: Math.max(0, el.offsetLeft - container.offsetWidth / 2 + el.offsetWidth / 2),
+        behavior: 'smooth',
       })
-
-      if (points.length < 2) return
-
-      let d = `M ${points[0].x} ${points[0].y}`
-      for (let i = 1; i < points.length; i++) {
-        d += ` L ${points[i].x} ${points[i].y}`
-      }
-      setSvgPath(d)
     }
+    center(railScrollRef.current, nodeRefs.current[activeStageIdx])
+  }, [activeStageIdx])
 
-    const timeout = setTimeout(updatePath, 150)
-    updatePath()
+  const prevStep = () => setActiveStageIdx((i) => Math.max(0, i - 1))
+  const nextStep = () => setActiveStageIdx((i) => Math.min(railMilestones.length - 1, i + 1))
 
-    window.addEventListener('resize', updatePath)
-    const ro = new ResizeObserver(updatePath)
-    if (timelineContainerRef.current) {
-      ro.observe(timelineContainerRef.current)
+  // Tablet tabs: Up/Down move selection and focus together (roving tabindex)
+  const handleVerticalKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return
+    e.preventDefault()
+    const next = e.key === 'ArrowUp'
+      ? Math.max(0, activeStageIdx - 1)
+      : Math.min(railMilestones.length - 1, activeStageIdx + 1)
+    setActiveStageIdx(next)
+    document.getElementById(`roadmap-tab-${railMilestones[next].step}`)?.focus()
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault()
+      prevStep()
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault()
+      nextStep()
     }
-
-    return () => {
-      clearTimeout(timeout)
-      window.removeEventListener('resize', updatePath)
-      ro.disconnect()
-    }
-  }, [])
+  }
   return (
-    <section id="about" className="relative bg-ink text-canvas border-t border-canvas/10">
+    <section id="about" className="relative bg-ink text-canvas border-t border-canvas/10 overflow-hidden">
       <ShootingStarsGrid />
       
       {/* ── Part 1: About Me (Balanced 2-Column Layout) ───────────────── */}
@@ -159,7 +200,7 @@ export default function About() {
                 aria-label="LinkedIn Profile"
                 className="group flex items-center gap-2.5 px-4 py-2.5 border border-canvas/10 bg-canvas/5 text-xs font-mono text-canvas hover:border-accent hover:text-accent hover:bg-canvas/10 transition-all shadow-sm rounded-full"
               >
-                <svg className="w-4 h-4 text-accent" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                <LinkedInIcon className="w-4 h-4 text-accent" />
                 LinkedIn Profile
               </a>
               <a
@@ -169,7 +210,7 @@ export default function About() {
                 aria-label="GitHub Profile"
                 className="group flex items-center gap-2.5 px-4 py-2.5 border border-canvas/10 bg-canvas/5 text-sm font-mono text-canvas hover:border-accent hover:text-accent hover:bg-canvas/10 transition-all shadow-sm rounded-full"
               >
-                <svg className="w-4 h-4 text-accent" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                <GitHubIcon className="w-4 h-4 text-accent" />
                 GitHub Profile
               </a>
               <a
@@ -179,10 +220,7 @@ export default function About() {
                 aria-label="WordPress.org Profile"
                 className="group flex items-center gap-2.5 px-4 py-2.5 border border-canvas/10 bg-canvas/5 text-sm font-mono text-canvas hover:border-accent hover:text-accent hover:bg-canvas/10 transition-all shadow-sm rounded-full"
               >
-                <svg className="w-4 h-4 text-accent" viewBox="0 0 28 28" fill="currentColor">
-                  <path d="M13.6052 0.923525C16.1432 0.923525 18.6137 1.67953 20.7062 3.09703C22.7447 4.47403 24.3512 6.41803 25.3097 8.68603C26.9837 12.6415 26.5382 17.164 24.1352 20.7145C22.7582 22.753 20.8142 24.3595 18.5462 25.318C14.5907 26.992 10.0682 26.5465 6.51772 24.1435C4.47922 22.7665 2.87272 20.8225 1.91422 18.5545C0.240225 14.599 0.685725 10.0765 3.08872 6.52603C4.46572 4.48753 6.40973 2.88103 8.67772 1.92253C10.2302 1.26103 11.9177 0.923525 13.6052 0.923525ZM13.6052 0.113525C6.15322 0.113525 0.105225 6.16153 0.105225 13.6135C0.105225 21.0655 6.15322 27.1135 13.6052 27.1135C21.0572 27.1135 27.1052 21.0655 27.1052 13.6135C27.1052 6.16153 21.0572 0.113525 13.6052 0.113525Z" />
-                  <path d="M2.36011 13.6133C2.36011 17.9198 4.81711 21.8618 8.70511 23.7383L3.33211 9.03684C2.68411 10.4813 2.36011 12.0338 2.36011 13.6133ZM21.2061 13.0463C21.2061 11.6558 20.7066 10.6973 20.2746 9.94134C19.8426 9.18534 19.1676 8.22684 19.1676 7.30884C19.1676 6.39084 19.9506 5.31084 21.0576 5.31084H21.2061C16.6296 1.11234 9.51511 1.42284 5.31661 6.01284C4.91161 6.45834 4.53361 6.93084 4.20961 7.43034H4.93861C6.11311 7.43034 7.93561 7.28184 7.93561 7.28184C8.54311 7.24134 8.61061 8.13234 8.00311 8.21334C8.00311 8.21334 7.39561 8.28084 6.72061 8.32134L10.8111 20.5118L13.2681 13.1273L11.5131 8.32134C10.9056 8.28084 10.3386 8.21334 10.3386 8.21334C9.73111 8.17284 9.79861 7.25484 10.4061 7.28184C10.4061 7.28184 12.2691 7.43034 13.3626 7.43034C14.4561 7.43034 16.3596 7.28184 16.3596 7.28184C16.9671 7.24134 17.0346 8.13234 16.4271 8.21334C16.4271 8.21334 15.8196 8.28084 15.1446 8.32134L19.2081 20.4173L20.3691 16.7453C20.8821 15.1388 21.1926 14.0048 21.1926 13.0328L21.2061 13.0463ZM13.7946 14.5853L10.4196 24.3998C12.6876 25.0613 15.1041 25.0073 17.3316 24.2243L17.2506 24.0758L13.7946 14.5853ZM23.4741 8.21334C23.5281 8.59134 23.5551 8.98284 23.5551 9.37434C23.5551 10.5218 23.3391 11.8043 22.7046 13.3973L19.2621 23.3333C24.5271 20.2688 26.4036 13.5593 23.4741 8.21334Z" />
-                </svg>
+                <WordPressIcon className="w-4 h-4 text-accent" />
                 WordPress.org
               </a>
             </div>
@@ -190,140 +228,427 @@ export default function About() {
         </div>
       </div>
 
-      {/* ── Part 2: Career Roadmap (Clean Vertical Timeline) ──────────── */}
+      {/* ── Part 2: Career Roadmap (Design Inc. Horizontal Laser Track — Exact Replica of design2.gif) ──────────── */}
       <div id="timeline" className="relative z-10 container mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
-        <div className="flex flex-col md:flex-row justify-between md:items-end mb-12 sm:mb-16 gap-4 reveal-text">
+        
+        {/* Section Header with Line-by-Line Cascading Blooms */}
+        <div className="flex flex-col md:flex-row justify-between md:items-end mb-10 sm:mb-12 gap-4">
           <div>
-            <p className="text-sm font-mono text-accent uppercase tracking-widest mb-3 font-semibold">Career Roadmap</p>
-            <h2 className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-canvas leading-tight">
+            <p className="reveal-text text-sm font-mono text-accent uppercase tracking-widest mb-3 font-semibold">Career Roadmap</p>
+            <h2 className="reveal-text font-display font-normal text-3xl sm:text-4xl md:text-5xl text-canvas leading-tight delay-100">
               My journey.
             </h2>
           </div>
-          <p className="text-canvas/60 max-w-xs text-sm sm:text-base font-mono leading-relaxed">
-            Continuous engineering growth — from intern to Senior WordPress Developer.
+          <p className="reveal-text text-canvas/60 max-w-xs text-sm sm:text-base font-mono leading-relaxed delay-200">
+            Continuous engineering growth — from Web Developer to Senior WordPress Developer and Full Stack Engineer.
           </p>
         </div>
 
-        <div ref={timelineContainerRef} className="relative">
-          {/* Animated SVG Running Zig-Zag Line */}
-          {svgPath && (
-            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">
-              {/* Base faint dashed track */}
-              <path
-                d={svgPath}
-                fill="none"
-                stroke="rgba(245, 241, 236, 0.15)"
-                strokeWidth="2"
-                strokeDasharray="4 4"
-              />
-              {/* Glowing animated running laser line */}
-              <path
-                d={svgPath}
-                fill="none"
-                stroke="#DCBC7D"
-                strokeWidth="2.5"
-                strokeDasharray="16 12"
-                className="animate-timeline-flow"
-                strokeLinecap="round"
-              />
-              {/* Glowing ambient pulse underneath */}
-              <path
-                d={svgPath}
-                fill="none"
-                stroke="#DCBC7D"
-                strokeWidth="6"
-                strokeDasharray="16 12"
-                className="animate-timeline-flow opacity-30 blur-[3px]"
-                strokeLinecap="round"
-              />
-            </svg>
-          )}
+        {/* Main Interactive Stage Container */}
+        <div className="reveal-text delay-300 relative bg-gradient-to-b from-forest/30 via-forest/15 to-ink/90 border border-canvas/15 rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-10 shadow-2xl overflow-hidden backdrop-blur-md">
+          
+          {/* Ambient Micro-Particles Background */}
+          <div className="absolute inset-0 pointer-events-none select-none overflow-hidden opacity-25">
+            <span className="absolute top-12 left-16 text-accent/40 font-mono text-sm">+</span>
+            <span className="absolute top-48 left-1/4 text-canvas/30 font-mono text-xs">○</span>
+            <span className="absolute top-28 right-24 text-accent/40 font-mono text-sm">×</span>
+            <span className="absolute bottom-32 left-12 text-canvas/30 font-mono text-xs">○</span>
+            <span className="absolute bottom-16 right-1/3 text-accent/40 font-mono text-sm">+</span>
+            <span className="absolute top-72 right-16 text-canvas/30 font-mono text-sm">×</span>
+          </div>
 
-          <div className="space-y-0 relative z-10">
-            {milestones.map((item, idx) => {
-              const style = TYPE_STYLES[item.type as keyof typeof TYPE_STYLES]
-              const isRight = idx % 2 === 0
+          {/* Giant Watermarked Background Title */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+            <span className="text-[64px] sm:text-[120px] md:text-[180px] lg:text-[220px] font-display font-black tracking-widest text-canvas/[0.025] uppercase">
+              ROADMAP
+            </span>
+          </div>
 
+          {/* Center Stage Era Header */}
+          <div className="relative z-10 hidden lg:block text-center mb-12 space-y-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-accent font-bold block">
+              STAGE {currentStage.step} OF {String(railMilestones.length).padStart(2, '0')}
+            </span>
+            <h3 className="text-xl sm:text-3xl md:text-5xl font-display uppercase tracking-wider text-canvas font-semibold leading-snug sm:leading-tight">
+              {currentStage.role}
+            </h3>
+            <p className="text-xs sm:text-sm font-mono text-accent font-medium">
+              {currentStage.company} · {currentStage.period}
+            </p>
+          </div>
+
+          {/* ── Mobile: vertical timeline accordion (below md) ── */}
+          <ol className="relative z-10 md:hidden" aria-label="Career stages">
+            {railMilestones.map((m, idx) => {
+              const isSelected = idx === activeStageIdx
+              const isLast = idx === railMilestones.length - 1
+              const panelId = `roadmap-stage-${m.step}`
               return (
-                <div
-                  key={idx}
-                  className={`relative flex flex-col md:items-start ${
-                    isRight ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
-                >
-                  {/* Card */}
-                  <div className={`w-full md:w-[calc(50%-2.5rem)] ${isRight ? 'md:pr-10' : 'md:pl-10'} pl-8 sm:pl-10 md:pl-0 pb-8 sm:pb-12 relative`}>
-                    <div className="border border-canvas/10 hover:border-accent/40 bg-canvas/5 p-4 sm:p-6 md:p-7 transition-all duration-300 group rounded-xl relative">
-                      
-                      {/* Node Dot on Card Top */}
-                      <div
-                        ref={(el) => { dotRefs.current[idx] = el }}
-                        className={`absolute -top-3.5 left-0 md:left-auto ${
-                          isRight ? 'md:right-8' : 'md:left-8'
-                        } flex items-center justify-center z-20`}
-                      >
-                        <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 border-ink ${style.dot} flex items-center justify-center shadow-lg`}>
-                          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-canvas" />
-                        </div>
-                      </div>
+                <li key={m.step} className="relative pl-10">
+                  {/* Rail segment down to the next node */}
+                  {!isLast && (
+                    <span aria-hidden="true" className="absolute left-[13px] top-7 -bottom-1 w-[2px] bg-gradient-to-b from-accent/60 to-accent/15" />
+                  )}
 
-                      <div className="reveal-text flex items-center justify-between mb-3 sm:mb-4 flex-wrap gap-2 pt-1">
-                        <span className={`text-xs sm:text-sm font-mono uppercase tracking-widest border px-2.5 py-0.5 ${style.labelClass}`}>
-                          {style.label}
-                        </span>
-                        <span className="text-xs sm:text-sm font-mono text-canvas/50">
-                          {item.year} — {item.end}
-                        </span>
-                      </div>
-                      <h3 className="reveal-text text-canvas font-semibold text-base sm:text-lg md:text-xl group-hover:text-accent transition-colors mb-1.5 delay-100">
-                        {item.title}
-                      </h3>
-                      <p className="reveal-text text-xs sm:text-sm font-mono text-canvas/50 mb-3 delay-200">
-                        {item.company}<span className="mx-1.5">·</span>{item.location}
-                      </p>
-                      <p className="reveal-text text-canvas/80 text-sm sm:text-base leading-relaxed mb-4 delay-300">{item.desc}</p>
-                      {item.tags && item.tags.length > 0 && item.tags[0] !== '' && (
-                        <div className="reveal-text flex flex-wrap gap-1.5 sm:gap-2 delay-400">
-                          {item.tags.filter(tag => tag.trim() !== '').map((tag) => (
-                            <span key={tag} className="text-xs sm:text-sm font-mono text-canvas/70 border border-canvas/15 px-2 sm:px-2.5 py-0.5 sm:py-1 hover:bg-accent hover:border-accent hover:text-ink transition-all cursor-default rounded-md">
-                              {tag}
+                  {/* Node */}
+                  <span aria-hidden="true" className={`absolute left-0 top-1 w-7 h-7 rounded-full border-2 bg-ink flex items-center justify-center transition-all duration-300 ${
+                    isSelected ? 'border-accent shadow-[0_0_14px_#DCBC7D]' : 'border-canvas/25'
+                  }`}>
+                    <span className={`w-2.5 h-2.5 rounded-full transition-colors ${isSelected ? 'bg-accent animate-pulse' : 'bg-canvas/30'}`} />
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() => setActiveStageIdx(idx)}
+                    aria-expanded={isSelected}
+                    aria-controls={panelId}
+                    className="w-full text-left pb-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
+                  >
+                    <span className="flex items-center gap-2 flex-wrap">
+                      <span className={`text-xs font-mono font-bold ${isSelected ? 'text-accent' : 'text-canvas/50'}`}>{m.step}</span>
+                      <span className={`text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+                        isSelected ? 'text-accent border-accent/40 bg-accent/10' : 'text-canvas/60 border-canvas/15'
+                      }`}>
+                        {m.durationLabel}
+                      </span>
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-canvas/50">{m.period}</span>
+                    </span>
+                    <span className={`block mt-2 font-display text-lg leading-snug transition-colors ${isSelected ? 'text-canvas' : 'text-canvas/80'}`}>
+                      {m.role}
+                    </span>
+                    <span className="block mt-0.5 text-xs font-mono text-accent/80">{m.company}</span>
+                  </button>
+
+                  {/* Expanding details (grid-rows trick animates height without measuring) */}
+                  <div
+                    id={panelId}
+                    role="region"
+                    aria-label={`${m.role} details`}
+                    className={`grid transition-[grid-template-rows] duration-300 ease-out ${isSelected ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
+                  >
+                    <div className="overflow-hidden" inert={!isSelected}>
+                      <div className="mb-6 p-4 rounded-xl bg-canvas/[0.04] border border-canvas/15 space-y-3">
+                        <p className="text-sm text-canvas/80 leading-relaxed">{m.summary}</p>
+                        <ul className="space-y-1.5">
+                          {m.deliverables.map((d) => (
+                            <li key={d} className="flex items-start gap-2 text-xs font-mono text-canvas/90 leading-relaxed">
+                              <span className="text-accent font-bold shrink-0">✓</span>
+                              <span>{d}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="flex flex-wrap gap-1.5 pt-1">
+                          {m.tags.map((t) => (
+                            <span key={t} className="text-[11px] font-mono text-canvas/60 bg-canvas/5 border border-canvas/10 px-2.5 py-0.5 rounded">
+                              {t}
                             </span>
                           ))}
                         </div>
-                      )}
+                      </div>
                     </div>
                   </div>
-
-                  {/* Spacer */}
-                  <div className="hidden md:block w-[calc(50%-2.5rem)]" />
-                </div>
+                </li>
               )
             })}
+          </ol>
 
-            {/* End cap — Seeking Full-Time Roles */}
-            <div className="relative flex flex-col md:items-center pl-8 sm:pl-10 md:pl-0 mt-4 sm:mt-8">
-              {/* Dot */}
-              <div
-                ref={(el) => { dotRefs.current[milestones.length] = el }}
-                className="absolute left-0 md:left-1/2 md:-translate-x-1/2 -top-3.5 flex flex-col items-center z-20"
-              >
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-accent flex items-center justify-center animate-pulse border-2 border-ink shadow-lg">
-                  <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-ink" />
-                </div>
+          {/* ── Tablet: stage list + detail panel (md → lg only) ── */}
+          <div className="relative z-10 hidden md:grid lg:hidden grid-cols-12 gap-6 items-start">
+            {/* Stage list */}
+            <div className="col-span-5 relative" role="tablist" aria-orientation="vertical" aria-label="Career stages">
+              {railMilestones.map((m, idx) => {
+                const isSelected = idx === activeStageIdx
+                const isLast = idx === railMilestones.length - 1
+                return (
+                  <div key={m.step} className="relative pl-9 pb-3 last:pb-0">
+                    {!isLast && (
+                      <span aria-hidden="true" className="absolute left-[11px] top-7 bottom-0 w-[2px] bg-gradient-to-b from-accent/60 to-accent/15" />
+                    )}
+                    <span aria-hidden="true" className={`absolute left-0 top-3 w-6 h-6 rounded-full border-2 bg-ink flex items-center justify-center transition-all duration-300 ${
+                      isSelected ? 'border-accent shadow-[0_0_12px_#DCBC7D]' : 'border-canvas/25'
+                    }`}>
+                      <span className={`w-2 h-2 rounded-full transition-colors ${isSelected ? 'bg-accent' : 'bg-canvas/30'}`} />
+                    </span>
+                    <button
+                      type="button"
+                      role="tab"
+                      id={`roadmap-tab-${m.step}`}
+                      aria-selected={isSelected}
+                      aria-controls="roadmap-tabpanel"
+                      tabIndex={isSelected ? 0 : -1}
+                      onClick={() => setActiveStageIdx(idx)}
+                      onKeyDown={handleVerticalKeyDown}
+                      className={`w-full text-left px-4 py-3 rounded-xl border transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                        isSelected
+                          ? 'border-accent/50 bg-canvas/[0.07] shadow-lg'
+                          : 'border-transparent hover:border-canvas/15 hover:bg-canvas/[0.03]'
+                      }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className={`text-xs font-mono font-bold ${isSelected ? 'text-accent' : 'text-canvas/50'}`}>{m.step}</span>
+                        <span className={`text-[11px] font-mono font-bold uppercase tracking-wider ${isSelected ? 'text-accent' : 'text-canvas/50'}`}>
+                          {m.durationLabel}
+                        </span>
+                      </span>
+                      <span className={`block mt-1 font-display text-lg leading-snug ${isSelected ? 'text-canvas' : 'text-canvas/75'}`}>
+                        {m.role}
+                      </span>
+                      <span className="block mt-0.5 text-[11px] font-mono uppercase tracking-wider text-canvas/50">{m.period}</span>
+                    </button>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Detail panel */}
+            <div
+              id="roadmap-tabpanel"
+              role="tabpanel"
+              aria-labelledby={`roadmap-tab-${currentStage.step}`}
+              className="col-span-7 p-6 rounded-2xl bg-canvas/[0.04] border border-canvas/15 backdrop-blur-md"
+            >
+              <span className="text-xs font-mono uppercase tracking-widest text-accent font-bold">
+                Stage {currentStage.step} of {String(railMilestones.length).padStart(2, '0')} · {currentStage.period}
+              </span>
+              <h3 className="mt-3 text-2xl font-display text-canvas font-medium leading-snug">
+                {currentStage.role}
+              </h3>
+              <p className="mt-1 text-sm font-mono text-accent/90">{currentStage.company}</p>
+              <p className="mt-4 text-sm text-canvas/80 leading-relaxed">{currentStage.summary}</p>
+
+              <span className="mt-6 text-xs font-mono uppercase tracking-wider text-canvas/50 font-bold block">
+                Key Deliverables Shipped
+              </span>
+              <ul className="mt-2 space-y-1.5">
+                {currentStage.deliverables.map((d) => (
+                  <li key={d} className="flex items-start gap-2 text-xs font-mono text-canvas/90 leading-relaxed">
+                    <span className="text-accent font-bold shrink-0">✓</span>
+                    <span>{d}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="flex flex-wrap gap-1.5 mt-4">
+                {currentStage.tags.map((t) => (
+                  <span key={t} className="text-[11px] font-mono text-canvas/60 bg-canvas/5 border border-canvas/10 px-2.5 py-0.5 rounded">
+                    {t}
+                  </span>
+                ))}
               </div>
 
-              {/* Text Badge */}
-              <div className="bg-canvas/5 border border-accent/40 px-4 sm:px-6 py-3 sm:py-4 shadow-sm w-full md:w-auto z-10 rounded-xl text-left md:text-center mt-2 md:mt-6">
-                <p className="text-xs sm:text-sm md:text-base font-mono text-accent uppercase tracking-widest font-bold">
-                  Open to Full-Time Roles · Present
-                </p>
-                <p className="text-xs sm:text-sm font-mono text-canvas/70 mt-1">
-                  Senior WordPress Developer &amp; Full Stack Engineer
-                </p>
+              <div className="mt-6 pt-5 border-t border-canvas/10 flex items-center justify-between">
+                <span className="text-xs font-mono text-canvas/50">
+                  Phase {activeStageIdx + 1} of {railMilestones.length}
+                </span>
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={prevStep}
+                    disabled={activeStageIdx === 0}
+                    aria-label="Previous stage"
+                    className="w-10 h-10 rounded-full border border-canvas/20 hover:border-accent bg-canvas/5 hover:bg-accent hover:text-ink flex items-center justify-center text-canvas disabled:opacity-30 disabled:cursor-not-allowed transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 18l-6-6 6-6" /></svg>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={nextStep}
+                    disabled={activeStageIdx === railMilestones.length - 1}
+                    aria-label="Next stage"
+                    className="w-10 h-10 rounded-full border border-canvas/20 hover:border-accent bg-canvas/5 hover:bg-accent hover:text-ink flex items-center justify-center text-canvas disabled:opacity-30 disabled:cursor-not-allowed transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6" /></svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Main Track & Rail Grid */}
+          <div className="relative z-10 hidden lg:grid md:grid-cols-12 gap-6 items-center">
+            
+            {/* ── Left Stage Stepper (Desktop 01 to 05) ── */}
+            <div className="hidden md:flex md:col-span-1 flex-col items-center">
+              <div className="relative flex flex-col items-center py-2">
+                {/* Vertical thin rail */}
+                <div className="absolute top-2 bottom-2 w-[1px] bg-canvas/15" />
+
+                {railMilestones.map((m, idx) => {
+                  const isSelected = idx === activeStageIdx
+                  return (
+                    <button
+                      key={m.step}
+                      type="button"
+                      onClick={() => setActiveStageIdx(idx)}
+                      onKeyDown={handleKeyDown}
+                      className="relative z-10 my-1 min-w-6 min-h-6 p-1 flex items-center justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+                      aria-label={`Jump to stage ${m.step}: ${m.role}`}
+                      aria-pressed={isSelected}
+                    >
+                      <span className={`text-xs font-mono font-bold transition-all px-1.5 py-0.5 rounded ${
+                        isSelected
+                          ? 'text-accent scale-125 bg-accent/20 border border-accent/40 shadow-[0_0_8px_#DCBC7D]'
+                          : 'text-canvas/40 hover:text-canvas'
+                      }`}>
+                        {m.step}
+                      </span>
+                      {isSelected && (
+                        <span className="absolute -left-2 w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
+                      )}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* ── Center Horizontal Laser Rail with Concentric Nodes (11 cols) ── */}
+            <div ref={railScrollRef} className="w-full min-w-0 md:col-span-11 relative overflow-x-auto no-scrollbar py-6 sm:py-8 touch-pan-x select-none">
+              
+              {/* Continuous Horizontal Laser Track Line */}
+              <div className="relative min-w-[700px] px-4">
+                {/* Glowing horizontal laser line across all milestones (mathematically centered through node center at 46px) */}
+                <div className="absolute top-[45px] left-4 right-4 h-[2px] bg-gradient-to-r from-accent/20 via-accent to-accent/20 pointer-events-none" />
+                <div className="absolute top-[44px] left-4 right-4 h-[4px] bg-accent/20 blur-[2px] pointer-events-none" />
+
+                {/* Milestones along the horizontal line */}
+                <div className="grid grid-cols-5 gap-4 relative z-10">
+                  {railMilestones.map((item, idx) => {
+                    const isSelected = idx === activeStageIdx
+
+                    return (
+                      <button
+                        type="button"
+                        ref={(el) => { nodeRefs.current[idx] = el }}
+                        key={item.step}
+                        onClick={() => setActiveStageIdx(idx)}
+                        onKeyDown={handleKeyDown}
+                        className="flex flex-col items-center text-center cursor-pointer group px-2 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xl transition-all"
+                        aria-label={`Select stage ${item.step}: ${item.role}`}
+                        aria-pressed={isSelected}
+                      >
+                        {/* Top Duration Label (fixed 20px h-5 + 8px mb-2 for exact alignment with laser rail) */}
+                        <span className={`text-xs font-mono font-bold tracking-wider h-5 flex items-center justify-center mb-2 transition-colors ${
+                          isSelected ? 'text-accent drop-shadow-[0_0_8px_#DCBC7D]' : 'text-canvas/60 group-hover:text-canvas'
+                        }`}>
+                          {item.durationLabel}
+                        </span>
+
+                        {/* Concentric Glowing Node Directly on the Horizontal Line */}
+                        <div className="relative my-1 flex items-center justify-center">
+                          <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                            isSelected
+                              ? 'border-accent bg-ink shadow-[0_0_16px_#DCBC7D] scale-125'
+                              : 'border-canvas/25 bg-ink group-hover:border-accent/60'
+                          }`}>
+                            <span className={`w-2.5 h-2.5 rounded-full transition-all ${
+                              isSelected ? 'bg-accent animate-pulse' : 'bg-canvas/30 group-hover:bg-accent'
+                            }`} />
+                          </div>
+                        </div>
+
+                        {/* Period Subtitle Below Node */}
+                        <span className={`text-[11px] font-mono font-bold uppercase tracking-wider mt-3 block ${
+                          isSelected ? 'text-canvas' : 'text-canvas/50'
+                        }`}>
+                          {item.period}
+                        </span>
+
+                        {/* Narrative Description Snippet */}
+                        <span className="text-[11px] sm:text-xs text-canvas/70 font-sans leading-relaxed mt-2 line-clamp-3 block">
+                          {item.summary}
+                        </span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* Active Stage Detailed Inspection Box */}
+          <div
+            className="relative z-10 hidden lg:block mt-10 p-8 rounded-2xl bg-canvas/[0.04] border border-canvas/15 backdrop-blur-md"
+            role="region"
+            aria-label="Selected phase details"
+            aria-live="polite"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              <div className="lg:col-span-7 space-y-3">
+                <span className="text-xs font-mono uppercase tracking-widest text-accent font-bold">
+                  Selected Phase Breakdown · {currentStage.period}
+                </span>
+                <h4 className="text-xl sm:text-2xl font-display text-canvas font-medium">
+                  {currentStage.role}
+                </h4>
+                <p className="text-xs sm:text-sm font-mono text-accent/90">
+                  {currentStage.company}
+                </p>
+                <p className="text-sm text-canvas/80 font-sans leading-relaxed pt-1">
+                  {currentStage.summary}
+                </p>
+              </div>
+
+              <div className="lg:col-span-5 space-y-3 lg:border-l lg:border-canvas/10 lg:pl-6">
+                <span className="text-xs font-mono uppercase tracking-wider text-canvas/50 font-bold block">
+                  Key Deliverables Shipped
+                </span>
+                <div className="space-y-1.5">
+                  {currentStage.deliverables.map((d, idx) => (
+                    <div key={idx} className="flex items-start gap-2 text-xs font-mono text-canvas/90">
+                      <span className="text-accent font-bold shrink-0">✓</span>
+                      <span>{d}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-1.5 pt-3">
+                  {currentStage.tags.map((t) => (
+                    <span key={t} className="text-[11px] font-mono text-canvas/60 bg-canvas/5 border border-canvas/10 px-2.5 py-0.5 rounded hover:border-accent/40 hover:text-accent transition-colors">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Horizontal Arrow Controls */}
+          <div className="relative z-10 hidden lg:flex mt-8 items-center justify-between flex-wrap gap-3">
+            <span className="text-xs font-mono text-canvas/50">
+              Showing phase {activeStageIdx + 1} of {railMilestones.length} (Tap arrows or click nodes to explore)
+            </span>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={prevStep}
+                disabled={activeStageIdx === 0}
+                aria-label="Previous Milestone"
+                className="w-10 h-10 rounded-full border border-canvas/20 hover:border-accent bg-canvas/5 hover:bg-accent hover:text-ink flex items-center justify-center text-canvas disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-md group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <svg className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+              </button>
+
+              <button
+                type="button"
+                onClick={nextStep}
+                disabled={activeStageIdx === railMilestones.length - 1}
+                aria-label="Next Milestone"
+                className="w-10 h-10 rounded-full border border-canvas/20 hover:border-accent bg-canvas/5 hover:bg-accent hover:text-ink flex items-center justify-center text-canvas disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-md group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              >
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
         </div>
+
       </div>
     </section>
   )

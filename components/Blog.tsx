@@ -1,8 +1,19 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Carousel from './Carousel'
 import GameOfLife from './GameOfLife'
 
-const articles = [
+type Article = {
+  title: string
+  url: string
+  image: string
+  category: string
+  readTime: string
+}
+
+const articles: Article[] = [
   {
     title: "How to Improve SEO: A Practical Action Plan for 2025",
     url: "https://fueint.com/blog/how-to-improve-seo",
@@ -11,14 +22,14 @@ const articles = [
     readTime: "14 min"
   },
   {
-    title: "Perfmatters WordPress Plugin \u2013 Speed Up Your Site",
+    title: "Perfmatters WordPress Plugin – Speed Up Your Site",
     url: "https://fueint.com/blog/perfmatters-wordpress-plugin",
     image: "/images/blog/perfmatters-wordpress.webp",
     category: "WordPress",
     readTime: "8 min"
   },
   {
-    title: "WordPress Plugins 2025 \u2013 Must-Have Tools for Developers",
+    title: "WordPress Plugins 2025 – Must-Have Tools for Developers",
     url: "https://fueint.com/blog/must-have-wordpress-plugins",
     image: "/images/blog/wordpress-plugins-2025.webp",
     category: "WordPress",
@@ -39,7 +50,7 @@ const articles = [
     readTime: "11 min"
   },
   {
-    title: "Pantheon: Managed Hosting for WordPress &amp; Drupal Sites",
+    title: "Pantheon: Managed Hosting for WordPress & Drupal Sites",
     url: "https://fueint.com/blog/what-is-pantheon",
     image: "/images/blog/pantheon-hosting.webp",
     category: "WordPress",
@@ -68,8 +79,28 @@ const articles = [
   }
 ]
 
+// Cards per view: 1 on mobile, 2 from md (768px), 3 from lg (1024px) — matches Tailwind breakpoints
+function useSlidesToShow() {
+  const [slides, setSlides] = useState(1)
+  useEffect(() => {
+    const md = window.matchMedia('(min-width: 768px)')
+    const lg = window.matchMedia('(min-width: 1024px)')
+    const update = () => setSlides(lg.matches ? 3 : md.matches ? 2 : 1)
+    update()
+    md.addEventListener('change', update)
+    lg.addEventListener('change', update)
+    return () => {
+      md.removeEventListener('change', update)
+      lg.removeEventListener('change', update)
+    }
+  }, [])
+  return slides
+}
+
 export default function Blog() {
-  const renderCard = (article: any) => (
+  const slidesToShow = useSlidesToShow()
+
+  const renderCard = (article: Article) => (
     <a
       key={article.title}
       href={article.url}
@@ -82,11 +113,12 @@ export default function Blog() {
         src={article.image}
         alt={article.title}
         fill
+        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
         className="object-cover transition-transform duration-700 group-hover:scale-105"
         draggable={false}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-[#081729]/95 via-[#081729]/40 to-transparent pointer-events-none" />
-      <div className="absolute bottom-6 left-5 right-5 z-10">
+      <div className="absolute bottom-14 left-5 right-5 z-10">
         <div className="flex flex-wrap items-center gap-2 mb-3">
           <span className="text-sm font-mono text-accent uppercase tracking-widest bg-black/60 px-2.5 py-1 rounded-md backdrop-blur-sm border border-white/10 font-semibold">
             {article.category}
@@ -100,7 +132,7 @@ export default function Blog() {
         </p>
       </div>
     </a>
-  );
+  )
 
   return (
     <section id="blog" className="relative py-20 lg:py-24 bg-transparent border-t border-rule">
@@ -128,24 +160,10 @@ export default function Blog() {
           </a>
         </div>
 
-        {/* Desktop Carousel (3 items per view, slides 1 at a time) */}
-        <div className="hidden lg:block w-full max-w-7xl mx-auto h-[450px] reveal-text">
-          <Carousel slidesToShow={3}>
-            {articles.map(article => renderCard(article))}
-          </Carousel>
-        </div>
-
-        {/* Tablet Carousel (2 items per view, slides 1 at a time) */}
-        <div className="hidden md:block lg:hidden w-full max-w-5xl mx-auto h-[420px] reveal-text">
-          <Carousel slidesToShow={2}>
-            {articles.map(article => renderCard(article))}
-          </Carousel>
-        </div>
-
-        {/* Mobile Carousel (1 item per view) */}
-        <div className="block md:hidden w-full mx-auto h-[450px] reveal-text">
-          <Carousel slidesToShow={1}>
-            {articles.map(article => renderCard(article))}
+        <div className="w-full mx-auto h-[450px] md:max-w-5xl md:h-[420px] lg:max-w-7xl lg:h-[450px] reveal-text delay-300">
+          {/* Re-mount on breakpoint change so the seamless-loop clone offsets reset */}
+          <Carousel key={slidesToShow} slidesToShow={slidesToShow}>
+            {articles.map(renderCard)}
           </Carousel>
         </div>
 
@@ -154,7 +172,7 @@ export default function Blog() {
             href="https://fueint.com/authors/abinesh-s"
             target="_blank"
             rel="noopener noreferrer nofollow"
-            className="group text-base font-mono text-mist hover:text-forest transition-colors inline-flex items-center gap-1.5"
+            className="reveal-text delay-400 group text-base font-mono text-mist hover:text-forest transition-colors inline-flex items-center gap-1.5"
           >
             All articles
             <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -2,22 +2,18 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import ResumeActions from '@/components/ResumeActions'
 import ShootingStarsGrid from '@/components/ShootingStarsGrid'
+import JsonLd from '@/components/JsonLd'
+import { SITE_URL } from '@/lib/site'
+import { ID, PERSON_NAME, breadcrumbNode, jsonLdGraph, pageMetadata, personNode, websiteNode } from '@/lib/seo'
+
+const TITLE = 'Resume – Senior WordPress Developer'
+const DESCRIPTION =
+  'Resume of Abinesh Selvarasu, Senior WordPress Developer & Full Stack Engineer — 3+ years delivering enterprise CMS platforms for Unbounce, OGP & ElasticPath.'
 
 export const metadata: Metadata = {
-  title: 'Resume | Abinesh Selvarasu — Senior WordPress Developer & Full Stack Engineer',
-  description:
-    'Official digital resume of Abinesh Selvarasu, Senior WordPress Developer & Full Stack Engineer with 3+ years architecting enterprise CMS solutions, custom WordPress plugins, and Next.js applications.',
-  alternates: {
-    canonical: 'https://www.abineshspotlight.online/resume',
-  },
-  openGraph: {
-    title: 'Resume | Abinesh Selvarasu — Senior WordPress Developer & Full Stack Engineer',
-    description:
-      'Senior WordPress Developer & Full Stack Engineer with 3+ years delivering production-grade enterprise platforms for Unbounce, OGP, ElasticPath, and Premier Boxing Champions.',
-    url: 'https://www.abineshspotlight.online/resume',
-    siteName: 'Abinesh Selvarasu Portfolio',
-    type: 'profile',
-  },
+  // Template appends "| Abinesh Selvarasu"
+  title: TITLE,
+  ...pageMetadata({ path: '/resume', title: `${TITLE} | ${PERSON_NAME}`, description: DESCRIPTION, ogType: 'profile' }),
 }
 
 const skills = [
@@ -77,43 +73,30 @@ const enterpriseProjects = [
   { name: 'Loopio.com', role: 'WordPress Developer', highlight: 'Marketing website architecture, ACF modular layouts, and performance tuning for leading RFP response software platform.' },
 ]
 
-export default function ResumePage() {
-  const resumeSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfilePage',
-    mainEntity: {
-      '@type': 'Person',
-      name: 'Abinesh Selvarasu',
-      alternateName: 'Abinesh S',
-      jobTitle: 'Senior WordPress Developer & Full Stack Engineer',
-      description: 'Senior WordPress Developer and Full Stack Engineer with 3+ years delivering production-grade web platforms for global enterprise clients.',
-      url: 'https://www.abineshspotlight.online/resume',
-      email: 'mailtoabineshselva@gmail.com',
-      telephone: '+919042972156',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Coimbatore',
-        addressRegion: 'Tamil Nadu',
-        addressCountry: 'India',
-      },
-      sameAs: [
-        'https://linkedin.com/in/abineshselvarasu',
-        'https://github.com/abineshselvarasu',
-        'https://profiles.wordpress.org/abineshselvarasu/',
-      ],
-      alumniOf: {
-        '@type': 'EducationalOrganization',
-        name: 'Vidyaa Vikas College of Engineering (Anna University)',
-      },
-    },
-  }
+const schema = jsonLdGraph(
+  personNode,
+  websiteNode,
+  {
+    '@type': 'WebPage',
+    '@id': `${SITE_URL}/resume#webpage`,
+    url: `${SITE_URL}/resume`,
+    name: `${TITLE} | ${PERSON_NAME}`,
+    description: DESCRIPTION,
+    isPartOf: { '@id': ID.website },
+    about: { '@id': ID.person },
+    breadcrumb: { '@id': `${SITE_URL}/resume#breadcrumb` },
+    inLanguage: 'en-US',
+  },
+  breadcrumbNode('/resume', [
+    { name: 'Home', path: '/' },
+    { name: 'Resume', path: '/resume' },
+  ]),
+)
 
+export default function ResumePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(resumeSchema) }}
-      />
+      <JsonLd data={schema} />
 
       <div className="relative min-h-screen bg-ink text-canvas py-6 sm:py-10 lg:py-12 px-3 sm:px-6 lg:px-8 overflow-x-hidden selection:bg-accent selection:text-ink">
         

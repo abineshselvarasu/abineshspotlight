@@ -13,7 +13,7 @@ export default function RevealObserver() {
           }
         })
       },
-      { threshold: 0.05, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.01, rootMargin: '0px 0px 0px 0px' }
     )
 
     const observeElements = () => {
@@ -24,11 +24,35 @@ export default function RevealObserver() {
 
     observeElements()
 
+    // Safety fallback: If user reaches near the bottom of the page, reveal any elements in the viewport
+    const checkEndOfPage = () => {
+      const scrollPosition = window.innerHeight + window.scrollY
+      const pageBottom = document.documentElement.scrollHeight
+      if (scrollPosition >= pageBottom - 70) {
+        document.querySelectorAll('.reveal-text:not(.is-visible)').forEach((el) => {
+          const rect = el.getBoundingClientRect()
+          if (rect.top <= window.innerHeight) {
+            el.classList.add('is-visible')
+            observer.unobserve(el)
+          }
+        })
+      }
+    }
+
+    window.addEventListener('scroll', checkEndOfPage, { passive: true })
+    window.addEventListener('resize', checkEndOfPage, { passive: true })
+
+    // Check immediately in case page is loaded near or at bottom
+    checkEndOfPage()
+
     // Watch for dynamic DOM updates only within the interactive projects container
     let debounceTimer: ReturnType<typeof setTimeout>
     const debouncedObserve = () => {
       clearTimeout(debounceTimer)
-      debounceTimer = setTimeout(observeElements, 100)
+      debounceTimer = setTimeout(() => {
+        observeElements()
+        checkEndOfPage()
+      }, 100)
     }
 
     const projectsContainer = document.getElementById('projects')
@@ -45,6 +69,8 @@ export default function RevealObserver() {
       clearTimeout(debounceTimer)
       observer.disconnect()
       mutationObserver.disconnect()
+      window.removeEventListener('scroll', checkEndOfPage)
+      window.removeEventListener('resize', checkEndOfPage)
     }
   }, [])
 

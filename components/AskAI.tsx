@@ -40,20 +40,33 @@ export default function AskAI() {
   const ref = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
+  // Set when hover opened the menu, so the click that follows the hover doesn't immediately close it
+  const openedByHover = useRef(false)
+
+  const canHover = () => window.matchMedia('(hover: hover)').matches
+
   // Desktop hover trigger
   const handleMouseEnter = () => {
-    if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-      setOpen(true)
-    }
+    if (!canHover()) return
+    if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    if (!open) openedByHover.current = true
+    setOpen(true)
   }
 
   const handleMouseLeave = () => {
-    if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
-      timeoutRef.current = setTimeout(() => {
-        setOpen(false)
-      }, 250)
+    if (!canHover()) return
+    timeoutRef.current = setTimeout(() => {
+      openedByHover.current = false
+      setOpen(false)
+    }, 250)
+  }
+
+  const handleClick = () => {
+    if (openedByHover.current) {
+      openedByHover.current = false
+      return
     }
+    setOpen((o) => !o)
   }
 
   // Mobile + Desktop click/touch outside to close
@@ -65,12 +78,17 @@ export default function AskAI() {
         setOpen(false)
       }
     }
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
     document.addEventListener('mousedown', handleClickOutside, { passive: true })
     document.addEventListener('touchstart', handleClickOutside, { passive: true })
+    document.addEventListener('keydown', handleKeyDown)
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
       document.removeEventListener('touchstart', handleClickOutside)
+      document.removeEventListener('keydown', handleKeyDown)
       if (timeoutRef.current) clearTimeout(timeoutRef.current)
     }
   }, [open])
@@ -83,7 +101,7 @@ export default function AskAI() {
       onMouseLeave={handleMouseLeave}
     >
       <button
-        onClick={() => setOpen((o) => !o)}
+        onClick={handleClick}
         aria-expanded={open}
         aria-haspopup="true"
         className="group flex items-center gap-2 text-sm sm:text-base font-mono font-medium text-canvas hover:text-accent transition-colors cursor-pointer py-1"
