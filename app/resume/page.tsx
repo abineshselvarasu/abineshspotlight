@@ -189,7 +189,7 @@ export default function ResumePage() {
                       <h3 className="font-display text-lg sm:text-xl text-canvas font-normal print:text-black">
                         {plugin.name}
                       </h3>
-                      <span className="self-start text-[10px] sm:text-[11px] font-mono px-2 py-0.5 rounded-full border border-accent/40 text-accent bg-accent/10 whitespace-nowrap print:border-neutral-400 print:text-neutral-800">
+                      <span className="self-start text-xs font-mono px-2 py-0.5 rounded-full border border-accent/40 text-accent bg-accent/10 whitespace-nowrap print:border-neutral-400 print:text-neutral-800">
                         Live on WP.org
                       </span>
                     </div>
@@ -198,7 +198,7 @@ export default function ResumePage() {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-canvas/10 print:border-neutral-200">
                       <div className="flex flex-wrap gap-1">
                         {plugin.stack.map((tag) => (
-                          <span key={tag} className="text-[10px] sm:text-[11px] font-mono px-2 py-0.5 rounded bg-canvas/5 border border-canvas/10 text-canvas/60 print:bg-neutral-200 print:text-black">
+                          <span key={tag} className="text-xs font-mono px-2 py-0.5 rounded bg-canvas/5 border border-canvas/10 text-canvas/60 print:bg-neutral-200 print:text-black">
                             {tag}
                           </span>
                         ))}
@@ -232,7 +232,7 @@ export default function ResumePage() {
                       {group.items.map((item) => (
                         <span
                           key={item}
-                          className="text-[11px] sm:text-xs font-mono px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-canvas/5 border border-canvas/10 text-canvas/80 print:bg-neutral-100 print:border-neutral-300 print:text-black"
+                          className="text-xs font-mono px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-canvas/5 border border-canvas/10 text-canvas/80 print:bg-neutral-100 print:border-neutral-300 print:text-black"
                         >
                           {item}
                         </span>
@@ -330,7 +330,7 @@ export default function ResumePage() {
                   <div key={p.name} className="border border-canvas/10 rounded-xl p-3 sm:p-3.5 bg-canvas/[0.02] print:border-neutral-300 print:p-2.5">
                     <div className="flex items-baseline justify-between gap-1 mb-1">
                       <span className="font-mono text-xs sm:text-sm font-bold text-accent print:text-black">{p.name}</span>
-                      <span className="text-[10px] sm:text-[11px] font-mono text-canvas/50 shrink-0 print:text-neutral-600">{p.role}</span>
+                      <span className="text-xs font-mono text-canvas/50 shrink-0 print:text-neutral-600">{p.role}</span>
                     </div>
                     <p className="text-xs text-canvas/70 leading-relaxed print:text-neutral-700">{p.highlight}</p>
                   </div>

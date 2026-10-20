@@ -248,12 +248,12 @@ export default function Projects() {
   const showBothGroups = showEnterprise && showIndependent
 
   return (
-    <section id="projects" className="relative py-20 lg:py-24 bg-ink">
+    <section id="projects" className="relative py-14 md:py-20 lg:py-24 bg-ink">
       <ShootingStarsGrid />
       <div className="relative z-10 container mx-auto px-6">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between md:items-end mb-10 gap-6">
+        <div className="flex flex-col md:flex-row justify-between md:items-end mb-8 md:mb-10 gap-6">
           <div>
             <p className="reveal-text text-sm font-mono text-accent uppercase tracking-widest mb-3 font-semibold">Selected Work</p>
             <h2 className="reveal-text font-display font-normal text-4xl md:text-6xl text-canvas tracking-tight leading-tight delay-100">
@@ -266,7 +266,7 @@ export default function Projects() {
         </div>
 
         {/* Filters */}
-        <div className="mb-12 reveal-text delay-300">
+        <div className="mb-8 md:mb-12 reveal-text delay-300">
           <div className="flex flex-wrap gap-2.5">
             {filters.map((f) => (
               <button
@@ -286,7 +286,7 @@ export default function Projects() {
 
         {/* ── Enterprise Track Bento Grid ── */}
         {showEnterprise && (
-          <div className="mb-16">
+          <div className="mb-12 md:mb-16">
             {showBothGroups && (
               <div className="reveal-text flex items-center gap-4 mb-4">
                 <span className="text-sm font-mono uppercase tracking-widest text-accent font-semibold">Enterprise experience</span>
@@ -362,13 +362,14 @@ const STAGGER_DELAYS = ['delay-300', '', 'delay-100', 'delay-200']
 
 function BentoCard({ project, index, groupLabel }: { project: Project; index: number; groupLabel: string }) {
   const badge = project.subGroup ? (SUBGROUP_BADGE[project.subGroup] ?? groupLabel) : groupLabel
+  // Featured cards widen only on the 4-column desktop grid; spanning on the 2-column tablet grid would leave holes
   const isFeatured = !!project.featured
   const staggerDelay = STAGGER_DELAYS[index % 4]
 
   return (
     <article
       className={`reveal-text ${staggerDelay} group relative flex flex-col justify-between border border-canvas/10 hover:border-accent/50 bg-canvas/5 hover:bg-canvas/[0.08] transition-all duration-300 p-5 sm:p-6 rounded-2xl shadow-md ${
-        isFeatured ? 'col-span-1 md:col-span-2 lg:col-span-2 border-accent/20 bg-canvas/[0.07]' : 'col-span-1'
+        isFeatured ? 'col-span-1 lg:col-span-2 border-accent/20 bg-canvas/[0.07]' : 'col-span-1'
       }`}
     >
       {/* Top Accent Hover Highlight Line */}

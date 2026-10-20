@@ -135,10 +135,10 @@ export default function Blog() {
   )
 
   return (
-    <section id="blog" className="relative py-20 lg:py-24 bg-transparent border-t border-rule">
+    <section id="blog" className="relative py-14 md:py-20 lg:py-24 bg-transparent border-t border-rule">
       <GameOfLife />
       <div className="relative z-10 container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between md:items-end mb-16 gap-6">
+        <div className="flex flex-col md:flex-row justify-between md:items-end mb-8 md:mb-12 gap-6">
           <div>
             <p className="reveal-text text-sm font-mono text-forest uppercase tracking-widest mb-3 font-semibold">Publications</p>
             <h2 className="reveal-text font-display font-normal text-4xl md:text-5xl text-ink leading-tight delay-100">
@@ -167,7 +167,7 @@ export default function Blog() {
           </Carousel>
         </div>
 
-        <div className="mt-10 text-center md:hidden">
+        <div className="mt-8 text-center md:hidden">
           <a
             href="https://fueint.com/authors/abinesh-s"
             target="_blank"

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import ShootingStarsGrid from './ShootingStarsGrid'
 import { GitHubIcon, LinkedInIcon, WordPressIcon } from './icons'
+import { SnakeRail, SnakeSegment } from './SnakeRoad'
 
 const tags = [
   'WordPress Customization', 'Custom Themes', 'Custom Hooks',
@@ -16,6 +17,7 @@ interface RailMilestone {
   durationLabel: string
   period: string
   role: string
+  shortTitle: string // compact label under each node on the desktop rail
   company: string
   summary: string
   deliverables: string[]
@@ -28,6 +30,7 @@ interface RailMilestone {
 const railMilestones: RailMilestone[] = [
   {
     step: '01',
+    shortTitle: 'Engineering Degree',
     durationLabel: '4 Years',
     period: '2016 — 2020',
     role: 'B.E. Computer Science & Engineering',
@@ -42,6 +45,7 @@ const railMilestones: RailMilestone[] = [
   },
   {
     step: '02',
+    shortTitle: 'Web Developer',
     durationLabel: '6 Months',
     period: 'JUL — DEC 2022',
     role: 'Web Developer',
@@ -56,6 +60,7 @@ const railMilestones: RailMilestone[] = [
   },
   {
     step: '03',
+    shortTitle: 'Frontend & WP Developer',
     durationLabel: '2 Years',
     period: 'JAN 2023 — DEC 2024',
     role: 'Frontend & WordPress Developer',
@@ -70,6 +75,7 @@ const railMilestones: RailMilestone[] = [
   },
   {
     step: '04',
+    shortTitle: 'Senior WP Developer',
     durationLabel: '1.5 Years',
     period: 'JAN 2025 — MAY 2026',
     role: 'Senior WordPress Developer',
@@ -85,12 +91,14 @@ const railMilestones: RailMilestone[] = [
   },
   {
     step: '05',
-    durationLabel: 'Future / Next',
+    shortTitle: 'Open to Senior Roles',
+    durationLabel: '3 Yrs 10 Mos Exp.',
     period: 'PRESENT — FUTURE',
     role: 'Open to Full-Time Senior Engineering Roles',
     company: 'Global Remote / Enterprise',
-    summary: 'Ready to lead CMS architecture, headless WordPress solutions, and performance-critical frontend systems.',
+    summary: 'With 3 years 10 months of professional experience, ready to lead CMS architecture, headless WordPress, and performance-critical frontends.',
     deliverables: [
+      '3 years 10 months of professional experience',
       'Available for full-time senior developer positions',
       'Specialized in CMS architecture & Core Web Vitals',
       'Global remote collaboration experience',
@@ -148,7 +156,7 @@ export default function About() {
       <ShootingStarsGrid />
       
       {/* ── Part 1: About Me (Balanced 2-Column Layout) ───────────────── */}
-      <div className="relative z-10 container mx-auto px-6 py-16 lg:py-20 border-b border-canvas/10">
+      <div className="relative z-10 container mx-auto px-6 py-14 md:py-20 lg:py-24 border-b border-canvas/10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column: Bio & Narrative (7 cols) */}
@@ -229,10 +237,10 @@ export default function About() {
       </div>
 
       {/* ── Part 2: Career Roadmap (Design Inc. Horizontal Laser Track — Exact Replica of design2.gif) ──────────── */}
-      <div id="timeline" className="relative z-10 container mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
+      <div id="timeline" className="relative z-10 container mx-auto px-4 sm:px-6 py-14 md:py-20 lg:py-24">
         
         {/* Section Header with Line-by-Line Cascading Blooms */}
-        <div className="flex flex-col md:flex-row justify-between md:items-end mb-10 sm:mb-12 gap-4">
+        <div className="flex flex-col md:flex-row justify-between md:items-end mb-8 md:mb-12 gap-4">
           <div>
             <p className="reveal-text text-sm font-mono text-accent uppercase tracking-widest mb-3 font-semibold">Career Roadmap</p>
             <h2 className="reveal-text font-display font-normal text-3xl sm:text-4xl md:text-5xl text-canvas leading-tight delay-100">
@@ -287,7 +295,7 @@ export default function About() {
                 <li key={m.step} className="relative pl-10">
                   {/* Rail segment down to the next node */}
                   {!isLast && (
-                    <span aria-hidden="true" className="absolute left-[13px] top-7 -bottom-1 w-[2px] bg-gradient-to-b from-accent/60 to-accent/15" />
+                    <SnakeSegment flip={idx % 2 === 1} travelled={idx < activeStageIdx} className="absolute left-1 top-7 -bottom-1 w-5" />
                   )}
 
                   {/* Node */}
@@ -306,12 +314,12 @@ export default function About() {
                   >
                     <span className="flex items-center gap-2 flex-wrap">
                       <span className={`text-xs font-mono font-bold ${isSelected ? 'text-accent' : 'text-canvas/50'}`}>{m.step}</span>
-                      <span className={`text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+                      <span className={`text-xs font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
                         isSelected ? 'text-accent border-accent/40 bg-accent/10' : 'text-canvas/60 border-canvas/15'
                       }`}>
                         {m.durationLabel}
                       </span>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-canvas/50">{m.period}</span>
+                      <span className="text-xs font-mono uppercase tracking-wider text-canvas/50">{m.period}</span>
                     </span>
                     <span className={`block mt-2 font-display text-lg leading-snug transition-colors ${isSelected ? 'text-canvas' : 'text-canvas/80'}`}>
                       {m.role}
@@ -339,7 +347,7 @@ export default function About() {
                         </ul>
                         <div className="flex flex-wrap gap-1.5 pt-1">
                           {m.tags.map((t) => (
-                            <span key={t} className="text-[11px] font-mono text-canvas/60 bg-canvas/5 border border-canvas/10 px-2.5 py-0.5 rounded">
+                            <span key={t} className="text-xs font-mono text-canvas/60 bg-canvas/5 border border-canvas/10 px-2.5 py-0.5 rounded">
                               {t}
                             </span>
                           ))}
@@ -362,7 +370,7 @@ export default function About() {
                 return (
                   <div key={m.step} className="relative pl-9 pb-3 last:pb-0">
                     {!isLast && (
-                      <span aria-hidden="true" className="absolute left-[11px] top-7 bottom-0 w-[2px] bg-gradient-to-b from-accent/60 to-accent/15" />
+                      <SnakeSegment flip={idx % 2 === 1} travelled={idx < activeStageIdx} className="absolute left-0.5 top-9 -bottom-3 w-5" />
                     )}
                     <span aria-hidden="true" className={`absolute left-0 top-3 w-6 h-6 rounded-full border-2 bg-ink flex items-center justify-center transition-all duration-300 ${
                       isSelected ? 'border-accent shadow-[0_0_12px_#DCBC7D]' : 'border-canvas/25'
@@ -386,14 +394,14 @@ export default function About() {
                     >
                       <span className="flex items-center gap-2">
                         <span className={`text-xs font-mono font-bold ${isSelected ? 'text-accent' : 'text-canvas/50'}`}>{m.step}</span>
-                        <span className={`text-[11px] font-mono font-bold uppercase tracking-wider ${isSelected ? 'text-accent' : 'text-canvas/50'}`}>
+                        <span className={`text-xs font-mono font-bold uppercase tracking-wider ${isSelected ? 'text-accent' : 'text-canvas/50'}`}>
                           {m.durationLabel}
                         </span>
                       </span>
                       <span className={`block mt-1 font-display text-lg leading-snug ${isSelected ? 'text-canvas' : 'text-canvas/75'}`}>
                         {m.role}
                       </span>
-                      <span className="block mt-0.5 text-[11px] font-mono uppercase tracking-wider text-canvas/50">{m.period}</span>
+                      <span className="block mt-0.5 text-xs font-mono uppercase tracking-wider text-canvas/50">{m.period}</span>
                     </button>
                   </div>
                 )
@@ -430,16 +438,13 @@ export default function About() {
 
               <div className="flex flex-wrap gap-1.5 mt-4">
                 {currentStage.tags.map((t) => (
-                  <span key={t} className="text-[11px] font-mono text-canvas/60 bg-canvas/5 border border-canvas/10 px-2.5 py-0.5 rounded">
+                  <span key={t} className="text-xs font-mono text-canvas/60 bg-canvas/5 border border-canvas/10 px-2.5 py-0.5 rounded">
                     {t}
                   </span>
                 ))}
               </div>
 
-              <div className="mt-6 pt-5 border-t border-canvas/10 flex items-center justify-between">
-                <span className="text-xs font-mono text-canvas/50">
-                  Phase {activeStageIdx + 1} of {railMilestones.length}
-                </span>
+              <div className="mt-6 pt-5 border-t border-canvas/10 flex items-center justify-end">
                 <div className="flex items-center gap-3">
                   <button
                     type="button"
@@ -506,9 +511,8 @@ export default function About() {
               
               {/* Continuous Horizontal Laser Track Line */}
               <div className="relative min-w-[700px] px-4">
-                {/* Glowing horizontal laser line across all milestones (mathematically centered through node center at 46px) */}
-                <div className="absolute top-[45px] left-4 right-4 h-[2px] bg-gradient-to-r from-accent/20 via-accent to-accent/20 pointer-events-none" />
-                <div className="absolute top-[44px] left-4 right-4 h-[4px] bg-accent/20 blur-[2px] pointer-events-none" />
+                {/* Winding road through every node centre; the travelled stretch glows */}
+                <SnakeRail count={railMilestones.length} activeIdx={activeStageIdx} />
 
                 {/* Milestones along the horizontal line */}
                 <div className="grid grid-cols-5 gap-4 relative z-10">
@@ -547,16 +551,19 @@ export default function About() {
                         </div>
 
                         {/* Period Subtitle Below Node */}
-                        <span className={`text-[11px] font-mono font-bold uppercase tracking-wider mt-3 block ${
+                        <span className={`text-xs font-mono font-bold uppercase tracking-wider mt-3 block ${
                           isSelected ? 'text-canvas' : 'text-canvas/50'
                         }`}>
                           {item.period}
                         </span>
 
-                        {/* Narrative Description Snippet */}
-                        <span className="text-[11px] sm:text-xs text-canvas/70 font-sans leading-relaxed mt-2 line-clamp-3 block">
-                          {item.summary}
+                        {/* Short stage title */}
+                        <span className={`text-xs font-sans font-medium leading-snug mt-1.5 block transition-colors ${
+                          isSelected ? 'text-accent' : 'text-canvas/60 group-hover:text-canvas/80'
+                        }`}>
+                          {item.shortTitle}
                         </span>
+
                       </button>
                     )
                   })}
@@ -567,84 +574,77 @@ export default function About() {
 
           </div>
 
-          {/* Active Stage Detailed Inspection Box */}
-          <div
-            className="relative z-10 hidden lg:block mt-10 p-8 rounded-2xl bg-canvas/[0.04] border border-canvas/15 backdrop-blur-md"
-            role="region"
-            aria-label="Selected phase details"
-            aria-live="polite"
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              <div className="lg:col-span-7 space-y-3">
-                <span className="text-xs font-mono uppercase tracking-widest text-accent font-bold">
-                  Selected Phase Breakdown · {currentStage.period}
-                </span>
-                <h4 className="text-xl sm:text-2xl font-display text-canvas font-medium">
-                  {currentStage.role}
-                </h4>
-                <p className="text-xs sm:text-sm font-mono text-accent/90">
-                  {currentStage.company}
-                </p>
-                <p className="text-sm text-canvas/80 font-sans leading-relaxed pt-1">
-                  {currentStage.summary}
-                </p>
-              </div>
+          {/* Active Stage Detailed Inspection Box — prev/next arrows flank it on either side */}
+          <div className="relative z-10 hidden lg:flex items-center gap-4 xl:gap-6 mt-10">
+            <button
+              type="button"
+              onClick={prevStep}
+              disabled={activeStageIdx === 0}
+              aria-label="Previous Milestone"
+              className="shrink-0 w-10 h-10 rounded-full border border-canvas/20 hover:border-accent bg-canvas/5 hover:bg-accent hover:text-ink flex items-center justify-center text-canvas disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-md group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <svg className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
 
-              <div className="lg:col-span-5 space-y-3 lg:border-l lg:border-canvas/10 lg:pl-6">
-                <span className="text-xs font-mono uppercase tracking-wider text-canvas/50 font-bold block">
-                  Key Deliverables Shipped
-                </span>
-                <div className="space-y-1.5">
-                  {currentStage.deliverables.map((d, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-xs font-mono text-canvas/90">
-                      <span className="text-accent font-bold shrink-0">✓</span>
-                      <span>{d}</span>
-                    </div>
-                  ))}
+            <div
+              className="flex-1 min-w-0 p-8 rounded-2xl bg-canvas/[0.04] border border-canvas/15 backdrop-blur-md"
+              role="region"
+              aria-label="Selected phase details"
+              aria-live="polite"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div className="lg:col-span-7 space-y-3">
+                  <span className="text-xs font-mono uppercase tracking-widest text-accent font-bold">
+                    Selected Phase Breakdown · {currentStage.period}
+                  </span>
+                  <h4 className="text-xl sm:text-2xl font-display text-canvas font-medium">
+                    {currentStage.role}
+                  </h4>
+                  <p className="text-xs sm:text-sm font-mono text-accent/90">
+                    {currentStage.company}
+                  </p>
+                  <p className="text-sm text-canvas/80 font-sans leading-relaxed pt-1">
+                    {currentStage.summary}
+                  </p>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5 pt-3">
-                  {currentStage.tags.map((t) => (
-                    <span key={t} className="text-[11px] font-mono text-canvas/60 bg-canvas/5 border border-canvas/10 px-2.5 py-0.5 rounded hover:border-accent/40 hover:text-accent transition-colors">
-                      {t}
-                    </span>
-                  ))}
+                <div className="lg:col-span-5 space-y-3 lg:border-l lg:border-canvas/10 lg:pl-6">
+                  <span className="text-xs font-mono uppercase tracking-wider text-canvas/50 font-bold block">
+                    Key Deliverables Shipped
+                  </span>
+                  <div className="space-y-1.5">
+                    {currentStage.deliverables.map((d, idx) => (
+                      <div key={idx} className="flex items-start gap-2 text-xs font-mono text-canvas/90">
+                        <span className="text-accent font-bold shrink-0">✓</span>
+                        <span>{d}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5 pt-3">
+                    {currentStage.tags.map((t) => (
+                      <span key={t} className="text-xs font-mono text-canvas/60 bg-canvas/5 border border-canvas/10 px-2.5 py-0.5 rounded hover:border-accent/40 hover:text-accent transition-colors">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Bottom Horizontal Arrow Controls */}
-          <div className="relative z-10 hidden lg:flex mt-8 items-center justify-between flex-wrap gap-3">
-            <span className="text-xs font-mono text-canvas/50">
-              Showing phase {activeStageIdx + 1} of {railMilestones.length} (Tap arrows or click nodes to explore)
-            </span>
-
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={prevStep}
-                disabled={activeStageIdx === 0}
-                aria-label="Previous Milestone"
-                className="w-10 h-10 rounded-full border border-canvas/20 hover:border-accent bg-canvas/5 hover:bg-accent hover:text-ink flex items-center justify-center text-canvas disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-md group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                <svg className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-
-              <button
-                type="button"
-                onClick={nextStep}
-                disabled={activeStageIdx === railMilestones.length - 1}
-                aria-label="Next Milestone"
-                className="w-10 h-10 rounded-full border border-canvas/20 hover:border-accent bg-canvas/5 hover:bg-accent hover:text-ink flex items-center justify-center text-canvas disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-md group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={nextStep}
+              disabled={activeStageIdx === railMilestones.length - 1}
+              aria-label="Next Milestone"
+              className="shrink-0 w-10 h-10 rounded-full border border-canvas/20 hover:border-accent bg-canvas/5 hover:bg-accent hover:text-ink flex items-center justify-center text-canvas disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-md group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
           </div>
 
         </div>

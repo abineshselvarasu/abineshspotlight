@@ -25,7 +25,7 @@ export default function Contact() {
     <footer id="contact" className="relative bg-ink border-t border-canvas/10">
       <ShootingStarsGrid />
       {/* Main Footer Grid */}
-      <div className="relative z-10 container mx-auto px-6 py-16">
+      <div className="relative z-10 container mx-auto px-6 py-14 md:py-20 lg:py-24">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
 
           {/* ── Column 1: Identity & Address ── */}
