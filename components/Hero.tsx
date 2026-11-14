@@ -17,7 +17,8 @@ export default function Hero() {
           <span className="flex items-center gap-2 text-sm font-mono text-mist uppercase tracking-widest">
             Open To Work
           </span>
-          <span className="text-sm font-mono text-mist uppercase tracking-widest">
+          {/* Year comes from the static build; the client may differ after New Year, so skip the hydration warning */}
+          <span className="text-sm font-mono text-mist uppercase tracking-widest" suppressHydrationWarning>
             Tamil Nadu, India · {new Date().getFullYear()}
           </span>
         </div>

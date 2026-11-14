@@ -35,6 +35,9 @@ const Carousel = ({
     const clonedCount = seamlessLoop ? slidesToShow : 0
     const [currentSlideIndex, setCurrentSlideIndex] = useState(clonedCount)
     const [isTransitioning, setIsTransitioning] = useState(true)
+    // Auto-slide pauses while the pointer or keyboard focus is inside (WCAG 2.2.2) and never runs for reduced-motion users
+    const [isPaused, setIsPaused] = useState(false)
+    const [reducedMotion, setReducedMotion] = useState(false)
     // Refs, not state: pointer positions don't affect rendering, so no re-render per mousemove
     const dragStart = useRef<number | null>(null)
     const dragEnd = useRef<number | null>(null)
@@ -115,10 +118,18 @@ const Carousel = ({
     }, [currentSlideIndex, totalSlides, seamlessLoop, clonedCount])
 
     useEffect(() => {
-        if (!autoSlide) return
+        const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+        const update = () => setReducedMotion(mq.matches)
+        update()
+        mq.addEventListener('change', update)
+        return () => mq.removeEventListener('change', update)
+    }, [])
+
+    useEffect(() => {
+        if (!autoSlide || isPaused || reducedMotion) return
         const slideInterval = setInterval(goToNextSlide, autoSlideInterval)
         return () => clearInterval(slideInterval)
-    }, [autoSlide, autoSlideInterval, goToNextSlide])
+    }, [autoSlide, autoSlideInterval, goToNextSlide, isPaused, reducedMotion])
 
     // Map the (clone-padded) track position back to a real slide index for the indicators
     let activeIndex = currentSlideIndex
@@ -129,7 +140,13 @@ const Carousel = ({
     }
 
     return (
-        <div className='relative w-full h-full overflow-hidden rounded-3xl group/carousel'>
+        <div
+            className='relative w-full h-full overflow-hidden rounded-3xl group/carousel'
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onFocus={() => setIsPaused(true)}
+            onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setIsPaused(false) }}
+        >
             {/* Main Carousel Track */}
             <div
                 className={`flex w-full h-full cursor-grab active:cursor-grabbing touch-pan-y ${isTransitioning ? 'transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)]' : ''}`}
@@ -143,11 +160,17 @@ const Carousel = ({
                 onMouseLeave={handleDragEnd}
                 onDragStart={(e) => e.preventDefault()} // Prevent default HTML5 drag on links
             >
-                {extendedSlides.map((slide, idx) => (
+                {extendedSlides.map((slide, idx) => {
+                    // Off-screen slides and loop clones stay out of the tab order and the accessibility tree,
+                    // so focus can never land on a hidden card and scroll the track out of alignment
+                    const offScreen = idx < currentSlideIndex || idx >= currentSlideIndex + slidesToShow
+                    return (
                     <div
                         key={idx}
                         className="h-full flex-shrink-0 relative"
                         style={{ width: `${100 / slidesToShow}%` }}
+                        inert={offScreen}
+                        aria-hidden={offScreen || undefined}
                     >
                         <div className="w-full h-full p-2 md:p-3 pointer-events-none">
                            <div className="w-full h-full pointer-events-auto">
@@ -155,11 +178,12 @@ const Carousel = ({
                            </div>
                         </div>
                     </div>
-                ))}
+                    )
+                })}
             </div>
 
             {/* Navigation Buttons (Visible on Hover) */}
-            <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 pointer-events-none">
+            <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover/carousel:opacity-100 group-focus-within/carousel:opacity-100 transition-opacity duration-300 pointer-events-none">
                 <button
                     onClick={goToPreviousSlide}
                     aria-label="Previous slide"
