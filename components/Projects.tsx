@@ -177,6 +177,16 @@ const projects: Project[] = [
   // ── Independent Projects ─────────────────────────────────────────
   // Row 1 (Featured Left)
   {
+    name: 'NILAM Ventures',
+    role: 'WordPress Developer',
+    category: 'WordPress',
+    group: 'independent',
+    subGroup: 'client',
+    featured: true,
+    challenge: 'Website for a PhD-led aquaculture and farmtech advisory firm in Tamil Nadu — showcasing turnkey pond design, Biofloc & RAS tank setups, and fish seed supply, with a product catalogue, farm consultation forms, and one-tap WhatsApp enquiries.',
+    stack: ['WordPress', 'Kadence', 'ACF', 'Fluent Forms', 'Pantheon'],
+  },
+  {
     name: 'NaviCakes',
     role: 'Full Stack Developer',
     category: 'Next.js',
@@ -186,16 +196,6 @@ const projects: Project[] = [
     stack: ['Next.js', 'React', 'Tailwind', 'Vercel'],
   },
   {
-    name: 'Sri Dhanamoorthy Traders',
-    role: 'WordPress Developer',
-    category: 'WordPress',
-    group: 'independent',
-    subGroup: 'client',
-    featured: true,
-    challenge: 'B2B wholesale cement and steel trader website with product catalogue and trade enquiry flows.',
-    stack: ['WordPress', 'ACF', 'Pantheon'],
-  },
-  {
     name: 'MySupportInfo',
     role: 'Full Stack Developer',
     category: 'Next.js',
@@ -203,6 +203,27 @@ const projects: Project[] = [
     subGroup: 'utility',
     challenge: 'A customer support portal designed to centralise ticketing, knowledge base, and user communication for growing businesses.',
     stack: ['Next.js', 'React', 'Tailwind', 'Vercel'],
+  },
+
+  // Row 2 (Vice Versa — Featured Right!)
+  {
+    name: 'Sri Dhanamoorthy Traders',
+    role: 'WordPress Developer',
+    category: 'WordPress',
+    group: 'independent',
+    subGroup: 'client',
+    challenge: 'B2B wholesale cement and steel trader website with product catalogue and trade enquiry flows.',
+    stack: ['WordPress', 'ACF', 'Pantheon'],
+  },
+  {
+    name: 'ClickReach – Social Share Buttons & Counter',
+    role: 'WordPress Plugin Author',
+    category: 'WP Plugin',
+    group: 'independent',
+    subGroup: 'plugin',
+    challenge: 'Published on WordPress.org — lightweight, privacy-friendly social sharing buttons with live click counters, zero bloat, pure inline SVGs, and Core Web Vitals friendly performance.',
+    stack: ['WordPress', 'PHP', 'JavaScript', 'REST API'],
+    url: 'https://wordpress.org/plugins/clickreach-social-share-buttons/',
   },
   {
     name: 'WP SVG Engine',
@@ -214,17 +235,6 @@ const projects: Project[] = [
     challenge: 'Published on WordPress.org — enables safe SVG & SVGZ uploads with automated DOM sanitization, Media Library preview fixes, dimension detection, and fast client-side inlining.',
     stack: ['PHP', 'WordPress', 'SVG', 'DOM Sanitization'],
     url: 'https://wordpress.org/plugins/svigent-tools/',
-  },
-  {
-    name: 'ClickReach – Social Share Buttons & Counter',
-    role: 'WordPress Plugin Author',
-    category: 'WP Plugin',
-    group: 'independent',
-    subGroup: 'plugin',
-    featured: true,
-    challenge: 'Published on WordPress.org — lightweight, privacy-friendly social sharing buttons with live click counters, zero bloat, pure inline SVGs, and Core Web Vitals friendly performance.',
-    stack: ['WordPress', 'PHP', 'JavaScript', 'REST API'],
-    url: 'https://wordpress.org/plugins/clickreach-social-share-buttons/',
   },
 ]
 

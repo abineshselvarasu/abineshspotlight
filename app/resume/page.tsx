@@ -314,6 +314,7 @@ export default function ResumePage() {
                     <li><strong>Parithadam:</strong> E-commerce web platform for organic agricultural goods built with Next.js 15, React, Tailwind CSS, Razorpay payment processing, and automated Nodemailer notification pipelines.</li>
                     <li><strong>NaviCakes:</strong> Custom bakery ordering and brand identity portal built with Next.js and Tailwind CSS — pixel-perfect from Figma to production.</li>
                     <li><strong>Sri Dhanamoorthy Traders:</strong> B2B wholesale cement and steel distributor platform with custom product catalogues and digital trade inquiry flows.</li>
+                    <li><strong>NILAM Ventures:</strong> WordPress lead-generation platform for an aquaculture and rural development consultancy — custom product catalogue, ACF data models, Fluent Forms consultations, and WhatsApp enquiry flows on Pantheon.</li>
                     <li><strong>MySupportInfo:</strong> Centralised customer support and ticketing knowledge base portal built on modern React.</li>
                   </ul>
                 </div>
