@@ -311,11 +311,12 @@ export default function ResumePage() {
                   </p>
 
                   <ul className="space-y-1.5 text-xs sm:text-sm lg:text-base text-canvas/80 leading-relaxed font-sans list-disc list-outside ml-4 print:text-neutral-800">
-                    <li><strong>Parithadam:</strong> E-commerce web platform for organic agricultural goods built with Next.js 15, React, Tailwind CSS, Razorpay payment processing, and automated Nodemailer notification pipelines.</li>
+                    <li><strong>NILAM Ventures:</strong> WordPress website for a PhD-led aquaculture and farmtech advisory firm in Tamil Nadu — turnkey pond design, Biofloc &amp; RAS tank setups, and fish seed catalogue with farm consultation forms and one-tap WhatsApp enquiries.</li>
+                    <li><strong>Card About Me:</strong> Link-in-bio platform for creators and businesses with appointment bookings, WhatsApp client chat, and 0% commission direct UPI payments (<a href="https://www.cardabout.me/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline print:text-black">cardabout.me</a>).</li>
+                    <li><strong>MySupportInfo:</strong> Centralised device diagnostics and instant system info portal for remote teams and IT helpdesks (<a href="https://mysupportinfo.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline print:text-black">mysupportinfo.com</a>).</li>
                     <li><strong>NaviCakes:</strong> Custom bakery ordering and brand identity portal built with Next.js and Tailwind CSS — pixel-perfect from Figma to production.</li>
                     <li><strong>Sri Dhanamoorthy Traders:</strong> B2B wholesale cement and steel distributor platform with custom product catalogues and digital trade inquiry flows.</li>
-                    <li><strong>NILAM Ventures:</strong> WordPress website for a PhD-led aquaculture and farmtech advisory firm in Tamil Nadu — turnkey pond design, Biofloc &amp; RAS tank setups, and fish seed catalogue with farm consultation forms and one-tap WhatsApp enquiries.</li>
-                    <li><strong>MySupportInfo:</strong> Centralised customer support and ticketing knowledge base portal built on modern React.</li>
+                    <li><strong>Parithadam:</strong> E-commerce web platform for organic agricultural goods built with Next.js 15, React, Tailwind CSS, Razorpay payment processing, and automated Nodemailer notification pipelines.</li>
                   </ul>
                 </div>
               </div>

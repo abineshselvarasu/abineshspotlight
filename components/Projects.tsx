@@ -13,6 +13,7 @@ type Project = {
   challenge: string
   stack: string[]
   url?: string
+  urlLabel?: string
 }
 
 const projects: Project[] = [
@@ -175,7 +176,7 @@ const projects: Project[] = [
   },
 
   // ── Independent Projects ─────────────────────────────────────────
-  // Row 1 (Featured Left)
+  // Row 1 (Featured Left: 2 cols + 1 col + 1 col = 4 cols)
   {
     name: 'NILAM Ventures',
     role: 'WordPress Developer',
@@ -187,13 +188,15 @@ const projects: Project[] = [
     stack: ['WordPress', 'Kadence', 'ACF', 'Fluent Forms', 'Pantheon'],
   },
   {
-    name: 'NaviCakes',
+    name: 'Card About Me',
     role: 'Full Stack Developer',
     category: 'Next.js',
     group: 'independent',
-    subGroup: 'client',
-    challenge: 'Local bakery website with custom ordering, gallery, and brand identity — pixel-perfect from Figma to code.',
-    stack: ['Next.js', 'React', 'Tailwind', 'Vercel'],
+    subGroup: 'utility',
+    challenge: 'Link-in-bio platform for creators and businesses — featuring custom profile links, calendar bookings, direct WhatsApp client chat, and 0% commission direct UPI payments.',
+    stack: ['Next.js', 'React', 'Tailwind', 'UPI Integration', 'Vercel'],
+    url: 'https://www.cardabout.me/',
+    urlLabel: 'Visit Live Site',
   },
   {
     name: 'MySupportInfo',
@@ -201,20 +204,13 @@ const projects: Project[] = [
     category: 'Next.js',
     group: 'independent',
     subGroup: 'utility',
-    challenge: 'A customer support portal designed to centralise ticketing, knowledge base, and user communication for growing businesses.',
-    stack: ['Next.js', 'React', 'Tailwind', 'Vercel'],
+    challenge: 'Instant device diagnostics and system info tool for remote teams and IT helpdesks — inspecting browser version, OS, IP, WebRTC leaks, and network latency with zero tracking.',
+    stack: ['Next.js', 'React', 'Tailwind', 'Web APIs', 'Vercel'],
+    url: 'https://mysupportinfo.com/',
+    urlLabel: 'Visit Live Site',
   },
 
-  // Row 2 (Vice Versa — Featured Right!)
-  {
-    name: 'Sri Dhanamoorthy Traders',
-    role: 'WordPress Developer',
-    category: 'WordPress',
-    group: 'independent',
-    subGroup: 'client',
-    challenge: 'B2B wholesale cement and steel trader website with product catalogue and trade enquiry flows.',
-    stack: ['WordPress', 'ACF', 'Pantheon'],
-  },
+  // Row 2 (Plugins & Client Builds: 1 + 1 + 1 + 1 = 4 cols)
   {
     name: 'ClickReach – Social Share Buttons & Counter',
     role: 'WordPress Plugin Author',
@@ -231,10 +227,27 @@ const projects: Project[] = [
     category: 'WP Plugin',
     group: 'independent',
     subGroup: 'plugin',
-    featured: true,
     challenge: 'Published on WordPress.org — enables safe SVG & SVGZ uploads with automated DOM sanitization, Media Library preview fixes, dimension detection, and fast client-side inlining.',
     stack: ['PHP', 'WordPress', 'SVG', 'DOM Sanitization'],
     url: 'https://wordpress.org/plugins/svigent-tools/',
+  },
+  {
+    name: 'NaviCakes',
+    role: 'Full Stack Developer',
+    category: 'Next.js',
+    group: 'independent',
+    subGroup: 'client',
+    challenge: 'Local bakery website with custom ordering, gallery, and brand identity — pixel-perfect from Figma to code.',
+    stack: ['Next.js', 'React', 'Tailwind', 'Vercel'],
+  },
+  {
+    name: 'Sri Dhanamoorthy Traders',
+    role: 'WordPress Developer',
+    category: 'WordPress',
+    group: 'independent',
+    subGroup: 'client',
+    challenge: 'B2B wholesale cement and steel trader website with product catalogue and trade enquiry flows.',
+    stack: ['WordPress', 'ACF', 'Pantheon'],
   },
 ]
 
@@ -434,7 +447,7 @@ function BentoCard({ project, index, groupLabel }: { project: Project; index: nu
           rel="noopener noreferrer"
           className="reveal-text inline-flex items-center gap-1.5 mt-2.5 py-1.5 text-sm font-mono font-semibold text-accent hover:text-canvas transition-colors delay-600"
         >
-          View on WordPress.org
+          {project.urlLabel ?? (project.category === 'WP Plugin' || project.url.includes('wordpress.org') ? 'View on WordPress.org' : 'Visit Live Site')}
           <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>

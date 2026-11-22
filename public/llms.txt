@@ -72,10 +72,11 @@ All projects delivered through FueInt Technologies via Dialed In Design (Canada)
 
 ## Personal Projects
 
+- **Card About Me** — Link-in-bio platform for bookings, WhatsApp chat & 0% commission direct UPI payments (Next.js): https://www.cardabout.me/
+- **MySupportInfo** — Instant device diagnostics & system info tool for remote teams and IT helpdesks (Next.js): https://mysupportinfo.com/
 - **MoneyArk** — Personal finance app with LLM AI assistant, OCR receipt scanning, voice expense tracking (Flutter + Supabase): https://moneyark.vercel.app
 - **Videoclips** — Professional video editing platform with real-time canvas rendering (React)
 - **Parithadam** — Event ticketing platform (Next.js 15 + Razorpay + Nodemailer)
-- **MySupportInfo** — Customer support portal: https://mysupportinfo.vercel.app
 - **Instatrove** — E-commerce / product discovery platform: https://instatrove.vercel.app
 - **Developer Academy Quiz App** — Cross-platform quiz app (Flutter + Firebase Auth)
 
