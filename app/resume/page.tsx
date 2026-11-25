@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import ResumeActions from '@/components/ResumeActions'
 import JsonLd from '@/components/JsonLd'
+import { ForwardArrowIcon } from '@/components/icons'
 import { SITE_URL } from '@/lib/site'
 import { ID, PERSON_NAME, breadcrumbNode, jsonLdGraph, pageMetadata, personNode, websiteNode } from '@/lib/seo'
 
@@ -292,9 +293,10 @@ export default function ResumePage() {
                         href={plugin.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs font-semibold text-accent hover:underline inline-flex items-center gap-1 self-start sm:self-auto"
+                        className="group text-xs font-semibold text-accent hover:underline inline-flex items-center gap-1 self-start sm:self-auto"
                       >
-                        View on WP.org ↗
+                        <span>View on WP.org</span>
+                        <ForwardArrowIcon className="w-3.5 h-3.5" strokeWidth={2.2} />
                       </a>
                     </div>
                   </div>

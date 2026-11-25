@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Carousel from './Carousel'
+import { ForwardArrowIcon } from './icons'
 
 type Article = {
   title: string
@@ -93,12 +94,10 @@ export default function Blog() {
             href="https://fueint.com/authors/abinesh-s"
             target="_blank"
             rel="noopener noreferrer nofollow"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-ink transition-colors"
+            className="group inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-ink transition-colors"
           >
             View all articles
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            <ForwardArrowIcon className="w-4 h-4" />
           </a>
         </div>
 
@@ -141,9 +140,7 @@ export default function Blog() {
 
                 <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-forest">
                   Read article
-                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
+                  <ForwardArrowIcon className="w-3.5 h-3.5" />
                 </span>
               </div>
             </a>

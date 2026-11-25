@@ -36,12 +36,12 @@ export default function BackToTop() {
       title="Back to top"
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
-      className={`fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-ink-deep text-accent border border-accent/40 shadow-lg flex items-center justify-center hover:bg-accent hover:text-ink transition-all duration-200 ${
+      className={`group fixed bottom-6 right-6 z-40 w-11 h-11 rounded-full bg-ink-deep text-accent border border-accent/40 shadow-lg flex items-center justify-center hover:bg-accent hover:text-ink transition-all duration-200 ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
       }`}
     >
       <svg
-        className="w-5 h-5"
+        className="w-5 h-5 transition-transform duration-200 ease-out group-hover:-translate-y-0.5 motion-reduce:transform-none"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

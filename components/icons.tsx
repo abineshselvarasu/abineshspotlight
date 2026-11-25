@@ -32,3 +32,26 @@ export const MailIcon = ({ className }: IconProps) => (
     <path d="M2 7l10 7 10-7" />
   </svg>
 )
+
+export const ForwardArrowIcon = ({
+  className = 'w-4 h-4',
+  strokeWidth = 2,
+  groupHover = 'group-hover:translate-x-1',
+}: {
+  className?: string
+  strokeWidth?: number
+  groupHover?: string
+}) => (
+  <svg
+    className={`${className} shrink-0 transition-transform duration-200 ease-out ${groupHover} motion-reduce:transform-none`}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={strokeWidth}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14M12 5l7 7-7 7" />
+  </svg>
+)

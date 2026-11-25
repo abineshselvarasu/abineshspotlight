@@ -216,9 +216,9 @@ export default function Carousel({ children, label = 'Carousel' }: CarouselProps
               type="button"
               onClick={goPrevious}
               aria-label="Previous slide"
-              className="pointer-events-auto w-10 h-10 rounded-full bg-ink/90 text-accent border border-accent/30 shadow-lg flex items-center justify-center hover:bg-ink hover:text-canvas transition-colors"
+              className="group/btn pointer-events-auto w-10 h-10 rounded-full bg-ink/90 text-accent border border-accent/30 shadow-lg flex items-center justify-center hover:bg-ink hover:text-canvas transition-colors"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="transition-transform duration-200 ease-out group-hover/btn:-translate-x-0.5 motion-reduce:transform-none">
                 <polyline points="15 18 9 12 15 6" />
               </svg>
             </button>
@@ -226,9 +226,9 @@ export default function Carousel({ children, label = 'Carousel' }: CarouselProps
               type="button"
               onClick={goNext}
               aria-label="Next slide"
-              className="pointer-events-auto w-10 h-10 rounded-full bg-ink/90 text-accent border border-accent/30 shadow-lg flex items-center justify-center hover:bg-ink hover:text-canvas transition-colors"
+              className="group/btn pointer-events-auto w-10 h-10 rounded-full bg-ink/90 text-accent border border-accent/30 shadow-lg flex items-center justify-center hover:bg-ink hover:text-canvas transition-colors"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="transition-transform duration-200 ease-out group-hover/btn:translate-x-0.5 motion-reduce:transform-none">
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             </button>

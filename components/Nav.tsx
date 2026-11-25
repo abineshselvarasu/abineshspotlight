@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ForwardArrowIcon } from './icons'
 
 const navLinks = [
   { label: 'Skills',   url: '#skills' },
@@ -90,12 +91,10 @@ export default function Nav() {
             <Link
               href="/resume"
               prefetch={true}
-              className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-ink bg-accent hover:bg-canvas transition-colors rounded-full"
+              className="group hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-ink bg-accent hover:bg-canvas transition-colors rounded-full"
             >
               Resume
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+              <ForwardArrowIcon className="w-3.5 h-3.5" strokeWidth={2.5} />
             </Link>
 
             <button
@@ -150,12 +149,10 @@ export default function Nav() {
             href="/resume"
             prefetch={true}
             onClick={close}
-            className="inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-ink bg-accent hover:bg-canvas transition-colors rounded-full"
+            className="group inline-flex items-center gap-2 px-7 py-3 text-sm font-semibold text-ink bg-accent hover:bg-canvas transition-colors rounded-full"
           >
             View Resume
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
+            <ForwardArrowIcon className="w-4 h-4" strokeWidth={2.5} />
           </Link>
         </div>
       </div>

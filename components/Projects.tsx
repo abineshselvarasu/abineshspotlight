@@ -1,6 +1,7 @@
 'use client'
 
 import { useId, useState } from 'react'
+import { ForwardArrowIcon } from './icons'
 
 type ProjectCategory = 'WordPress' | 'WP Plugin' | 'Next.js'
 
@@ -136,22 +137,6 @@ const categoryIconPath: Record<ProjectCategory, string> = {
   WordPress: '/icons/wp.svg',
   'WP Plugin': '/icons/wp.svg',
   'Next.js': '/icons/nextjs.svg',
-}
-
-function ArrowUpRightIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-4 h-4 shrink-0 transition-transform duration-150 group-hover/link:translate-x-0.5"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-      aria-hidden="true"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
-    </svg>
-  )
 }
 
 function ArchitectureToggle({
@@ -525,7 +510,7 @@ export default function Projects() {
                         className="group/link inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:text-canvas transition-colors"
                       >
                         {project.urlLabel ?? 'Visit Live Site'}
-                        <ArrowUpRightIcon />
+                        <ForwardArrowIcon className="w-4 h-4" groupHover="group-hover/link:translate-x-1" />
                       </a>
                     ) : (
                       <span className="inline-flex items-center gap-1.5 text-xs font-medium text-canvas/60">
