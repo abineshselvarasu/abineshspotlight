@@ -66,6 +66,26 @@
   }
 }
 
+/* ── Smooth native <details> accordion motion ───────────────────── */
+@supports (interpolate-size: allow-keywords) {
+  details::details-content {
+    interpolate-size: allow-keywords;
+    overflow: clip;
+    contain: layout;
+  }
+
+  details:not([open])::details-content {
+    block-size: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    details::details-content {
+      transition: block-size 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+        content-visibility 0.32s cubic-bezier(0.22, 1, 0.36, 1) allow-discrete;
+    }
+  }
+}
+
 /* ── Hide scrollbar utility (Cross-browser) ─────────────────────── */
 .no-scrollbar::-webkit-scrollbar {
   display: none !important;
@@ -75,4 +95,13 @@
 .no-scrollbar {
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-shooting-star-lr,
+  .animate-shooting-star-rl,
+  .animate-shooting-star-tb,
+  .animate-shooting-star-bt {
+    animation: none !important;
+  }
 }

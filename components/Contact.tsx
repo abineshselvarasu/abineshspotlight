@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { GitHubIcon, LinkedInIcon, WhatsAppIcon, WordPressIcon } from './icons'
+import ScrambleText from './ScrambleText'
+import ShootingStarsGrid from './ShootingStarsGrid'
+import { GitHubIcon, LinkedInIcon, MailIcon, WhatsAppIcon, WordPressIcon } from './icons'
 
 const navLinks = [
   { label: 'Home',     href: '#hero' },
@@ -11,10 +13,11 @@ const navLinks = [
 ]
 
 const socials = [
-  { label: 'WordPress.org', href: 'https://profiles.wordpress.org/abineshselvarasu/', Icon: WordPressIcon },
-  { label: 'LinkedIn',      href: 'https://linkedin.com/in/abineshselvarasu/',         Icon: LinkedInIcon },
-  { label: 'GitHub',        href: 'https://github.com/abineshselvarasu',               Icon: GitHubIcon },
-  { label: 'WhatsApp',      href: 'https://wa.me/919042972156',                        Icon: WhatsAppIcon },
+  { label: 'Email',         href: 'mailto:mailtoabineshselva@gmail.com',                Icon: MailIcon,      external: false, title: 'mailtoabineshselva@gmail.com' },
+  { label: 'WordPress.org', href: 'https://profiles.wordpress.org/abineshselvarasu/',   Icon: WordPressIcon, external: true },
+  { label: 'LinkedIn',      href: 'https://linkedin.com/in/abineshselvarasu/',           Icon: LinkedInIcon,  external: true },
+  { label: 'GitHub',        href: 'https://github.com/abineshselvarasu',                 Icon: GitHubIcon,    external: true },
+  { label: 'WhatsApp',      href: 'https://wa.me/919042972156',                          Icon: WhatsAppIcon,  external: true },
 ]
 
 const askAiQuery = encodeURIComponent(
@@ -84,8 +87,9 @@ const aiProviders = [
 
 export default function Contact() {
   return (
-    <footer id="contact" className="bg-ink text-canvas border-t-4 border-accent">
-      <div className="max-w-7xl mx-auto px-6 py-16 md:py-20">
+    <footer id="contact" className="relative overflow-hidden bg-ink text-canvas border-t-4 border-accent">
+      <ShootingStarsGrid />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
           {/* Identity & Contact */}
           <div className="md:col-span-5 space-y-5">
@@ -98,7 +102,7 @@ export default function Contact() {
                 className="h-9 w-auto object-contain mb-4"
               />
               <h3 className="font-display text-2xl sm:text-3xl text-canvas font-normal">
-                Abinesh Selvarasu
+                <ScrambleText text="Abinesh Selvarasu" />
               </h3>
               <p className="text-sm text-accent font-medium mt-1">
                 WordPress Developer · WordPress, Drupal, Craft CMS &amp; Next.js
@@ -106,26 +110,6 @@ export default function Contact() {
             </div>
 
             <div className="space-y-2.5 text-sm sm:text-base text-canvas/80">
-              <a
-                href="mailto:mailtoabineshselva@gmail.com"
-                className="flex items-center gap-3 hover:text-accent transition-colors"
-                aria-label="Email Abinesh Selvarasu"
-              >
-                <svg className="w-4 h-4 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <rect x="2" y="4" width="20" height="16" rx="2" />
-                  <path d="M2 7l10 7 10-7" />
-                </svg>
-                <span>mailtoabineshselva@gmail.com</span>
-              </a>
-              <a
-                href="tel:+919042972156"
-                className="flex items-center gap-3 hover:text-accent transition-colors"
-              >
-                <svg className="w-4 h-4 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-                </svg>
-                <span>+91 90429 72156</span>
-              </a>
               <p className="flex items-center gap-3">
                 <svg className="w-4 h-4 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
@@ -170,12 +154,13 @@ export default function Contact() {
               Connect
             </p>
             <div className="space-y-3">
-              {socials.map(({ label, href, Icon }) => (
+              {socials.map(({ label, href, Icon, external, title }) => (
                 <a
                   key={label}
                   href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  title={title}
+                  aria-label={title ? `${label}: ${title}` : label}
                   className="flex items-center gap-3 text-sm sm:text-base text-canvas/80 hover:text-accent transition-colors"
                 >
                   <Icon className="w-4 h-4 text-accent shrink-0" />
@@ -188,7 +173,7 @@ export default function Contact() {
       </div>
 
       {/* Bottom Copyright Bar + Inline MySupportInfo-style Ask AI icons */}
-      <div className="border-t border-canvas/10">
+      <div className="relative z-10 border-t border-canvas/10">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-canvas/75">
           <p className="text-center sm:text-left">
             © {new Date().getFullYear()} Abinesh Selvarasu ·{' '}

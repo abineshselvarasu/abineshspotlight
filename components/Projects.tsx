@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useId, useState } from 'react'
 
 type ProjectCategory = 'WordPress' | 'WP Plugin' | 'Next.js'
 
@@ -163,9 +163,18 @@ function ArchitectureToggle({
   outcome: string
   className?: string
 }) {
+  const [open, setOpen] = useState(false)
+  const panelId = useId()
+
   return (
-    <details className={`group/arch ${className} rounded-xl border border-canvas/10 bg-ink/70 text-xs overflow-hidden`}>
-      <summary className="cursor-pointer select-none list-none flex items-center justify-between gap-2 px-3.5 py-2.5 font-medium text-canvas/90 hover:text-accent transition-colors">
+    <div className={`${className} rounded-xl border border-canvas/10 bg-ink/70 text-xs overflow-hidden`}>
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => setOpen((prev) => !prev)}
+        className="w-full cursor-pointer select-none flex items-center justify-between gap-2 px-3.5 py-2.5 font-medium text-canvas/90 hover:text-accent transition-colors text-left"
+      >
         <span className="flex items-center gap-2">
           <svg
             className="w-3.5 h-3.5 text-accent shrink-0"
@@ -183,7 +192,9 @@ function ArchitectureToggle({
           Architecture &amp; Decisions
         </span>
         <svg
-          className="w-3.5 h-3.5 text-accent shrink-0 transition-transform duration-150 group-open/arch:rotate-180"
+          className={`w-3.5 h-3.5 text-accent shrink-0 transition-transform duration-300 ease-out motion-reduce:transition-none ${
+            open ? 'rotate-180' : 'rotate-0'
+          }`}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -194,16 +205,29 @@ function ArchitectureToggle({
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
-      </summary>
-      <div className="px-3.5 pb-3 pt-2.5 border-t border-canvas/10 space-y-1.5 text-canvas/75 leading-relaxed">
-        <p>
-          <strong className="text-canvas font-medium">Decision:</strong> {decision}
-        </p>
-        <p>
-          <strong className="text-canvas font-medium">Result:</strong> {outcome}
-        </p>
+      </button>
+
+      {/* CSS Grid 0fr -> 1fr + opacity transition gives 60fps butter-smooth open & close across all browsers */}
+      <div
+        id={panelId}
+        aria-hidden={!open}
+        inert={!open}
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+          open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+      >
+        <div className="min-h-0 overflow-hidden">
+          <div className="px-3.5 pb-3 pt-2.5 border-t border-canvas/10 space-y-1.5 text-canvas/75 leading-relaxed">
+            <p>
+              <strong className="text-canvas font-medium">Decision:</strong> {decision}
+            </p>
+            <p>
+              <strong className="text-canvas font-medium">Result:</strong> {outcome}
+            </p>
+          </div>
+        </div>
       </div>
-    </details>
+    </div>
   )
 }
 
