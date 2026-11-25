@@ -87,7 +87,7 @@ export const personNode = {
   telephone: '+919042972156',
   jobTitle: JOB_TITLE,
   description:
-    'WordPress Developer with 3.5+ years building production websites across WordPress, Drupal, Craft CMS, and Next.js for enterprise SaaS, nonprofit organizations, and independent businesses.',
+    'WordPress Developer with 3 years 10 months of experience building production websites across WordPress, Drupal, Craft CMS, and Next.js for enterprise SaaS, nonprofit organizations, and independent businesses.',
   knowsAbout: [
     'WordPress Development',
     'WordPress Plugin Development',

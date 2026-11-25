@@ -14,11 +14,12 @@ const experienceList: ExperienceItem[] = [
     role: 'Engineer – Web Apps',
     company: 'FueInt Technologies · Coimbatore (Full-time)',
     summary:
-      'Delivered production WordPress, Drupal, and Craft CMS platforms across 20+ international enterprise SaaS and nonprofit websites.',
+      'Delivered production WordPress, Drupal, and Craft CMS platforms across 20+ international enterprise SaaS and nonprofit websites in Agile/Scrum teams.',
     highlights: [
-      'Built custom WordPress themes, plugins, Gutenberg block suites (React & PHP), and 50+ ACF Pro modular layouts',
-      'Maintained Drupal 7/9/10 and Craft CMS sites — custom modules, Twig templates, PHP 7.4 → 8.x upgrades, and WCAG accessibility',
-      'Cut LCP by ~30%, boosted organic CTR by ~15% via JSON-LD schema, and resolved 1,700+ sitemap URL encoding bugs',
+      'Built custom WordPress themes, plugins, React Gutenberg block suites, and 50+ ACF Pro modular layouts — cutting repeat build time by ~25%',
+      'Led PHP 7.4 → 8.x maintenance upgrades, security patching, custom Drupal/Craft Twig modules, and WCAG accessibility audits',
+      'Wired REST API & WPGraphQL integrations, cut LCP by ~30%, boosted organic CTR by ~15% via JSON-LD schema, and fixed 1,700+ sitemap URLs',
+      'Shipped across Agile/Scrum sprints with Git code reviews and multidev deployments on Pantheon, WP Engine, Kinsta, and Servd',
     ],
   },
   {
@@ -26,10 +27,10 @@ const experienceList: ExperienceItem[] = [
     role: 'Freelance Web Developer',
     company: 'Gradiolex · Independent',
     summary:
-      'Designs, develops, and launches custom WordPress websites, official WordPress.org plugins, and Next.js web applications.',
+      'Designs, architects, and launches custom WordPress websites, official WordPress.org plugins, and React/Next.js web applications.',
     highlights: [
       'Shipped NILAM Ventures, Sri Dhanamoorthy Traders, and NaviCakes from Figma to production',
-      'Built and launched live utility products including Card About Me and MySupportInfo',
+      'Architected and launched live Next.js + TypeScript web apps including Card About Me and MySupportInfo',
       'Published and maintain ClickReach and WP SVG Engine on the official WordPress.org plugin directory',
     ],
   },
@@ -61,12 +62,12 @@ export default function About() {
             <div className="space-y-4 text-base text-mist leading-relaxed">
               <p>
                 I&apos;m Abinesh Selvarasu — a <strong className="text-ink font-semibold">WordPress Developer</strong> with
-                3.5+ years of production experience across WordPress, Drupal, Craft CMS, and modern React/Next.js frontends.
+                3 years 10 months of production experience across WordPress, Drupal, Craft CMS, and modern React/Next.js frontends.
               </p>
               <p>
-                During my tenure at FueInt Technologies, I worked across 20+ enterprise SaaS and nonprofit platforms,
-                turning complex design systems into clean ACF Pro components, native Gutenberg blocks, and fast,
-                search-friendly websites.
+                During my tenure at FueInt Technologies, I worked in Agile/Scrum teams across 20+ enterprise SaaS and nonprofit
+                platforms — delivering PHP 8 maintenance upgrades, REST API integrations, clean ACF Pro &amp; Gutenberg systems,
+                and fast, search-friendly websites.
               </p>
             </div>
 

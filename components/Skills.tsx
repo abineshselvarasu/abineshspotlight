@@ -5,6 +5,11 @@ interface CapabilityPillar {
   points: string[]
 }
 
+interface ToolItem {
+  name: string
+  icon: string
+}
+
 const pillars: CapabilityPillar[] = [
   {
     title: 'WordPress & ACF Architecture',
@@ -13,30 +18,30 @@ const pillars: CapabilityPillar[] = [
     points: [
       'Custom themes, hooks, filters & Custom Post Types',
       'ACF Pro flexible layouts (50+ reusable components)',
-      'Custom plugins published on WordPress.org',
-      'WooCommerce & WordPress Multisite setups',
+      'Official plugins published on WordPress.org',
+      'PHP 8.x upgrades, security patching & WooCommerce',
     ],
   },
   {
     title: 'Gutenberg, Drupal & Craft CMS',
     icon: 'drupal',
-    summary: 'Multi-CMS fluency for enterprise content workflows.',
+    summary: 'Multi-CMS fluency across structured enterprise workflows.',
     points: [
       'Native Gutenberg block suites (React & PHP)',
       'Drupal 7/9/10 custom modules, Twig & Views',
-      'Craft CMS Twig templates & WCAG compliance',
-      'PHP 7.4 to 8.x upgrades & security patching',
+      'Craft CMS structured templates & WCAG compliance',
+      'Agile/Scrum sprints, code reviews & QA handoffs',
     ],
   },
   {
-    title: 'Frontend & Modern Web Apps',
-    icon: 'gb',
-    summary: 'Fast, responsive interfaces built from design to production.',
+    title: 'React, Next.js & API Wiring',
+    icon: 'api',
+    summary: 'Modern frontends and reliable third-party backend integrations.',
     points: [
-      'React, Next.js, TypeScript & Tailwind CSS',
-      'Headless WordPress via WPGraphQL & REST APIs',
-      'Pixel-accurate Figma to semantic HTML5 & CSS3',
-      'Screen-reader accessible & mobile-first layouts',
+      'React 19, Next.js 15 App Router, TypeScript & Tailwind',
+      'WP REST API endpoints, WPGraphQL & CRM webhooks',
+      'Payment gateways (UPI / Razorpay) & automated emails',
+      'Pixel-accurate Figma to accessible HTML5 & CSS3',
     ],
   },
   {
@@ -47,22 +52,28 @@ const pillars: CapabilityPillar[] = [
       'Core Web Vitals optimization (LCP, CLS, INP)',
       'JSON-LD schema & XML sitemap debugging',
       'Pantheon, WP Engine, Kinsta, Servd & Vercel',
-      'Git workflows, SSH deploys & CI/CD pipelines',
+      'Git workflows, SSH deploys & GitHub Actions CI/CD',
     ],
   },
 ]
 
-const toolStrip = [
+const dailyStack: ToolItem[] = [
   { name: 'WordPress', icon: 'wp' },
   { name: 'ACF Pro', icon: 'acf' },
   { name: 'Gutenberg', icon: 'gb' },
+  { name: 'Headless WP', icon: 'hwp' },
   { name: 'Drupal', icon: 'drupal' },
   { name: 'Craft CMS', icon: 'craft' },
-  { name: 'PHP', icon: 'php' },
+  { name: 'PHP 8', icon: 'php' },
   { name: 'MySQL', icon: 'sql' },
+  { name: 'HTML5', icon: 'html' },
+  { name: 'CSS3 / SCSS', icon: 'css' },
   { name: 'JavaScript', icon: 'js' },
   { name: 'TypeScript', icon: 'ts' },
+  { name: 'React 19', icon: 'react' },
+  { name: 'Next.js 15', icon: 'nextjs' },
   { name: 'Tailwind CSS', icon: 'tw' },
+  { name: 'Webpack', icon: 'webpack' },
   { name: 'WPGraphQL', icon: 'gql' },
   { name: 'REST API', icon: 'api' },
   { name: 'Core Web Vitals', icon: 'cwv' },
@@ -73,9 +84,47 @@ const toolStrip = [
   { name: 'Vercel', icon: 'vercel' },
 ]
 
+const hostingAndDevOps: ToolItem[] = [
+  { name: 'WooCommerce', icon: 'woocommerce' },
+  { name: 'WordPress Multisite', icon: 'wp' },
+  { name: 'Twig', icon: 'twig' },
+  { name: 'JSON-LD Schema', icon: 'jsonld' },
+  { name: 'WCAG Accessibility', icon: 'wcag' },
+  { name: 'Node.js', icon: 'nodejs' },
+  { name: 'Docker', icon: 'docker' },
+  { name: 'GitHub Actions CI/CD', icon: 'ghactions' },
+  { name: 'SSH Deploys', icon: 'ssh' },
+  { name: 'WP Engine', icon: 'wpengine' },
+  { name: 'Kinsta', icon: 'kinsta' },
+  { name: 'Servd', icon: 'servd' },
+  { name: 'Agile / Scrum', icon: 'scrum' },
+  { name: 'Supabase', icon: 'supabase' },
+  { name: 'Firebase Auth', icon: 'firebase' },
+  { name: 'Nodemailer', icon: 'mail' },
+  { name: 'Razorpay / UPI', icon: 'razorpay' },
+]
+
+function ToolBadge({ tool }: { tool: ToolItem }) {
+  return (
+    <span className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-rule bg-surface text-sm font-medium text-ink">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`/icons/${tool.icon}.svg`}
+        alt={`${tool.name} logo`}
+        width={16}
+        height={16}
+        loading="lazy"
+        decoding="async"
+        className="w-4 h-4 object-contain"
+      />
+      {tool.name}
+    </span>
+  )
+}
+
 export default function Skills() {
   return (
-    <section id="skills" className="bg-surface text-ink py-16 md:py-24 border-b border-rule">
+    <section id="skills" className="bg-surface text-ink pt-14 pb-16 md:pt-20 md:pb-24 border-b border-rule">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="max-w-2xl mb-12">
@@ -86,7 +135,7 @@ export default function Skills() {
             Built for reliable delivery, not clutter.
           </h2>
           <p className="mt-4 text-base text-mist leading-relaxed">
-            Every stack decision focuses on fast load times, clean code structure, and an editor experience anyone on your team can manage.
+            Every stack decision focuses on fast load times, clean API and PHP architecture, and an editor experience anyone on your team can manage.
           </p>
         </div>
 
@@ -131,30 +180,28 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Calm Static Tools Row */}
-        <div className="mt-12 pt-8 border-t border-rule">
-          <p className="text-xs font-semibold uppercase tracking-wider text-mist mb-4">
-            Daily Stack &amp; Platforms
-          </p>
-          <div className="flex flex-wrap gap-2.5">
-            {toolStrip.map((tool) => (
-              <span
-                key={tool.name}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-rule bg-surface text-sm font-medium text-ink"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`/icons/${tool.icon}.svg`}
-                  alt={`${tool.name} icon`}
-                  width={16}
-                  height={16}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-4 h-4 object-contain"
-                />
-                {tool.name}
-              </span>
-            ))}
+        {/* Daily Stack & Platforms + Separate Hosting, DevOps & Integrations */}
+        <div className="mt-12 pt-8 border-t border-rule space-y-8">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-mist mb-4">
+              Daily Stack &amp; Platforms
+            </p>
+            <div className="flex flex-wrap gap-2.5">
+              {dailyStack.map((tool) => (
+                <ToolBadge key={tool.name} tool={tool} />
+              ))}
+            </div>
+          </div>
+
+          <div className="pt-6 border-t border-rule/70">
+            <p className="text-xs font-semibold uppercase tracking-wider text-mist mb-4">
+              Hosting, DevOps &amp; Integrations
+            </p>
+            <div className="flex flex-wrap gap-2.5">
+              {hostingAndDevOps.map((tool) => (
+                <ToolBadge key={tool.name} tool={tool} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

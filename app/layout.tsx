@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    'WordPress Developer with 3.5+ years building production WordPress, Drupal, Craft CMS, and Next.js websites for enterprise SaaS and nonprofit teams.',
+    'WordPress Developer with 3 years 10 months of experience building production WordPress, Drupal, Craft CMS, and Next.js websites for enterprise SaaS and nonprofit teams.',
 
   keywords: [
     'Abinesh Selvarasu',
