@@ -104,20 +104,42 @@ const hostingAndDevOps: ToolItem[] = [
   { name: 'Razorpay / UPI', icon: 'razorpay' },
 ]
 
-function ToolBadge({ tool }: { tool: ToolItem }) {
+function ToolBadge({
+  tool,
+  variant = 'light',
+}: {
+  tool: ToolItem
+  variant?: 'light' | 'dark'
+}) {
+  const isDark = variant === 'dark'
+
   return (
-    <span className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-rule bg-surface text-sm font-medium text-ink">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={`/icons/${tool.icon}.svg`}
-        alt={`${tool.name} logo`}
-        width={16}
-        height={16}
-        loading="lazy"
-        decoding="async"
-        className="w-4 h-4 object-contain"
-      />
-      {tool.name}
+    <span
+      className={`group/tool inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-sm font-medium transition-all duration-150 hover:-translate-y-0.5 motion-reduce:transform-none ${
+        isDark
+          ? 'border-canvas/15 bg-canvas/[0.08] text-canvas hover:bg-canvas/[0.14] hover:border-accent/60 hover:shadow-[0_4px_14px_rgba(220,188,125,0.12)]'
+          : 'border-forest/15 bg-surface/95 text-ink shadow-[0_1px_2px_rgba(15,55,40,0.05)] hover:border-forest/45 hover:shadow-md'
+      }`}
+    >
+      <span
+        className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 p-1 ${
+          isDark
+            ? 'bg-surface shadow-sm'
+            : 'bg-paper group-hover/tool:bg-emerald-50 transition-colors'
+        }`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`/icons/${tool.icon}.svg`}
+          alt={`${tool.name} logo`}
+          width={16}
+          height={16}
+          loading="lazy"
+          decoding="async"
+          className="w-4 h-4 object-contain"
+        />
+      </span>
+      <span>{tool.name}</span>
     </span>
   )
 }
@@ -180,26 +202,87 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Daily Stack & Platforms + Separate Hosting, DevOps & Integrations */}
-        <div className="mt-12 pt-8 border-t border-rule space-y-8">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-mist mb-4">
-              Daily Stack &amp; Platforms
-            </p>
-            <div className="flex flex-wrap gap-2.5">
+        {/* Vibrant Side-by-Side 2-Column Tech Showcase */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+          {/* Left Column: Daily Stack & Platforms */}
+          <div className="relative rounded-2xl border border-forest/20 bg-gradient-to-br from-[#F1F9F4] via-surface to-[#FDF8EB] p-6 sm:p-7 overflow-hidden shadow-sm flex flex-col">
+            <div
+              className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-forest via-emerald-500 to-accent"
+              aria-hidden="true"
+            />
+            <div
+              className="pointer-events-none absolute -top-14 -right-14 w-44 h-44 rounded-full bg-emerald-400/15 blur-2xl"
+              aria-hidden="true"
+            />
+
+            <div className="relative z-10 flex items-start justify-between gap-3 pb-4 mb-5 border-b border-forest/15">
+              <div className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-forest to-ink text-accent flex items-center justify-center shrink-0 shadow-sm">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                    <polyline points="2 17 12 22 22 17" />
+                    <polyline points="2 12 12 17 22 12" />
+                  </svg>
+                </span>
+                <div>
+                  <h3 className="font-display text-xl sm:text-2xl text-ink leading-tight">
+                    Daily Stack &amp; Platforms
+                  </h3>
+                  <p className="text-xs sm:text-sm text-mist mt-0.5">
+                    CMS engines, languages &amp; modern frontend UI
+                  </p>
+                </div>
+              </div>
+              <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100/90 text-forest border border-emerald-200 tabular-nums">
+                {dailyStack.length} tools
+              </span>
+            </div>
+
+            <div className="relative z-10 flex flex-wrap gap-2">
               {dailyStack.map((tool) => (
-                <ToolBadge key={tool.name} tool={tool} />
+                <ToolBadge key={tool.name} tool={tool} variant="light" />
               ))}
             </div>
           </div>
 
-          <div className="pt-6 border-t border-rule/70">
-            <p className="text-xs font-semibold uppercase tracking-wider text-mist mb-4">
-              Hosting, DevOps &amp; Integrations
-            </p>
-            <div className="flex flex-wrap gap-2.5">
+          {/* Right Column: Hosting, DevOps & Integrations */}
+          <div className="relative rounded-2xl border border-forest/60 bg-gradient-to-br from-ink via-ink-deep to-[#082117] text-canvas p-6 sm:p-7 overflow-hidden shadow-md flex flex-col">
+            <div
+              className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent via-[#E9C985] to-emerald-400"
+              aria-hidden="true"
+            />
+            <div
+              className="pointer-events-none absolute -top-14 -right-14 w-44 h-44 rounded-full bg-accent/15 blur-2xl"
+              aria-hidden="true"
+            />
+
+            <div className="relative z-10 flex items-start justify-between gap-3 pb-4 mb-5 border-b border-canvas/15">
+              <div className="flex items-center gap-3">
+                <span className="w-10 h-10 rounded-xl bg-accent/15 border border-accent/35 text-accent flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+                    <line x1="6" y1="6" x2="6.01" y2="6" />
+                    <line x1="6" y1="18" x2="6.01" y2="18" />
+                  </svg>
+                </span>
+                <div>
+                  <h3 className="font-display text-xl sm:text-2xl text-canvas leading-tight">
+                    Hosting, DevOps &amp; Integrations
+                  </h3>
+                  <p className="text-xs sm:text-sm text-canvas/70 mt-0.5">
+                    Cloud platforms, CI/CD automation &amp; backend services
+                  </p>
+                </div>
+              </div>
+              <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-accent/20 text-accent border border-accent/35 tabular-nums">
+                {hostingAndDevOps.length} tools
+              </span>
+            </div>
+
+            <div className="relative z-10 flex flex-wrap gap-2">
               {hostingAndDevOps.map((tool) => (
-                <ToolBadge key={tool.name} tool={tool} />
+                <ToolBadge key={tool.name} tool={tool} variant="dark" />
               ))}
             </div>
           </div>
