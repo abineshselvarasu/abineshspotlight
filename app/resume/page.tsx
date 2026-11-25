@@ -27,15 +27,15 @@ const skills = [
   },
   {
     category: 'APIs, Databases & Integrations',
-    items: ['WP REST API', 'WPGraphQL', 'MySQL', 'Webhook & CRM Wiring', 'Node.js', 'Nodemailer', 'Razorpay / UPI Integration', 'Firebase Auth', 'Supabase'],
+    items: ['WP REST API', 'MySQL', 'Webhook & CRM Wiring', 'Node.js', 'Nodemailer', 'Razorpay / UPI Integration', 'Firebase Auth', 'Supabase'],
   },
   {
     category: 'SEO, Performance & Maintenance',
-    items: ['Core Web Vitals (LCP / CLS / INP)', 'PHP 7.4 → 8.x Upgrades', 'Security Patching', 'Technical SEO', 'JSON-LD Structured Data', 'Sitemap Optimisation', 'WCAG Accessibility'],
+    items: ['Core Web Vitals (LCP / CLS / INP)', 'PHP 7.4 → 8.x Upgrades', 'Security & Malware Recovery', 'Technical SEO', 'JSON-LD Structured Data', 'Sitemap Optimisation', 'WCAG Accessibility'],
   },
   {
-    category: 'DevOps, Delivery & Hosting',
-    items: ['Agile / Scrum Sprints', 'Git & Code Reviews', 'GitHub Actions CI/CD', 'SSH Multi-Key Configs', 'Docker', 'Pantheon', 'WP Engine', 'Kinsta', 'Servd', 'Vercel'],
+    category: 'DevOps, Servers & Hosting',
+    items: ['Agile / Scrum Sprints', 'Git & Code Reviews', 'GitHub Actions CI/CD', 'SSH Multi-Key Configs', 'Ubuntu Server Maintenance', 'Virtualmin', 'CapRover', 'Docker', 'Pantheon', 'WP Engine', 'Kinsta', 'Servd', 'Vercel'],
   },
   {
     category: 'Design & UI Engineering',
@@ -218,16 +218,16 @@ export default function ResumePage() {
 
                   <ul className="space-y-2 text-base text-canvas/85 leading-relaxed list-disc list-outside ml-4 print:text-base print:text-neutral-800 print:space-y-1.5 print:leading-[1.45]">
                     <li>
-                      <strong>WordPress Themes, ACF Pro &amp; Gutenberg:</strong> Built custom themes, plugins, reusable React/PHP Gutenberg block suites (Data, CTA, FAQ, Video Popup), and 50+ ACF Pro modular layouts across <strong>20+ international enterprise SaaS and nonprofit sites</strong>, reducing repeat-project build time by ~25%.
+                      <strong>WordPress Themes, ACF Pro &amp; Gutenberg:</strong> Built custom themes, plugins, reusable React/PHP Gutenberg block suites (Data, CTA, FAQ, Video Popup), and 50+ ACF Pro modular layouts across <strong>20+ international enterprise SaaS and nonprofit projects</strong>.
                     </li>
                     <li>
-                      <strong>PHP 8 Maintenance &amp; Multi-CMS Engineering:</strong> Led <strong>PHP 7.4 → 8.x upgrades</strong>, monthly security patching, dependency updates, custom Drupal 7/9/10 modules and Twig templates, and Craft CMS WCAG accessibility compliance.
+                      <strong>PHP 8 Upgrades, Multi-CMS &amp; Incident Recovery:</strong> Led <strong>PHP 7.4 → 8.x upgrades</strong>, monthly security patching, malware/incident recovery, Drupal 7/9/10 upgrades and Twig fixes, and Craft CMS WCAG accessibility compliance.
                     </li>
                     <li>
-                      <strong>Core Web Vitals &amp; Technical SEO:</strong> Cut <strong>LCP by ~30%</strong> and improved CLS by 0.05 via caching and PHP/asset refactoring; implemented JSON-LD structured data lifting organic CTR by <strong>~15%</strong>, and fixed a sitemap URL-encoding bug across <strong>1,700+ indexed URLs</strong>.
+                      <strong>Core Web Vitals &amp; Technical SEO:</strong> Cut <strong>LCP by ~30%</strong> via caching and PHP/asset refactoring; implemented JSON-LD structured data lifting organic CTR by <strong>~15%</strong>, and resolved a sitemap URL-encoding bug across <strong>1,700+ indexed URLs</strong>.
                     </li>
                     <li>
-                      <strong>REST API Wiring &amp; Agile/Scrum Delivery:</strong> Integrated WP REST APIs, WPGraphQL endpoints, and CRM webhooks in <strong>Agile/Scrum</strong> teams; managed Git code reviews, multi-SSH keys, and CI/CD staging-to-production releases across <strong>Pantheon, WP Engine, Kinsta, and Servd</strong>.
+                      <strong>REST APIs, Servers &amp; Agile/Scrum Delivery:</strong> Integrated WP REST APIs and CRM webhooks in <strong>Agile/Scrum</strong> teams; maintained Ubuntu dev servers via <strong>Virtualmin, CapRover &amp; Docker</strong>, and shipped across <strong>Pantheon, WP Engine, Kinsta, and Servd</strong>.
                     </li>
                   </ul>
                 </div>
@@ -252,6 +252,7 @@ export default function ResumePage() {
                     <li><strong>Card About Me:</strong> Next.js, React &amp; TypeScript link-in-bio SaaS with appointment bookings, WhatsApp chat, and 0%-commission direct UPI payments (<a href="https://www.cardabout.me/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline print:text-black">cardabout.me</a>).</li>
                     <li><strong>MySupportInfo:</strong> Next.js, React &amp; TypeScript client-side device diagnostics tool inspecting browser, OS, WebRTC leaks, and bufferbloat latency (<a href="https://mysupportinfo.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline print:text-black">mysupportinfo.com</a>).</li>
                     <li><strong>NaviCakes &amp; Sri Dhanamoorthy Traders:</strong> Custom Next.js bakery portal and WordPress/ACF B2B wholesale catalogue site from Figma to production.</li>
+                    <li><strong>MoneyArk:</strong> AI personal finance app with receipt OCR scanning, voice expense tracking, Google OAuth, Expo / React Native, TanStack Query, and Supabase Edge Functions.</li>
                     <li><strong>Parithadam:</strong> E-commerce web platform built with Next.js 15, React, Tailwind CSS, Razorpay integration, and Nodemailer order notifications.</li>
                   </ul>
                 </div>

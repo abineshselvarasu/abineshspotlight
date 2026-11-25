@@ -16,10 +16,10 @@ const experienceList: ExperienceItem[] = [
     summary:
       'Delivered production WordPress, Drupal, and Craft CMS platforms across 20+ international enterprise SaaS and nonprofit websites in Agile/Scrum teams.',
     highlights: [
-      'Built custom WordPress themes, plugins, React Gutenberg block suites, and 50+ ACF Pro modular layouts — cutting repeat build time by ~25%',
-      'Led PHP 7.4 → 8.x maintenance upgrades, security patching, custom Drupal/Craft Twig modules, and WCAG accessibility audits',
-      'Wired REST API & WPGraphQL integrations, cut LCP by ~30%, boosted organic CTR by ~15% via JSON-LD schema, and fixed 1,700+ sitemap URLs',
-      'Shipped across Agile/Scrum sprints with Git code reviews and multidev deployments on Pantheon, WP Engine, Kinsta, and Servd',
+      'Built custom WordPress themes, plugins, React Gutenberg block suites, and 50+ ACF Pro modular layouts across 20+ international enterprise SaaS and nonprofit projects',
+      'Led PHP 7.4 → 8.x upgrades, monthly security patching, malware/incident recovery, Drupal & Craft CMS updates, and WCAG accessibility audits',
+      'Wired REST API & CRM webhook integrations, cut LCP by ~30%, boosted organic CTR by ~15% via JSON-LD schema, and fixed 1,700+ sitemap URLs',
+      'Shipped across Agile/Scrum sprints with Git code reviews, Ubuntu dev servers (Virtualmin, CapRover, Docker), and deployments on Pantheon, WP Engine, Kinsta & Servd',
     ],
   },
   {
@@ -27,10 +27,10 @@ const experienceList: ExperienceItem[] = [
     role: 'Freelance Web Developer',
     company: 'Gradiolex · Independent',
     summary:
-      'Designs, architects, and launches custom WordPress websites, official WordPress.org plugins, and React/Next.js web applications.',
+      'Designs, architects, and launches custom WordPress websites, official WordPress.org plugins, and React/Next.js/AI apps.',
     highlights: [
       'Shipped NILAM Ventures, Sri Dhanamoorthy Traders, and NaviCakes from Figma to production',
-      'Architected and launched live Next.js + TypeScript web apps including Card About Me and MySupportInfo',
+      'Built Card About Me, MySupportInfo (Next.js + TypeScript) and MoneyArk (AI receipt OCR & voice finance app on Expo & Supabase)',
       'Published and maintain ClickReach and WP SVG Engine on the official WordPress.org plugin directory',
     ],
   },

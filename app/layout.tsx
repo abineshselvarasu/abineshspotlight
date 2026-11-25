@@ -43,7 +43,6 @@ export const metadata: Metadata = {
     'ACF Pro Developer',
     'Gutenberg Blocks Developer',
     'Headless WordPress',
-    'WPGraphQL',
     'Craft CMS Developer',
     'Drupal Developer',
     'Technical SEO Specialist',
