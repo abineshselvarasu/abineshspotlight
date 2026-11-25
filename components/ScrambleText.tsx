@@ -8,14 +8,13 @@ const LOWER_CHARS = 'abcdefghijkmnopqrstuvwxyz0123456789'
 interface ScrambleTextProps {
   text: string
   speed?: number
-  triggerOnView?: boolean
 }
 
-export default function ScrambleText({
-  text,
-  speed = 0.65,
-  triggerOnView = true,
-}: ScrambleTextProps) {
+/**
+ * Plays a single decode animation the first time the text enters the viewport.
+ * Respects `prefers-reduced-motion` and avoids re-triggering on hover.
+ */
+export default function ScrambleText({ text, speed = 0.65 }: ScrambleTextProps) {
   const [displayText, setDisplayText] = useState(text)
   const hostRef = useRef<HTMLSpanElement>(null)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -64,7 +63,7 @@ export default function ScrambleText({
 
   useEffect(() => {
     setDisplayText(text)
-    if (!triggerOnView || hasPlayedRef.current) return
+    if (hasPlayedRef.current) return
 
     const el = hostRef.current
     if (!el || typeof IntersectionObserver === 'undefined') return
@@ -85,18 +84,10 @@ export default function ScrambleText({
       observer.disconnect()
       clearTimer()
     }
-  }, [clearTimer, runScramble, text, triggerOnView])
-
-  useEffect(() => clearTimer, [clearTimer])
+  }, [clearTimer, runScramble, text])
 
   return (
-    <span
-      ref={hostRef}
-      onMouseEnter={runScramble}
-      onClick={runScramble}
-      aria-label={text}
-      className="inline cursor-default"
-    >
+    <span ref={hostRef} aria-label={text}>
       {displayText}
     </span>
   )
