@@ -92,7 +92,7 @@ export default function ResumePage() {
           <ResumeActions />
 
           {/* Main Resume Sheet (Screen: dark card layout; Print: clean 1-column 2-page ATS format) */}
-          <main className="bg-ink-deep border border-canvas/15 rounded-2xl p-5 sm:p-8 lg:p-12 shadow-xl print:bg-white print:text-black print:border-none print:p-0 print:shadow-none print:text-[11px] print:leading-[1.42]">
+          <main className="bg-ink-deep border border-canvas/15 rounded-2xl p-5 sm:p-8 lg:p-12 shadow-xl text-base leading-relaxed print:bg-white print:text-black print:border-none print:p-0 print:shadow-none print:text-[11px] print:leading-[1.42]">
             {/* ── HEADER ── */}
             <header className="border-b border-canvas/15 pb-6 sm:pb-8 mb-6 sm:mb-8 print:border-neutral-300 print:pb-2.5 print:mb-3">
               <div className="flex flex-col md:flex-row print:flex-row md:items-end print:items-end justify-between gap-5 sm:gap-6 print:gap-4">
@@ -109,7 +109,7 @@ export default function ResumePage() {
                 </div>
 
                 {/* Contact Details */}
-                <div className="text-xs sm:text-sm space-y-1.5 text-canvas/75 md:text-right print:text-right print:text-neutral-700 print:text-[10.5px] print:space-y-0.5">
+                <div className="text-sm sm:text-base space-y-1.5 text-canvas/75 md:text-right print:text-right print:text-neutral-700 print:text-[10.5px] print:space-y-0.5">
                   <p>Coimbatore, Tamil Nadu, India</p>
                   <p>
                     <a href="tel:+919042972156" className="hover:text-accent transition-colors print:text-black">
@@ -151,7 +151,7 @@ export default function ResumePage() {
               <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold mb-3 print:mb-1 print:text-xs print:text-black">
                 Professional Summary
               </h2>
-              <p className="text-canvas/85 text-sm sm:text-base leading-relaxed print:text-neutral-800 print:text-[11px] print:leading-[1.42]">
+              <p className="text-canvas/85 text-base leading-relaxed print:text-neutral-800 print:text-[11px] print:leading-[1.42]">
                 WordPress Developer with <strong>3 years 10 months</strong> of experience delivering production websites across WordPress, Drupal, Craft CMS, and React/Next.js for international enterprise SaaS, nonprofit organizations, and independent businesses. Experienced in PHP 8 upgrades, WordPress theme and plugin architecture, Gutenberg blocks, ACF Pro modular builds, REST API integrations, and Agile/Scrum delivery. Measurable impact across 20+ enterprise sites: <strong>−30% LCP</strong>, <strong>+15% organic CTR</strong>, resolved critical sitemap indexing bugs across <strong>1,700+ URLs</strong>, and scaled integration UIs from 16 to 57+ items with zero regressions.
               </p>
             </section>
@@ -211,11 +211,11 @@ export default function ResumePage() {
                     </span>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-canvas/65 mb-3.5 print:hidden">
+                  <p className="text-base text-canvas/65 mb-3.5 print:hidden">
                     FueInt Technologies · Coimbatore, Tamil Nadu, India
                   </p>
 
-                  <ul className="space-y-2 text-xs sm:text-sm lg:text-base text-canvas/85 leading-relaxed list-disc list-outside ml-4 print:text-[11px] print:text-neutral-800 print:space-y-1 print:leading-[1.38]">
+                  <ul className="space-y-2 text-base text-canvas/85 leading-relaxed list-disc list-outside ml-4 print:text-[11px] print:text-neutral-800 print:space-y-1 print:leading-[1.38]">
                     <li>
                       <strong>WordPress Themes, ACF Pro &amp; Gutenberg:</strong> Built custom themes, plugins, reusable React/PHP Gutenberg block suites (Data, CTA, FAQ, Video Popup), and 50+ ACF Pro modular layouts across <strong>20+ international enterprise SaaS and nonprofit sites</strong>, reducing repeat-project build time by ~25%.
                     </li>
@@ -242,11 +242,11 @@ export default function ResumePage() {
                     </span>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-canvas/65 mb-2.5 print:hidden">
+                  <p className="text-base text-canvas/65 mb-2.5 print:hidden">
                     Gradiolex · Independent Client &amp; Utility Engineering
                   </p>
 
-                  <ul className="space-y-1.5 text-xs sm:text-sm lg:text-base text-canvas/85 leading-relaxed list-disc list-outside ml-4 print:text-[11px] print:text-neutral-800 print:space-y-0.5 print:leading-[1.38]">
+                  <ul className="space-y-1.5 text-base text-canvas/85 leading-relaxed list-disc list-outside ml-4 print:text-[11px] print:text-neutral-800 print:space-y-0.5 print:leading-[1.38]">
                     <li><strong>NILAM Ventures:</strong> WordPress platform for an aquaculture &amp; farmtech advisory firm (Kadence, ACF Pro, Fluent Forms, WhatsApp lead routing on Pantheon).</li>
                     <li><strong>Card About Me:</strong> Next.js, React &amp; TypeScript link-in-bio SaaS with appointment bookings, WhatsApp chat, and 0%-commission direct UPI payments (<a href="https://www.cardabout.me/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline print:text-black">cardabout.me</a>).</li>
                     <li><strong>MySupportInfo:</strong> Next.js, React &amp; TypeScript client-side device diagnostics tool inspecting browser, OS, WebRTC leaks, and bufferbloat latency (<a href="https://mysupportinfo.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline print:text-black">mysupportinfo.com</a>).</li>
@@ -278,8 +278,8 @@ export default function ResumePage() {
                         Live on WP.org
                       </span>
                     </div>
-                    <p className="text-xs text-accent/90 font-medium mb-2 leading-snug">{plugin.tagline}</p>
-                    <p className="text-xs sm:text-sm text-canvas/75 leading-relaxed mb-4">{plugin.description}</p>
+                    <p className="text-sm text-accent/90 font-medium mb-2 leading-snug">{plugin.tagline}</p>
+                    <p className="text-base text-canvas/75 leading-relaxed mb-4">{plugin.description}</p>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2.5 border-t border-canvas/10">
                       <div className="flex flex-wrap gap-1.5">
                         {plugin.stack.map((tag) => (
@@ -322,7 +322,7 @@ export default function ResumePage() {
                     B.E. Computer Science &amp; Engineering · <span className="font-normal">Vidyaa Vikas College of Engineering (Anna University)</span>
                   </h3>
                 </div>
-                <div className="text-xs sm:text-sm text-accent font-semibold sm:text-right print:text-neutral-700 print:text-[10.5px]">
+                <div className="text-sm sm:text-base text-accent font-semibold sm:text-right print:text-neutral-700 print:text-[10.5px]">
                   2016 – 2020 · CGPA: 7.04 / 10
                 </div>
               </div>
