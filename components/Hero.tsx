@@ -7,8 +7,8 @@ const proofMetrics = [
     label: 'WordPress, Drupal & Craft CMS engineering',
   },
   {
-    value: '−30% LCP',
-    label: 'Caching & asset tuning across enterprise SaaS sites',
+    value: '20+ Projects',
+    label: 'Delivered for international SaaS & nonprofit clients',
   },
   {
     value: '+15% CTR',
@@ -78,7 +78,7 @@ export default function Hero() {
                   Performance, without guesswork.
                 </h2>
                 <p className="mt-3 text-sm sm:text-base text-mist leading-relaxed">
-                  Real delivery metrics across 20+ enterprise SaaS and nonprofit websites.
+                  Proven engineering across agency sprints, live site maintenance, technical SEO, and open-source builds.
                 </p>
               </div>
 
