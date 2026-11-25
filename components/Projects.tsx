@@ -3,7 +3,7 @@
 import { useId, useState } from 'react'
 import { ForwardArrowIcon } from './icons'
 
-type ProjectCategory = 'WordPress' | 'WP Plugin' | 'Apps & AI'
+type ProjectCategory = 'WordPress' | 'WP Plugin' | 'Next.js'
 
 type Project = {
   name: string
@@ -11,7 +11,6 @@ type Project = {
   category: ProjectCategory
   badge: string
   featured?: boolean
-  statusLabel?: string
   challenge: string
   highlights?: string[]
   architecture?: {
@@ -45,25 +44,9 @@ const projects: Project[] = [
     stack: ['WordPress', 'PHP 8', 'Kadence', 'ACF Pro', 'Fluent Forms', 'Pantheon'],
   },
   {
-    name: 'MoneyArk',
-    role: 'App & AI Builder',
-    category: 'Apps & AI',
-    badge: 'AI Finance App',
-    statusLabel: 'Solo AI Product Build',
-    challenge:
-      'AI-powered personal finance assistant built for fast mobile expense capture — featuring receipt OCR scanning, voice expense tracking, monthly spending analytics, Google OAuth, and real-time Supabase sync.',
-    architecture: {
-      decision:
-        'Engineered with Expo / React Native, TypeScript, and TanStack Query, routing AI vision receipt OCR parsing through secure Supabase Edge Functions with live state sync.',
-      outcome:
-        'Turns raw receipt photos and voice notes into structured monthly budget breakdowns with instant mobile sync.',
-    },
-    stack: ['Expo / React Native', 'TypeScript', 'Supabase Edge Functions', 'TanStack Query', 'AI OCR'],
-  },
-  {
     name: 'Card About Me',
     role: 'Web Developer',
-    category: 'Apps & AI',
+    category: 'Next.js',
     badge: 'Product Build',
     challenge:
       'Link-in-bio platform for creators and businesses — featuring custom profile links, calendar bookings, direct WhatsApp client chat, and 0% commission direct UPI payments.',
@@ -80,7 +63,7 @@ const projects: Project[] = [
   {
     name: 'MySupportInfo',
     role: 'Web Developer',
-    category: 'Apps & AI',
+    category: 'Next.js',
     badge: 'Utility Tool',
     challenge:
       'Instant device diagnostics and system info tool for remote teams and IT helpdesks — inspecting browser version, OS, IP, WebRTC leaks, and network latency with zero tracking.',
@@ -131,7 +114,7 @@ const projects: Project[] = [
   {
     name: 'NaviCakes',
     role: 'Web Developer',
-    category: 'Apps & AI',
+    category: 'Next.js',
     badge: 'Freelance Client',
     challenge:
       'Local bakery website with custom ordering, gallery, and brand identity — pixel-accurate from Figma to production.',
@@ -148,12 +131,12 @@ const projects: Project[] = [
   },
 ]
 
-const filters = ['All', 'WordPress', 'WP Plugin', 'Apps & AI'] as const
+const filters = ['All', 'WordPress', 'WP Plugin', 'Next.js'] as const
 
 const categoryIconPath: Record<ProjectCategory, string> = {
   WordPress: '/icons/wp.svg',
   'WP Plugin': '/icons/wp.svg',
-  'Apps & AI': '/icons/react.svg',
+  'Next.js': '/icons/nextjs.svg',
 }
 
 function ArchitectureToggle({
@@ -243,7 +226,7 @@ export default function Projects() {
       : projects.filter((p) => p.category === active)
 
   const gridColsClass =
-    gridProjects.length === 2 || gridProjects.length === 4
+    gridProjects.length === 2
       ? 'grid-cols-1 md:grid-cols-2'
       : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
 
@@ -453,9 +436,7 @@ export default function Projects() {
           {gridProjects.map((project) => (
             <article
               key={project.name}
-              className={`group relative flex flex-col justify-between rounded-2xl border border-canvas/15 bg-ink-deep overflow-hidden hover:border-accent/60 transition-colors ${
-                active === 'All' && project.name === 'MoneyArk' ? 'md:col-span-2 lg:col-span-3' : ''
-              }`}
+              className="group relative flex flex-col justify-between rounded-2xl border border-canvas/15 bg-ink-deep overflow-hidden hover:border-accent/60 transition-colors"
             >
               <div className="flex-1 flex flex-col">
                 {/* Header Band with Category Icon & Role */}
@@ -534,7 +515,7 @@ export default function Projects() {
                     ) : (
                       <span className="inline-flex items-center gap-1.5 text-xs font-medium text-canvas/60">
                         <span className="w-1.5 h-1.5 rounded-full bg-accent/70" aria-hidden="true" />
-                        {project.statusLabel ?? 'Client Production Build'}
+                        Client Production Build
                       </span>
                     )}
                   </div>

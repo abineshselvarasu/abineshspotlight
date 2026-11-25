@@ -27,10 +27,10 @@ const experienceList: ExperienceItem[] = [
     role: 'Freelance Web Developer',
     company: 'Gradiolex · Independent',
     summary:
-      'Designs, architects, and launches custom WordPress websites, official WordPress.org plugins, and React/Next.js/AI apps.',
+      'Designs, architects, and launches custom WordPress websites, official WordPress.org plugins, and React/Next.js web applications.',
     highlights: [
       'Shipped NILAM Ventures, Sri Dhanamoorthy Traders, and NaviCakes from Figma to production',
-      'Built Card About Me, MySupportInfo (Next.js + TypeScript) and MoneyArk (AI receipt OCR & voice finance app on Expo & Supabase)',
+      'Architected and launched live Next.js + TypeScript web apps including Card About Me and MySupportInfo',
       'Published and maintain ClickReach and WP SVG Engine on the official WordPress.org plugin directory',
     ],
   },
