@@ -6,7 +6,7 @@ import { SITE_URL, SOCIAL_PROFILES } from './site'
 // per route, so each page builds its own from these helpers.
 
 export const PERSON_NAME = 'Abinesh Selvarasu'
-export const JOB_TITLE = 'Senior WordPress Developer & Full Stack Engineer'
+export const JOB_TITLE = 'WordPress Developer'
 export const SITE_NAME = `${PERSON_NAME} — ${JOB_TITLE}`
 export const OG_IMAGE = {
   url: '/og-image.png',
@@ -87,7 +87,7 @@ export const personNode = {
   telephone: '+919042972156',
   jobTitle: JOB_TITLE,
   description:
-    'Senior WordPress Developer and Full Stack Engineer with 3+ years building production-grade web platforms for global enterprise clients.',
+    'WordPress Developer with 3.5+ years building production websites across WordPress, Drupal, Craft CMS, and Next.js for enterprise SaaS, nonprofit organizations, and independent businesses.',
   knowsAbout: [
     'WordPress Development',
     'WordPress Plugin Development',
@@ -98,9 +98,10 @@ export const personNode = {
     'Drupal',
     'PHP',
     'JavaScript',
+    'React',
+    'Next.js',
     'Technical SEO',
     'Core Web Vitals',
-    'Next.js',
     'Tailwind CSS',
   ],
   sameAs: SOCIAL_PROFILES,
@@ -150,15 +151,18 @@ export function breadcrumbNode(path: string, trail: { name: string; path: string
   return {
     '@type': 'BreadcrumbList',
     '@id': `${SITE_URL}${path}#breadcrumb`,
-    itemListElement: trail.map((t, i) => ({
+    itemListElement: trail.map((item, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      name: t.name,
-      item: `${SITE_URL}${t.path === '/' ? '' : t.path}`,
+      name: item.name,
+      item: item.path === '/' ? SITE_URL : `${SITE_URL}${item.path}`,
     })),
   }
 }
 
-export function jsonLdGraph(...nodes: object[]) {
-  return { '@context': 'https://schema.org', '@graph': nodes }
+export function jsonLdGraph(...nodes: Record<string, unknown>[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': nodes,
+  }
 }

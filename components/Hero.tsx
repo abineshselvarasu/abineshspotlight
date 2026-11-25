@@ -1,75 +1,96 @@
-"use client";
+import Link from 'next/link'
 
-import { useState } from "react";
-import ScrambleText from "./ScrambleText";
-import GameOfLife from "./GameOfLife";
+const proofMetrics = [
+  {
+    value: '3.5+ Years',
+    label: 'WordPress, Drupal & Craft CMS engineering',
+  },
+  {
+    value: '−30% LCP',
+    label: 'Caching & asset tuning across enterprise SaaS sites',
+  },
+  {
+    value: '+15% CTR',
+    label: 'JSON-LD schema & 1,700+ sitemap URL fixes',
+  },
+  {
+    value: '2 Live Plugins',
+    label: 'Published & actively maintained on WordPress.org',
+  },
+]
 
 export default function Hero() {
-  const [isHovered, setIsHovered] = useState(false);
-  const firstPart = "Abinesh";
-  const lastPart = ".S";
-
   return (
-    <section id="hero" className="relative bg-transparent flex flex-col overflow-hidden">
-      <GameOfLife />
-      <div className="relative z-10 container mx-auto px-6 flex flex-col justify-center py-6 md:py-10 pt-32 md:pt-36">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-rule pb-5 gap-4 md:gap-0">
-          <span className="flex items-center gap-2 text-sm font-mono text-mist uppercase tracking-widest">
-            Open To Work
-          </span>
-          {/* Year comes from the static build; the client may differ after New Year, so skip the hydration warning */}
-          <span className="text-sm font-mono text-mist uppercase tracking-widest" suppressHydrationWarning>
-            Tamil Nadu, India · {new Date().getFullYear()}
-          </span>
-        </div>
+    <section id="hero" className="bg-ink text-canvas pt-28 pb-16 md:pt-36 md:pb-24">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Centered Editorial Hero (Elastic Path Rhythm) */}
+        <div className="max-w-3xl mx-auto text-center">
+          <p className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-canvas/15 bg-forest/50 text-xs font-medium text-accent mb-6">
+            Coimbatore, India · Open to WordPress &amp; CMS Roles
+          </p>
 
-        <div
-          className="group font-display font-semibold leading-none tracking-tighter uppercase select-none pt-8 cursor-default max-w-full"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onClick={() => setIsHovered((prev) => !prev)}
-        >
-          {/* The heading holds the full name for search engines and screen readers; the split-text visual below is decorative */}
-          <h1 className="sr-only">Abinesh Selvarasu — Senior WordPress Developer &amp; Full Stack Engineer</h1>
-          <span aria-hidden="true" className="relative block max-w-full">
-            {/* Revealed Text (Center) */}
-            <span className="absolute inset-0 flex items-center justify-center opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 z-10 pointer-events-none">
-              <span className="text-xs sm:text-base md:text-2xl lg:text-4xl xl:text-5xl text-accent tracking-[0.15em] md:tracking-widest uppercase font-mono font-bold whitespace-nowrap drop-shadow-md">
-                <ScrambleText text="Full Stack Engineer" isHovered={isHovered} speed={0.3} />
-              </span>
-            </span>
+          <h1 className="font-display font-normal text-4xl sm:text-5xl md:text-6xl lg:text-[64px] text-canvas tracking-tight leading-[1.08]">
+            WordPress Developer{' '}
+            <span className="block text-accent">built for speed &amp; clarity.</span>
+          </h1>
 
-            {/* Top Half */}
-            <span
-              className="block whitespace-nowrap text-6xl sm:text-7xl md:text-9xl lg:text-[200px] xl:text-[260px] text-ink transition-transform duration-500 ease-out group-hover:-translate-y-3 md:group-hover:-translate-y-6 clip-half-top"
+          <p className="mt-6 text-base sm:text-lg text-canvas/80 leading-relaxed max-w-2xl mx-auto">
+            I&apos;m <strong className="text-canvas font-semibold">Abinesh Selvarasu</strong> — 3.5+ years architecting
+            custom WordPress themes, plugins, Drupal, Craft CMS, and Next.js sites for enterprise SaaS,
+            nonprofit organizations, and growing businesses.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-5">
+            <a
+              href="#projects"
+              className="inline-flex items-center gap-2 px-7 py-3.5 text-sm sm:text-base font-semibold text-ink bg-accent hover:bg-canvas transition-colors rounded-full"
             >
-              {firstPart}<span className="text-accent">{lastPart}</span>
-            </span>
-
-            {/* Bottom Half */}
-            <span
-              className="absolute top-0 left-0 whitespace-nowrap text-6xl sm:text-7xl md:text-9xl lg:text-[200px] xl:text-[260px] text-ink transition-transform duration-500 ease-out group-hover:translate-y-3 md:group-hover:translate-y-6 clip-half-bottom"
+              View Selected Work
+            </a>
+            <Link
+              href="/resume"
+              prefetch={true}
+              className="inline-flex items-center gap-1.5 text-sm sm:text-base font-medium text-canvas hover:text-accent underline underline-offset-4 decoration-accent/60 transition-colors"
             >
-              {firstPart}<span className="text-accent">{lastPart}</span>
-            </span>
-
-          </span>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-6 pb-12 md:pb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 pt-8 border-t border-rule items-start">
-          <div>
-            <p className="text-sm font-mono text-mist font-bold uppercase tracking-widest mb-2">Role &amp; Experience</p>
-            <p className="text-ink font-semibold text-lg lg:whitespace-nowrap">Senior WordPress Developer &amp; Full Stack Engineer</p>
-            <p className="text-mist text-base mt-1 font-mono">3+ Years Experience</p>
+              View Resume
+            </Link>
           </div>
+        </div>
 
-          <div>
-            <p className="text-sm font-mono text-mist font-bold uppercase tracking-widest mb-2">Specialises in</p>
-            <p className="text-ink text-opacity-70 text-base leading-relaxed">
-              Custom WordPress Architecture, Headless CMS, Core Web Vitals &amp; Performance Engineering.
-            </p>
+        {/* Clean 4-Cell Impact Card (modeled on Elastic Path's "Performance, uninterrupted." block) */}
+        <div className="mt-14 md:mt-20 max-w-5xl mx-auto rounded-2xl bg-ink-deep border border-canvas/15 p-6 sm:p-8 lg:p-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-4 text-center lg:text-left">
+              <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
+                Measured Outcomes
+              </p>
+              <h2 className="font-display font-normal text-2xl sm:text-3xl text-canvas leading-snug">
+                Performance, without guesswork.
+              </h2>
+              <p className="mt-2 text-sm text-canvas/70 leading-relaxed">
+                Real delivery metrics across 20+ enterprise SaaS and nonprofit websites.
+              </p>
+            </div>
+
+            <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 border border-canvas/10 rounded-xl overflow-hidden">
+              {proofMetrics.map((metric, idx) => (
+                <div
+                  key={metric.value}
+                  className={`p-5 sm:p-6 bg-ink/50 ${
+                    idx % 2 === 0 ? 'sm:border-r sm:border-canvas/10' : ''
+                  } ${idx < 2 ? 'border-b border-canvas/10' : ''} ${
+                    idx === 2 ? 'border-b sm:border-b-0 border-canvas/10' : ''
+                  }`}
+                >
+                  <p className="font-display text-2xl sm:text-3xl text-accent">
+                    {metric.value}
+                  </p>
+                  <p className="mt-1.5 text-sm text-canvas/75 leading-snug">
+                    {metric.label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

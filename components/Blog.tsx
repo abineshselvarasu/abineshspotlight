@@ -1,9 +1,5 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Carousel from './Carousel'
-import GameOfLife from './GameOfLife'
 
 type Article = {
   title: string
@@ -15,171 +11,144 @@ type Article = {
 
 const articles: Article[] = [
   {
-    title: "How to Improve SEO: A Practical Action Plan for 2025",
-    url: "https://fueint.com/blog/how-to-improve-seo",
-    image: "/images/blog/how-to-Improve-seo.webp",
-    category: "SEO",
-    readTime: "14 min"
+    title: 'How to Improve SEO: A Practical Action Plan for 2025',
+    url: 'https://fueint.com/blog/how-to-improve-seo',
+    image: '/images/blog/how-to-Improve-seo.webp',
+    category: 'SEO',
+    readTime: '14 min',
   },
   {
-    title: "Perfmatters WordPress Plugin – Speed Up Your Site",
-    url: "https://fueint.com/blog/perfmatters-wordpress-plugin",
-    image: "/images/blog/perfmatters-wordpress.webp",
-    category: "WordPress",
-    readTime: "8 min"
+    title: 'Perfmatters WordPress Plugin – Speed Up Your Site',
+    url: 'https://fueint.com/blog/perfmatters-wordpress-plugin',
+    image: '/images/blog/perfmatters-wordpress.webp',
+    category: 'WordPress',
+    readTime: '8 min',
   },
   {
-    title: "WordPress Plugins 2025 – Must-Have Tools for Developers",
-    url: "https://fueint.com/blog/must-have-wordpress-plugins",
-    image: "/images/blog/wordpress-plugins-2025.webp",
-    category: "WordPress",
-    readTime: "9 min"
+    title: 'WordPress Plugins 2025 – Must-Have Tools for Developers',
+    url: 'https://fueint.com/blog/must-have-wordpress-plugins',
+    image: '/images/blog/wordpress-plugins-2025.webp',
+    category: 'WordPress',
+    readTime: '9 min',
   },
   {
-    title: "How to Install LAMP Stack on Ubuntu with Virtual Hosts",
-    url: "https://fueint.com/blog/how-to-install-lamp-stack-on-ubuntu",
-    image: "/images/blog/install-lamp-stack-on-ubuntu.webp",
-    category: "DevOps",
-    readTime: "9 min"
+    title: 'How to Install LAMP Stack on Ubuntu with Virtual Hosts',
+    url: 'https://fueint.com/blog/how-to-install-lamp-stack-on-ubuntu',
+    image: '/images/blog/install-lamp-stack-on-ubuntu.webp',
+    category: 'DevOps',
+    readTime: '9 min',
   },
   {
-    title: "JavaScript Learning Roadmap (Beginner to Mastery Guide)",
-    url: "https://fueint.com/blog/javascript-learning-roadmap",
-    image: "/images/blog/javascript-learning-roadmap-og.webp",
-    category: "JavaScript",
-    readTime: "11 min"
+    title: 'JavaScript Learning Roadmap (Beginner to Mastery Guide)',
+    url: 'https://fueint.com/blog/javascript-learning-roadmap',
+    image: '/images/blog/javascript-learning-roadmap-og.webp',
+    category: 'JavaScript',
+    readTime: '11 min',
   },
   {
-    title: "Pantheon: Managed Hosting for WordPress & Drupal Sites",
-    url: "https://fueint.com/blog/what-is-pantheon",
-    image: "/images/blog/pantheon-hosting.webp",
-    category: "WordPress",
-    readTime: "9 min"
+    title: 'Pantheon: Managed Hosting for WordPress & Drupal Sites',
+    url: 'https://fueint.com/blog/what-is-pantheon',
+    image: '/images/blog/pantheon-hosting.webp',
+    category: 'WordPress',
+    readTime: '9 min',
   },
   {
-    title: "WordPress.org vs WordPress.com: Key Differences, Pros",
-    url: "https://fueint.com/blog/wordpress-org-vs-wordpress-com",
-    image: "/images/blog/wordpress-org-vs-wordpress-com.webp",
-    category: "WordPress",
-    readTime: "10 min"
+    title: 'WordPress.org vs WordPress.com: Key Differences, Pros',
+    url: 'https://fueint.com/blog/wordpress-org-vs-wordpress-com',
+    image: '/images/blog/wordpress-org-vs-wordpress-com.webp',
+    category: 'WordPress',
+    readTime: '10 min',
   },
   {
-    title: "Best A/B Testing WordPress Plugins for 2025",
-    url: "https://fueint.com/blog/best-ab-testing-plugins-wordpress",
-    image: "/images/blog/ab-testing-plugins-wordpress.jpg",
-    category: "WordPress",
-    readTime: "12 min"
+    title: 'Best A/B Testing WordPress Plugins for 2025',
+    url: 'https://fueint.com/blog/best-ab-testing-plugins-wordpress',
+    image: '/images/blog/ab-testing-plugins-wordpress.jpg',
+    category: 'WordPress',
+    readTime: '12 min',
   },
   {
-    title: "Pagination vs Load More vs Infinite Scroll 2025",
-    url: "https://fueint.com/blog/pagination-vs-load-more-vs-infinite-scroll",
-    image: "/images/blog/pagination-vs-load-more-vs-infinite-scroll.webp",
-    category: "Tech",
-    readTime: "16 min"
-  }
+    title: 'Pagination vs Load More vs Infinite Scroll 2025',
+    url: 'https://fueint.com/blog/pagination-vs-load-more-vs-infinite-scroll',
+    image: '/images/blog/pagination-vs-load-more-vs-infinite-scroll.webp',
+    category: 'Tech',
+    readTime: '16 min',
+  },
 ]
 
-// Cards per view: 1 on mobile, 2 from md (768px), 3 from lg (1024px) — matches Tailwind breakpoints
-function useSlidesToShow() {
-  const [slides, setSlides] = useState(1)
-  useEffect(() => {
-    const md = window.matchMedia('(min-width: 768px)')
-    const lg = window.matchMedia('(min-width: 1024px)')
-    const update = () => setSlides(lg.matches ? 3 : md.matches ? 2 : 1)
-    update()
-    md.addEventListener('change', update)
-    lg.addEventListener('change', update)
-    return () => {
-      md.removeEventListener('change', update)
-      lg.removeEventListener('change', update)
-    }
-  }, [])
-  return slides
-}
-
 export default function Blog() {
-  const slidesToShow = useSlidesToShow()
-
-  const renderCard = (article: Article) => (
-    <a
-      key={article.title}
-      href={article.url}
-      target="_blank"
-      rel="noopener noreferrer nofollow"
-      className="relative block w-full h-full overflow-hidden group rounded-2xl bg-canvas"
-      draggable={false}
-    >
-      <Image
-        src={article.image}
-        alt={article.title}
-        fill
-        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-        className="object-cover transition-transform duration-700 group-hover:scale-105"
-        draggable={false}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#081729]/95 via-[#081729]/40 to-transparent pointer-events-none" />
-      <div className="absolute bottom-14 left-5 right-5 z-10">
-        <div className="flex flex-wrap items-center gap-2 mb-3">
-          <span className="text-sm font-mono text-accent uppercase tracking-widest bg-black/60 px-2.5 py-1 rounded-md backdrop-blur-sm border border-white/10 font-semibold">
-            {article.category}
-          </span>
-          <span className="text-sm font-mono text-canvas/70 bg-black/60 px-2.5 py-1 rounded-md backdrop-blur-sm border border-white/10">
-            {article.readTime}
-          </span>
-        </div>
-        <p className="text-white font-display text-2xl md:text-3xl leading-snug group-hover:text-accent transition-colors duration-300">
-          {article.title}
-        </p>
-      </div>
-    </a>
-  )
-
   return (
-    <section id="blog" className="relative py-14 md:py-20 lg:py-24 bg-transparent border-t border-rule">
-      <GameOfLife />
-      <div className="relative z-10 container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between md:items-end mb-8 md:mb-12 gap-6">
+    <section id="blog" className="bg-paper text-ink py-16 md:py-24 border-b border-rule">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between md:items-end mb-10 gap-4">
           <div>
-            <p className="reveal-text text-sm font-mono text-forest uppercase tracking-widest mb-3 font-semibold">Publications</p>
-            <h2 className="reveal-text font-display font-normal text-4xl md:text-5xl text-ink leading-tight delay-100">
-              Things I&apos;ve written.
+            <p className="text-xs font-semibold uppercase tracking-wider text-forest mb-2">
+              Publications
+            </p>
+            <h2 className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-ink leading-tight">
+              Articles &amp; technical guides.
             </h2>
           </div>
+
           <a
             href="https://fueint.com/authors/abinesh-s"
             target="_blank"
             rel="noopener noreferrer nofollow"
-            className="reveal-text hidden md:inline-flex group items-center gap-2 text-lg font-mono text-mist hover:text-forest transition-colors delay-200"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-ink transition-colors"
           >
-            All articles{' '}
-            <span className="group-hover:translate-x-1 transition-transform inline-flex items-center">
-              <svg className="w-4 h-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </a>
-        </div>
-
-        <div className="w-full mx-auto h-[450px] md:max-w-5xl md:h-[420px] lg:max-w-7xl lg:h-[450px] reveal-text delay-300">
-          {/* Re-mount on breakpoint change so the seamless-loop clone offsets reset */}
-          <Carousel key={slidesToShow} slidesToShow={slidesToShow}>
-            {articles.map(renderCard)}
-          </Carousel>
-        </div>
-
-        <div className="mt-8 text-center md:hidden">
-          <a
-            href="https://fueint.com/authors/abinesh-s"
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            className="reveal-text delay-400 group text-base font-mono text-mist hover:text-forest transition-colors inline-flex items-center gap-1.5"
-          >
-            All articles
-            <svg className="w-4 h-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            View all articles
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
         </div>
+
+        <Carousel label="Published technical articles">
+          {articles.map((article) => (
+            <a
+              key={article.title}
+              href={article.url}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              className="group flex flex-col h-full rounded-xl border border-rule bg-surface overflow-hidden hover:border-forest/50 transition-colors"
+              draggable={false}
+            >
+              <div className="relative aspect-[16/9] w-full bg-paper overflow-hidden border-b border-rule">
+                <Image
+                  src={article.image}
+                  alt={article.title}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                  draggable={false}
+                />
+              </div>
+
+              <div className="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-forest/10 text-forest">
+                      {article.category}
+                    </span>
+                    <span className="text-xs text-mist">
+                      {article.readTime} read
+                    </span>
+                  </div>
+
+                  <h3 className="font-display font-normal text-xl text-ink leading-snug group-hover:text-forest transition-colors">
+                    {article.title}
+                  </h3>
+                </div>
+
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-forest">
+                  Read article
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+          ))}
+        </Carousel>
       </div>
     </section>
   )

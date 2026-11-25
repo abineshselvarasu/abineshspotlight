@@ -6,14 +6,14 @@ import Skills from '@/components/Skills'
 import Projects from '@/components/Projects'
 import Blog from '@/components/Blog'
 import Contact from '@/components/Contact'
-import RevealObserver from '@/components/RevealObserver'
+import BackToTop from '@/components/BackToTop'
 import JsonLd from '@/components/JsonLd'
 import { SITE_URL } from '@/lib/site'
 import { ID, JOB_TITLE, PERSON_NAME, businessNode, jsonLdGraph, pageMetadata, personNode, websiteNode } from '@/lib/seo'
 
 const TITLE = `${JOB_TITLE} | ${PERSON_NAME}`
 const DESCRIPTION =
-  'Senior WordPress Developer & Full Stack Engineer with 3+ years architecting enterprise web platforms for global brands.'
+  'WordPress Developer with 3.5+ years building production WordPress, Drupal, Craft CMS, and Next.js websites for enterprise SaaS and nonprofit teams.'
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -30,7 +30,7 @@ const schema = jsonLdGraph(
     url: SITE_URL,
     name: TITLE,
     description:
-      `Personal portfolio of ${PERSON_NAME} — ${JOB_TITLE}. Showcases enterprise projects, technical skills, career journey, and contact information.`,
+      `Portfolio of ${PERSON_NAME} — ${JOB_TITLE}. Showcases WordPress plugins, independent web builds, technical capabilities, career background, and contact details.`,
     isPartOf: { '@id': ID.website },
     mainEntity: { '@id': ID.person },
     inLanguage: 'en-US',
@@ -44,15 +44,15 @@ export default function Home() {
     <>
       <JsonLd data={schema} />
       <Nav />
-      <RevealObserver />
       <main>
         <Hero />
-        <About />
         <Skills />
         <Projects />
+        <About />
         <Blog />
         <Contact />
       </main>
+      <BackToTop />
     </>
   )
 }

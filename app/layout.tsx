@@ -33,21 +33,19 @@ export const metadata: Metadata = {
   },
 
   description:
-    'Senior WordPress Developer & Full Stack Engineer with 3+ years architecting enterprise web platforms for global brands.',
+    'WordPress Developer with 3.5+ years building production WordPress, Drupal, Craft CMS, and Next.js websites for enterprise SaaS and nonprofit teams.',
 
   keywords: [
     'Abinesh Selvarasu',
-    'Senior WordPress Engineer',
     'WordPress Developer',
-    'Full Stack Developer',
-    'Full Stack Engineer',
+    'WordPress Plugin Developer',
     'ACF Pro Developer',
     'Gutenberg Blocks Developer',
     'Headless WordPress',
     'WPGraphQL',
     'Craft CMS Developer',
     'Drupal Developer',
-    'Technical SEO Expert',
+    'Technical SEO Specialist',
     'Core Web Vitals Optimization',
     'PHP Developer',
     'JavaScript Developer',
@@ -76,7 +74,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${dmSerifDisplay.variable} ${albertSans.variable} scroll-smooth`}>
-      <body className="font-sans bg-canvas text-ink antialiased overflow-x-hidden min-h-screen">
+      <body className="font-sans bg-ink text-ink antialiased overflow-x-clip min-h-screen">
         {children}
         <Analytics />
 

@@ -1,230 +1,145 @@
 'use client'
 
-import React, { useState, useEffect, useCallback, useRef } from 'react'
-
-const ChevronLeft = ({ size = 24 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="15 18 9 12 15 6"></polyline>
-  </svg>
-)
-
-const ChevronRight = ({ size = 24 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="9 18 15 12 9 6"></polyline>
-  </svg>
-)
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 interface CarouselProps {
-  children: React.ReactNode;
-  autoSlide?: boolean;
-  autoSlideInterval?: number;
-  seamlessLoop?: boolean;
-  slidesToShow?: number;
+  children: React.ReactNode
+  label?: string
 }
 
-const Carousel = ({
-    children: slides,
-    autoSlide = true,
-    autoSlideInterval = 5000,
-    seamlessLoop = true,
-    slidesToShow = 1
-}: CarouselProps) => {
-    const slidesArray = React.Children.toArray(slides)
-    const totalSlides = slidesArray.length
+export default function Carousel({ children, label = 'Carousel' }: CarouselProps) {
+  const slides = React.Children.toArray(children)
+  const totalSlides = slides.length
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [maxIndex, setMaxIndex] = useState(Math.max(0, totalSlides - 1))
 
-    const clonedCount = seamlessLoop ? slidesToShow : 0
-    const [currentSlideIndex, setCurrentSlideIndex] = useState(clonedCount)
-    const [isTransitioning, setIsTransitioning] = useState(true)
-    // Auto-slide pauses while the pointer or keyboard focus is inside (WCAG 2.2.2) and never runs for reduced-motion users
-    const [isPaused, setIsPaused] = useState(false)
-    const [reducedMotion, setReducedMotion] = useState(false)
-    // Refs, not state: pointer positions don't affect rendering, so no re-render per mousemove
-    const dragStart = useRef<number | null>(null)
-    const dragEnd = useRef<number | null>(null)
+  const measureVisible = useCallback(() => {
+    const track = trackRef.current
+    if (!track || !track.children.length) return
+    const first = track.children[0] as HTMLElement
+    const cardWidth = first.offsetWidth
+    if (!cardWidth) return
+    const visible = Math.max(1, Math.round(track.clientWidth / cardWidth))
+    const max = Math.max(0, totalSlides - visible)
+    setMaxIndex(max)
+    setCurrentIndex((prev) => Math.min(prev, max))
+  }, [totalSlides])
 
-    // Append and prepend clones to create the seamless illusion
-    const extendedSlides = seamlessLoop
-        ? [
-            ...slidesArray.slice(-clonedCount),
-            ...slidesArray,
-            ...slidesArray.slice(0, clonedCount)
-          ]
-        : slidesArray
+  useEffect(() => {
+    measureVisible()
+    window.addEventListener('resize', measureVisible)
+    return () => window.removeEventListener('resize', measureVisible)
+  }, [measureVisible])
 
-    const goToPreviousSlide = useCallback(() => {
-        if (seamlessLoop) {
-            if (currentSlideIndex <= 0) return
-            setIsTransitioning(true)
-            setCurrentSlideIndex(prev => prev - 1)
-        } else {
-            setCurrentSlideIndex(index => (index === 0 ? totalSlides - slidesToShow : index - 1))
-        }
-    }, [currentSlideIndex, seamlessLoop, totalSlides, slidesToShow])
+  const scrollToIndex = useCallback((nextIdx: number) => {
+    const track = trackRef.current
+    if (!track) return
+    const target = track.children[nextIdx] as HTMLElement | undefined
+    if (!target) return
+    track.scrollTo({
+      left: target.offsetLeft,
+      behavior: 'smooth',
+    })
+    setCurrentIndex(nextIdx)
+  }, [])
 
-    const goToNextSlide = useCallback(() => {
-        if (seamlessLoop) {
-            if (currentSlideIndex >= totalSlides + clonedCount) return
-            setIsTransitioning(true)
-            setCurrentSlideIndex(prev => prev + 1)
-        } else {
-            setCurrentSlideIndex(index => (index >= totalSlides - slidesToShow ? 0 : index + 1))
-        }
-    }, [currentSlideIndex, seamlessLoop, totalSlides, clonedCount, slidesToShow])
+  const goPrevious = () => {
+    const nextIdx = currentIndex <= 0 ? maxIndex : currentIndex - 1
+    scrollToIndex(nextIdx)
+  }
 
-    // Drag / Swipe handlers
-    const clientX = (e: React.TouchEvent | React.MouseEvent) =>
-        'targetTouches' in e ? e.targetTouches[0].clientX : e.clientX
+  const goNext = () => {
+    const nextIdx = currentIndex >= maxIndex ? 0 : currentIndex + 1
+    scrollToIndex(nextIdx)
+  }
 
-    const handleDragStart = (e: React.TouchEvent | React.MouseEvent) => {
-        dragEnd.current = null
-        dragStart.current = clientX(e)
+  // Sync active counter when user drags/swipes or uses trackpad scroll
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+    let raf = 0
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        raf = 0
+        const first = track.children[0] as HTMLElement | undefined
+        const second = track.children[1] as HTMLElement | undefined
+        if (!first) return
+        const step = second ? second.offsetLeft - first.offsetLeft : first.offsetWidth
+        if (step <= 0) return
+        const idx = Math.min(maxIndex, Math.max(0, Math.round(track.scrollLeft / step)))
+        setCurrentIndex(idx)
+      })
     }
-
-    const handleDragMove = (e: React.TouchEvent | React.MouseEvent) => {
-        if (dragStart.current !== null) dragEnd.current = clientX(e)
+    track.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      track.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
     }
+  }, [maxIndex])
 
-    const handleDragEnd = () => {
-        if (dragStart.current !== null && dragEnd.current !== null) {
-            const distance = dragStart.current - dragEnd.current
-            const minSwipeDistance = 50
-            if (distance > minSwipeDistance) goToNextSlide()
-            else if (distance < -minSwipeDistance) goToPreviousSlide()
-        }
-        dragStart.current = null
-        dragEnd.current = null
-    }
+  const totalSteps = maxIndex + 1
 
-    // Handle seamless jumping when reaching clones
-    useEffect(() => {
-        if (!seamlessLoop) return
+  return (
+    <div role="region" aria-roledescription="carousel" aria-label={label}>
+      {/* Native Scroll-Snap Track (strictly manual, zero autoplay) */}
+      <div
+        ref={trackRef}
+        tabIndex={0}
+        aria-label="Slides"
+        className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar pb-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xl"
+        style={{ overscrollBehaviorX: 'contain' }}
+      >
+        {slides.map((slide, idx) => (
+          <div
+            key={idx}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${idx + 1} of ${totalSlides}`}
+            className="snap-start shrink-0 w-full md:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
+          >
+            {slide}
+          </div>
+        ))}
+      </div>
 
-        // If we slid past the last real slide into the cloned area
-        if (currentSlideIndex === totalSlides + clonedCount) {
-            const timeout = setTimeout(() => {
-                setIsTransitioning(false)
-                setCurrentSlideIndex(clonedCount)
-            }, 700)
-            return () => clearTimeout(timeout)
-        }
-        // If we slid backwards past the first real slide into the cloned area
-        if (currentSlideIndex === 0) {
-            const timeout = setTimeout(() => {
-                setIsTransitioning(false)
-                setCurrentSlideIndex(totalSlides)
-            }, 700)
-            return () => clearTimeout(timeout)
-        }
-    }, [currentSlideIndex, totalSlides, seamlessLoop, clonedCount])
-
-    useEffect(() => {
-        const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-        const update = () => setReducedMotion(mq.matches)
-        update()
-        mq.addEventListener('change', update)
-        return () => mq.removeEventListener('change', update)
-    }, [])
-
-    useEffect(() => {
-        if (!autoSlide || isPaused || reducedMotion) return
-        const slideInterval = setInterval(goToNextSlide, autoSlideInterval)
-        return () => clearInterval(slideInterval)
-    }, [autoSlide, autoSlideInterval, goToNextSlide, isPaused, reducedMotion])
-
-    // Map the (clone-padded) track position back to a real slide index for the indicators
-    let activeIndex = currentSlideIndex
-    if (seamlessLoop) {
-        if (currentSlideIndex < clonedCount) activeIndex = totalSlides - clonedCount + currentSlideIndex
-        else if (currentSlideIndex >= totalSlides + clonedCount) activeIndex = currentSlideIndex - totalSlides - clonedCount
-        else activeIndex = currentSlideIndex - clonedCount
-    }
-
-    return (
-        <div
-            className='relative w-full h-full overflow-hidden rounded-3xl group/carousel'
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            onFocus={() => setIsPaused(true)}
-            onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setIsPaused(false) }}
-        >
-            {/* Main Carousel Track */}
-            <div
-                className={`flex w-full h-full cursor-grab active:cursor-grabbing touch-pan-y ${isTransitioning ? 'transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)]' : ''}`}
-                style={{ transform: `translateX(-${(currentSlideIndex * 100) / slidesToShow}%)` }}
-                onTouchStart={handleDragStart}
-                onTouchMove={handleDragMove}
-                onTouchEnd={handleDragEnd}
-                onMouseDown={handleDragStart}
-                onMouseMove={handleDragMove}
-                onMouseUp={handleDragEnd}
-                onMouseLeave={handleDragEnd}
-                onDragStart={(e) => e.preventDefault()} // Prevent default HTML5 drag on links
+      {/* Elastic Path-style Centered Manual Pill Controls: <  1 / N  > */}
+      {totalSteps > 1 && (
+        <div className="mt-8 flex justify-center">
+          <div className="inline-flex items-center gap-2 rounded-full bg-ink text-canvas px-2.5 py-1.5 border border-ink/15 shadow-sm">
+            <button
+              type="button"
+              onClick={goPrevious}
+              aria-label="Previous slide"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-accent hover:bg-canvas/10 transition-colors"
             >
-                {extendedSlides.map((slide, idx) => {
-                    // Off-screen slides and loop clones stay out of the tab order and the accessibility tree,
-                    // so focus can never land on a hidden card and scroll the track out of alignment
-                    const offScreen = idx < currentSlideIndex || idx >= currentSlideIndex + slidesToShow
-                    return (
-                    <div
-                        key={idx}
-                        className="h-full flex-shrink-0 relative"
-                        style={{ width: `${100 / slidesToShow}%` }}
-                        inert={offScreen}
-                        aria-hidden={offScreen || undefined}
-                    >
-                        <div className="w-full h-full p-2 md:p-3 pointer-events-none">
-                           <div className="w-full h-full pointer-events-auto">
-                             {slide}
-                           </div>
-                        </div>
-                    </div>
-                    )
-                })}
-            </div>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
 
-            {/* Navigation Buttons (Visible on Hover) */}
-            <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover/carousel:opacity-100 group-focus-within/carousel:opacity-100 transition-opacity duration-300 pointer-events-none">
-                <button
-                    onClick={goToPreviousSlide}
-                    aria-label="Previous slide"
-                    className='pointer-events-auto p-2 rounded-full backdrop-blur-md bg-ink/40 text-mist shadow-lg border border-accent/30 hover:bg-accent/80 hover:text-white hover:scale-110 transition-all duration-300'
-                >
-                    <ChevronLeft size={24} />
-                </button>
-                <button
-                    onClick={goToNextSlide}
-                    aria-label="Next slide"
-                    className='pointer-events-auto p-2 rounded-full backdrop-blur-md bg-ink/40 text-mist shadow-lg border border-accent/30 hover:bg-accent/80 hover:text-white hover:scale-110 transition-all duration-300'
-                >
-                    <ChevronRight size={24} />
-                </button>
-            </div>
+            <span
+              role="status"
+              aria-live="polite"
+              className="text-sm font-medium tabular-nums min-w-[3.25rem] text-center text-canvas"
+            >
+              {currentIndex + 1} / {totalSteps}
+            </span>
 
-            {/* Custom Modern Indicators */}
-            <div className='absolute bottom-4 right-0 left-0 pointer-events-none'>
-                <div className='flex items-center justify-center gap-1 pointer-events-auto'>
-                    {slidesArray.map((_, slideIndex) => (
-                        <button
-                            key={slideIndex}
-                            aria-label={`Go to slide ${slideIndex + 1}`}
-                            onClick={() => {
-                                setIsTransitioning(true)
-                                setCurrentSlideIndex(seamlessLoop ? slideIndex + clonedCount : slideIndex)
-                            }}
-                            // 24px hit area around the small visual dot
-                            className="group/dot p-2 cursor-pointer"
-                        >
-                            <span className={`block transition-all duration-500 rounded-full ${
-                                activeIndex === slideIndex
-                                ? "w-8 h-2 bg-accent shadow-[0_0_10px_rgba(220,188,125,0.8)]"
-                                : "w-2 h-2 bg-mist opacity-50 group-hover/dot:opacity-100"
-                            }`} />
-                        </button>
-                    ))}
-                </div>
-            </div>
+            <button
+              type="button"
+              onClick={goNext}
+              aria-label="Next slide"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-accent hover:bg-canvas/10 transition-colors"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
         </div>
-    )
+      )}
+    </div>
+  )
 }
-
-export default Carousel

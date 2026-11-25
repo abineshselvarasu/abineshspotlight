@@ -1,14 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import ShootingStarsGrid from './ShootingStarsGrid'
 
 type Project = {
   name: string
   role: string
-  category: string
-  group: 'FueInt' | 'independent'
-  subGroup?: 'global' | 'client' | 'utility' | 'domestic' | 'plugin'
+  category: 'WordPress' | 'WP Plugin' | 'Next.js'
+  badge: string
   featured?: boolean
   challenge: string
   stack: string[]
@@ -17,442 +15,202 @@ type Project = {
 }
 
 const projects: Project[] = [
-  // ── Enterprise via FueInt Technologies ──────────────────────────────
-  // Row 1 (Featured Left)
-  {
-    name: 'Unbounce',
-    role: 'WordPress Developer',
-    category: 'WordPress',
-    group: 'FueInt',
-    subGroup: 'global',
-    featured: true,
-    challenge: 'ACF architecture overhaul, CPT development, and performance optimisation for a leading SaaS landing page platform used by 120,000+ marketers.',
-    stack: ['WordPress', 'ACF Pro', 'PHP', 'Performance'],
-  },
-  {
-    name: 'Intiveo',
-    role: 'WordPress Developer',
-    category: 'WordPress',
-    group: 'FueInt',
-    subGroup: 'global',
-    challenge: 'Custom WordPress components, interactive element integrations, and conversion flow optimisation for a patient communication SaaS.',
-    stack: ['WordPress', 'PHP', 'JavaScript', 'ACF Pro'],
-  },
-  {
-    name: 'Open Gov Week',
-    role: 'WordPress Developer',
-    category: 'WordPress',
-    group: 'FueInt',
-    subGroup: 'global',
-    challenge: 'Custom CMS and taxonomy architecture for a major international open government event platform.',
-    stack: ['WordPress', 'ACF Pro', 'CPT', 'REST API'],
-  },
-
-  // Row 2 (Vice Versa — Featured Right!)
-  {
-    name: 'Insightly',
-    role: 'WordPress Developer',
-    category: 'WordPress',
-    group: 'FueInt',
-    subGroup: 'global',
-    challenge: 'Marketing site optimisation, Gutenberg blocks, and CRM form integrations for a popular CRM platform website.',
-    stack: ['WordPress', 'PHP', 'ACF Pro', 'CRM Integration'],
-  },
-  {
-    name: 'PPIC',
-    role: 'WordPress Developer',
-    category: 'WordPress',
-    group: 'FueInt',
-    subGroup: 'global',
-    challenge: 'Custom theme development, complex block architectures, and content migrations for a leading policy research and analysis center.',
-    stack: ['WordPress', 'PHP', 'ACF Pro', 'CSS'],
-  },
-  {
-    name: 'Open Government Partnership',
-    role: 'WordPress Developer',
-    category: 'WordPress',
-    group: 'FueInt',
-    subGroup: 'global',
-    featured: true,
-    challenge: 'Large-scale CMS and Custom Post Type architecture for an international initiative spanning 75+ governments and millions of annual visitors.',
-    stack: ['WordPress', 'ACF Pro', 'CPT', 'REST API'],
-  },
-
-  // Row 4 (Vice Versa — Featured Right!)
-  {
-    name: 'Loopio',
-    role: 'WordPress Developer',
-    category: 'WordPress',
-    group: 'FueInt',
-    subGroup: 'global',
-    challenge: 'Marketing website architecture, ACF modular layouts, and performance tuning for a leading RFP response software platform.',
-    stack: ['WordPress', 'PHP', 'ACF Pro', 'Webpack'],
-  },
-  {
-    name: 'Traction Complete',
-    role: 'WordPress Developer',
-    category: 'WordPress',
-    group: 'FueInt',
-    subGroup: 'global',
-    featured: true,
-    challenge: 'ACF architecture, performance improvements, and custom plugin development for a Salesforce-native data management SaaS.',
-    stack: ['WordPress', 'ACF Pro', 'PHP', 'Plugin Dev'],
-  },
-
-  // Row 3 (Featured Left)
-  {
-    name: 'ElasticPath',
-    role: 'Craft CMS Developer',
-    category: 'CMS',
-    group: 'FueInt',
-    subGroup: 'global',
-    challenge: 'Full WCAG accessibility compliance and Core Web Vitals optimisation for an enterprise headless commerce platform with global reach.',
-    stack: ['Craft CMS', 'WCAG', 'Performance', 'SEO'],
-  },
-  {
-    name: 'Premier Boxing Champions',
-    role: 'Drupal Developer',
-    category: 'Drupal',
-    group: 'FueInt',
-    subGroup: 'global',
-    featured: true,
-    challenge: 'Security hardening and performance work for a major US boxing promoter, including live fight-night features built to handle peak concurrency.',
-    stack: ['Drupal', 'PHP', 'Security', 'Performance'],
-  },
-  {
-    name: 'DialedIn',
-    role: 'Drupal Developer',
-    category: 'Drupal',
-    group: 'FueInt',
-    subGroup: 'global',
-    challenge: 'Developed and maintained a Drupal-based website for a cloud contact center platform, focusing on custom features, performance improvements, and ongoing site maintenance.',
-    stack: ['Drupal', 'PHP', 'JavaScript', 'Performance'],
-  },
-  {
-    name: 'FUEiNT',
-    role: 'Next.js Developer',
-    category: 'Next.js',
-    group: 'FueInt',
-    subGroup: 'domestic',
-    challenge: 'Rebuilt the company website in Next.js, improving performance, modernising the UI, and creating a scalable codebase for future growth.',
-    stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-  },
-
-  {
-    name: 'Andaman Guru & Package',
-    role: 'React Developer',
-    category: 'Next.js',
-    group: 'FueInt',
-    subGroup: 'domestic',
-    challenge: 'Migrated a legacy WordPress website to React/Next.js to modernise performance and user experience.',
-    stack: ['Next.js', 'React', 'Tailwind'],
-  },
-  {
-    name: 'Siswa',
-    role: 'Mobile App Developer',
-    category: 'Flutter',
-    group: 'FueInt',
-    subGroup: 'domestic',
-    challenge: 'A cross-platform mobile application for student collaboration, academic tracking, and real-time notifications.',
-    stack: ['Flutter', 'Firebase', 'Dart', 'State Management'],
-  },
-  {
-    name: 'Naicee',
-    role: 'Next.js Developer',
-    category: 'Next.js',
-    group: 'FueInt',
-    subGroup: 'domestic',
-    challenge: 'A platform dedicated to preserving native Tamil Nadu dog breeds — multilingual support, breed search filters, adopt workflows, and optimised image galleries.',
-    stack: ['Next.js', 'React', 'Tailwind'],
-  },
-  {
-    name: 'Parithadam',
-    role: 'Web Platform',
-    category: 'Next.js',
-    group: 'FueInt',
-    subGroup: 'domestic',
-    challenge: 'E-commerce platform for 100% natural honey, traditional snacks, and chemical-free rice — with Nodemailer-based order notifications.',
-    stack: ['Next.js 15', 'React', 'Tailwind', 'Nodemailer'],
-  },
-
-  // ── Independent Projects ─────────────────────────────────────────
-  // Row 1 (Featured Left: 2 cols + 1 col + 1 col = 4 cols)
   {
     name: 'NILAM Ventures',
     role: 'WordPress Developer',
     category: 'WordPress',
-    group: 'independent',
-    subGroup: 'client',
+    badge: 'Freelance Client',
     featured: true,
-    challenge: 'Website for a PhD-led aquaculture and farmtech advisory firm in Tamil Nadu — showcasing turnkey pond design, Biofloc & RAS tank setups, and fish seed supply, with a product catalogue, farm consultation forms, and one-tap WhatsApp enquiries.',
+    challenge:
+      'Website for a PhD-led aquaculture and farmtech advisory firm in Tamil Nadu — showcasing turnkey pond design, Biofloc & RAS tank setups, and fish seed supply, with a product catalogue, farm consultation forms, and one-tap WhatsApp enquiries.',
     stack: ['WordPress', 'Kadence', 'ACF', 'Fluent Forms', 'Pantheon'],
   },
   {
     name: 'Card About Me',
-    role: 'Full Stack Developer',
+    role: 'Web Developer',
     category: 'Next.js',
-    group: 'independent',
-    subGroup: 'utility',
-    challenge: 'Link-in-bio platform for creators and businesses — featuring custom profile links, calendar bookings, direct WhatsApp client chat, and 0% commission direct UPI payments.',
-    stack: ['Next.js', 'React', 'Tailwind', 'UPI Integration', 'Vercel'],
+    badge: 'Product Build',
+    challenge:
+      'Link-in-bio platform for creators and businesses — featuring custom profile links, calendar bookings, direct WhatsApp client chat, and 0% commission direct UPI payments.',
+    stack: ['Next.js', 'React', 'Tailwind CSS', 'UPI Integration', 'Vercel'],
     url: 'https://www.cardabout.me/',
     urlLabel: 'Visit Live Site',
   },
   {
     name: 'MySupportInfo',
-    role: 'Full Stack Developer',
+    role: 'Web Developer',
     category: 'Next.js',
-    group: 'independent',
-    subGroup: 'utility',
-    challenge: 'Instant device diagnostics and system info tool for remote teams and IT helpdesks — inspecting browser version, OS, IP, WebRTC leaks, and network latency with zero tracking.',
-    stack: ['Next.js', 'React', 'Tailwind', 'Web APIs', 'Vercel'],
+    badge: 'Utility Tool',
+    challenge:
+      'Instant device diagnostics and system info tool for remote teams and IT helpdesks — inspecting browser version, OS, IP, WebRTC leaks, and network latency with zero tracking.',
+    stack: ['Next.js', 'React', 'Tailwind CSS', 'Web APIs', 'Vercel'],
     url: 'https://mysupportinfo.com/',
     urlLabel: 'Visit Live Site',
   },
-
-  // Row 2 (Plugins & Client Builds: 1 + 1 + 1 + 1 = 4 cols)
   {
     name: 'ClickReach – Social Share Buttons & Counter',
     role: 'WordPress Plugin Author',
     category: 'WP Plugin',
-    group: 'independent',
-    subGroup: 'plugin',
-    challenge: 'Published on WordPress.org — lightweight, privacy-friendly social sharing buttons with live click counters, zero bloat, pure inline SVGs, and Core Web Vitals friendly performance.',
+    badge: 'WP.org Plugin',
+    challenge:
+      'Published on WordPress.org — lightweight, privacy-friendly social sharing buttons with live click counters, pure inline SVGs, and Core Web Vitals friendly performance.',
     stack: ['WordPress', 'PHP', 'JavaScript', 'REST API'],
     url: 'https://wordpress.org/plugins/clickreach-social-share-buttons/',
+    urlLabel: 'View on WordPress.org',
   },
   {
     name: 'WP SVG Engine',
     role: 'WordPress Plugin Author',
     category: 'WP Plugin',
-    group: 'independent',
-    subGroup: 'plugin',
-    challenge: 'Published on WordPress.org — enables safe SVG & SVGZ uploads with automated DOM sanitization, Media Library preview fixes, dimension detection, and fast client-side inlining.',
+    badge: 'WP.org Plugin',
+    challenge:
+      'Published on WordPress.org — enables safe SVG & SVGZ uploads with automated DOM sanitization, Media Library preview fixes, dimension detection, and fast client-side inlining.',
     stack: ['PHP', 'WordPress', 'SVG', 'DOM Sanitization'],
     url: 'https://wordpress.org/plugins/svigent-tools/',
+    urlLabel: 'View on WordPress.org',
   },
   {
     name: 'NaviCakes',
-    role: 'Full Stack Developer',
+    role: 'Web Developer',
     category: 'Next.js',
-    group: 'independent',
-    subGroup: 'client',
-    challenge: 'Local bakery website with custom ordering, gallery, and brand identity — pixel-perfect from Figma to code.',
-    stack: ['Next.js', 'React', 'Tailwind', 'Vercel'],
+    badge: 'Freelance Client',
+    challenge:
+      'Local bakery website with custom ordering, gallery, and brand identity — pixel-accurate from Figma to production.',
+    stack: ['Next.js', 'React', 'Tailwind CSS', 'Vercel'],
   },
   {
     name: 'Sri Dhanamoorthy Traders',
     role: 'WordPress Developer',
     category: 'WordPress',
-    group: 'independent',
-    subGroup: 'client',
-    challenge: 'B2B wholesale cement and steel trader website with product catalogue and trade enquiry flows.',
+    badge: 'Freelance Client',
+    challenge:
+      'B2B wholesale cement and steel trader website with structured product catalogue and trade enquiry workflows.',
     stack: ['WordPress', 'ACF', 'Pantheon'],
   },
 ]
 
-const filters = ['All', 'Enterprise', 'Independent', 'WordPress', 'Next.js', 'Flutter', 'CMS', 'Drupal', 'WP Plugin']
-
+const filters = ['All', 'WordPress', 'WP Plugin', 'Next.js'] as const
 
 export default function Projects() {
-  const [active, setActive] = useState('All')
+  const [active, setActive] = useState<(typeof filters)[number]>('All')
 
   const filtered =
     active === 'All'
       ? projects
-      : active === 'Enterprise'
-      ? projects.filter((p) => p.group === 'FueInt')
-      : active === 'Independent'
-      ? projects.filter((p) => p.group === 'independent')
       : projects.filter((p) => p.category === active)
 
-  const showEnterprise = filtered.some((p) => p.group === 'FueInt')
-  const showIndependent = filtered.some((p) => p.group === 'independent')
-  const showBothGroups = showEnterprise && showIndependent
-
   return (
-    <section id="projects" className="relative py-14 md:py-20 lg:py-24 bg-ink">
-      <ShootingStarsGrid />
-      <div className="relative z-10 container mx-auto px-6">
-        
+    <section id="projects" className="bg-ink text-canvas py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between md:items-end mb-8 md:mb-10 gap-6">
-          <div>
-            <p className="reveal-text text-sm font-mono text-accent uppercase tracking-widest mb-3 font-semibold">Selected Work</p>
-            <h2 className="reveal-text font-display font-normal text-4xl md:text-6xl text-canvas tracking-tight leading-tight delay-100">
-              Featured projects.
+        <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-8">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
+              Selected Work
+            </p>
+            <h2 className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-canvas leading-tight">
+              Independent builds &amp; published plugins.
             </h2>
           </div>
-          <p className="reveal-text text-canvas/60 max-w-xs text-base font-mono leading-relaxed delay-200">
-            Enterprise platforms, headless CMS builds, and independent full-stack applications.
+          <p className="text-sm text-canvas/75 max-w-sm leading-relaxed">
+            Client websites, utility products, and official WordPress.org plugins shipped under{' '}
+            <a
+              href="https://gradiolex.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:underline font-medium"
+            >
+              Gradiolex
+            </a>
+            .
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="mb-8 md:mb-12 reveal-text delay-300">
-          <div className="flex flex-wrap gap-2.5">
-            {filters.map((f) => (
-              <button
-                key={f}
-                onClick={() => setActive(f)}
-                className={`px-4 py-1.5 text-sm font-mono font-medium rounded-full transition-all duration-300 ${
-                  active === f
-                    ? 'bg-accent text-ink font-bold shadow-md scale-105'
-                    : 'bg-canvas/5 text-canvas/60 border border-canvas/10 hover:bg-accent/20 hover:text-canvas'
-                }`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
+        {/* NDA-safe enterprise context note */}
+        <div className="mb-8 rounded-xl border border-canvas/15 bg-ink-deep/80 px-5 py-4 text-sm text-canvas/80 leading-relaxed">
+          <span className="font-semibold text-accent">Enterprise Track Note:</span>{' '}
+          Previously delivered 20+ production WordPress, Drupal, and Craft CMS builds for enterprise SaaS and nonprofit organizations during my full-time tenure (2022–2026). Specific agency client brands are omitted here to respect client confidentiality.
         </div>
 
-        {/* ── Enterprise Track Bento Grid ── */}
-        {showEnterprise && (
-          <div className="mb-12 md:mb-16">
-            {showBothGroups && (
-              <div className="reveal-text flex items-center gap-4 mb-4">
-                <span className="text-sm font-mono uppercase tracking-widest text-accent font-semibold">Enterprise experience</span>
-                <div className="flex-1 h-px bg-canvas/10" />
+        {/* Filters */}
+        <div className="flex flex-wrap gap-2.5 mb-10" role="group" aria-label="Filter projects by technology">
+          {filters.map((f) => (
+            <button
+              key={f}
+              type="button"
+              onClick={() => setActive(f)}
+              aria-pressed={active === f}
+              className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+                active === f
+                  ? 'bg-accent text-ink font-semibold'
+                  : 'bg-canvas/5 text-canvas/80 border border-canvas/15 hover:border-accent/50 hover:text-canvas'
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
+        {/* Project Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {filtered.map((project) => (
+            <article
+              key={project.name}
+              className={`flex flex-col justify-between rounded-xl border border-canvas/15 bg-ink-deep p-6 hover:border-accent/60 transition-colors ${
+                project.featured && active === 'All' ? 'col-span-1 lg:col-span-2' : 'col-span-1'
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 pb-4 border-b border-canvas/10">
+                  <span className="text-xs font-medium text-accent">
+                    {project.role}
+                  </span>
+                  <span className="text-xs font-medium px-2.5 py-0.5 rounded-full bg-canvas/5 border border-canvas/15 text-canvas/80">
+                    {project.badge}
+                  </span>
+                </div>
+
+                <h3 className="mt-4 font-display font-normal text-2xl text-canvas leading-snug">
+                  {project.name}
+                </h3>
+
+                <p className="mt-3 text-sm text-canvas/75 leading-relaxed">
+                  {project.challenge}
+                </p>
               </div>
-            )}
 
-            <p className="reveal-text text-canvas/50 text-base font-mono mb-8 border-l-2 border-accent/40 pl-4 leading-relaxed delay-100">
-              Delivered under <span className="text-accent/90">FueInt Technologies</span> via{' '}
-              <span className="text-accent/90">Dialed In Design (Canada)</span>. All trademarks belong to their respective owners.
-            </p>
+              <div className="mt-6 pt-4 border-t border-canvas/10 space-y-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {project.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2.5 py-1 rounded-md bg-canvas/5 border border-canvas/10 text-canvas/75"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
-            {/* Bento Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-              {filtered
-                .filter((p) => p.group === 'FueInt')
-                .map((p, i) => (
-                  <BentoCard key={p.name} project={p} index={i + 1} groupLabel="FueInt" />
-                ))}
-            </div>
-          </div>
-        )}
-
-        {/* ── Independent Track Bento Grid ── */}
-        {showIndependent && (
-          <div>
-            {showBothGroups && (
-              <div className="reveal-text flex items-center gap-4 mb-4">
-                <span className="text-sm font-mono uppercase tracking-widest text-accent font-semibold">Independent Builds</span>
-                <div className="flex-1 h-px bg-canvas/10" />
+                {project.url && (
+                  <div>
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:text-canvas transition-colors"
+                    >
+                      {project.urlLabel ?? 'Visit Live Site'}
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
+                )}
               </div>
-            )}
-
-            <p className="reveal-text text-canvas/50 text-sm font-mono mb-8 border-l-2 border-accent/40 pl-4 leading-relaxed delay-100">
-              Client & utility builds shipped under{' '}
-              <a
-                href="https://gradiolex.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:underline font-semibold"
-              >
-                Gradiolex
-              </a>{' '}
-              — highlighting custom web development and Next.js architecture.
-            </p>
-
-            {/* Bento Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-              {filtered
-                .filter((p) => p.group === 'independent')
-                .map((p, i) => (
-                  <BentoCard key={p.name} project={p} index={i + 1} groupLabel="Independent" />
-                ))}
-            </div>
-          </div>
-        )}
-
+            </article>
+          ))}
+        </div>
       </div>
     </section>
-  )
-}
-
-const SUBGROUP_BADGE: Record<string, string> = {
-  client:   'Freelance Client',
-  utility:  'Utility Tool',
-  domestic: 'Internal Project',
-  global:   'Enterprise',
-  plugin:   'WP Plugin',
-}
-
-// Indexed by (card number % 4): cards 1, 2, 3, 4 → no delay, 100, 200, 300ms
-const STAGGER_DELAYS = ['delay-300', '', 'delay-100', 'delay-200']
-
-function BentoCard({ project, index, groupLabel }: { project: Project; index: number; groupLabel: string }) {
-  const badge = project.subGroup ? (SUBGROUP_BADGE[project.subGroup] ?? groupLabel) : groupLabel
-  // Featured cards widen only on the 4-column desktop grid; spanning on the 2-column tablet grid would leave holes
-  const isFeatured = !!project.featured
-  const staggerDelay = STAGGER_DELAYS[index % 4]
-
-  return (
-    <article
-      className={`reveal-text ${staggerDelay} group relative flex flex-col justify-between border border-canvas/10 hover:border-accent/50 bg-canvas/5 hover:bg-canvas/[0.08] transition-all duration-300 p-5 sm:p-6 rounded-2xl shadow-md ${
-        isFeatured ? 'col-span-1 lg:col-span-2 border-accent/20 bg-canvas/[0.07]' : 'col-span-1'
-      }`}
-    >
-      {/* Top Accent Hover Highlight Line */}
-      <div className="absolute top-0 left-6 right-6 h-[2px] bg-accent/0 group-hover:bg-accent transition-all duration-300 rounded-full" />
-
-      <div>
-        {/* Header Badges */}
-        <div className="reveal-text flex items-center justify-between mb-4 delay-100">
-          <span className="text-sm font-mono text-accent font-bold">
-            {String(index).padStart(2, '0')}
-          </span>
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm font-mono uppercase tracking-widest text-canvas/50 border border-canvas/10 group-hover:border-canvas/30 group-hover:text-canvas/80 px-2.5 py-0.5 rounded-md transition-colors">
-              {badge}
-            </span>
-          </div>
-        </div>
-
-        {/* Role Subtitle */}
-        <p className="reveal-text text-sm font-mono text-accent/80 uppercase tracking-widest mb-1.5 font-semibold delay-200">
-          {project.role}
-        </p>
-
-        {/* Project Title */}
-        <h3 className="reveal-text font-display font-normal text-2xl sm:text-3xl text-canvas leading-tight mb-3 group-hover:text-accent transition-colors duration-300 delay-300">
-          {project.name}
-        </h3>
-
-        {/* Description — Always Visible */}
-        <p className="reveal-text text-canvas/70 text-sm sm:text-base leading-relaxed mb-5 delay-400">
-          {project.challenge}
-        </p>
-      </div>
-
-      {/* Stack Tags */}
-      <div className="reveal-text flex flex-wrap gap-2 pt-4 border-t border-canvas/5 group-hover:border-canvas/10 transition-colors delay-500">
-        {project.stack.map((s) => (
-          <span
-            key={s}
-            className="text-sm font-mono text-canvas/60 bg-canvas/5 border border-canvas/10 px-2.5 py-0.5 rounded-md group-hover:border-canvas/20 group-hover:text-canvas/90 transition-colors"
-          >
-            {s}
-          </span>
-        ))}
-      </div>
-
-      {/* External Link */}
-      {project.url && (
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="reveal-text inline-flex items-center gap-1.5 mt-2.5 py-1.5 text-sm font-mono font-semibold text-accent hover:text-canvas transition-colors delay-600"
-        >
-          {project.urlLabel ?? (project.category === 'WP Plugin' || project.url.includes('wordpress.org') ? 'View on WordPress.org' : 'Visit Live Site')}
-          <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
-      )}
-    </article>
   )
 }
