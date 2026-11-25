@@ -37,17 +37,6 @@ const aiProviders = [
     ),
   },
   {
-    name: 'Perplexity',
-    href: `https://www.perplexity.ai/search/new?q=${askAiQuery}`,
-    title: 'Ask Perplexity about Abinesh Selvarasu',
-    ariaLabel: 'Ask Perplexity about Abinesh Selvarasu (opens in a new tab)',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path fill="#22B8CD" d="M19.785 0v7.272H22.5V17.62h-2.935V24l-7.037-6.194v6.145h-1.091v-6.152L4.392 24v-6.465H1.5V7.188h2.884V0l7.053 6.494V.19h1.09v6.49L19.786 0zm-7.257 9.044v7.319l5.946 5.234V14.44l-5.946-5.397zm-1.099-.08l-5.946 5.398v7.235l5.946-5.234V8.965zm8.136 7.58h1.844V8.349H13.46l6.105 5.54v2.655zm-8.982-8.28H2.59v8.195h1.8v-2.576l6.192-5.62zM5.475 2.476v4.71h5.115l-5.115-4.71zm13.219 0l-5.115 4.71h5.115v-4.71z" />
-      </svg>
-    ),
-  },
-  {
     name: 'Claude',
     href: `https://claude.ai/new?q=${askAiQuery}`,
     title: 'Ask Claude about Abinesh Selvarasu',
@@ -84,6 +73,17 @@ const aiProviders = [
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor" fillRule="evenodd">
         <path d="M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Perplexity',
+    href: `https://www.perplexity.ai/search/new?q=${askAiQuery}`,
+    title: 'Ask Perplexity about Abinesh Selvarasu',
+    ariaLabel: 'Ask Perplexity about Abinesh Selvarasu (opens in a new tab)',
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path fill="#22B8CD" d="M19.785 0v7.272H22.5V17.62h-2.935V24l-7.037-6.194v6.145h-1.091v-6.152L4.392 24v-6.465H1.5V7.188h2.884V0l7.053 6.494V.19h1.09v6.49L19.786 0zm-7.257 9.044v7.319l5.946 5.234V14.44l-5.946-5.397zm-1.099-.08l-5.946 5.398v7.235l5.946-5.234V8.965zm8.136 7.58h1.844V8.349H13.46l6.105 5.54v2.655zm-8.982-8.28H2.59v8.195h1.8v-2.576l6.192-5.62zM5.475 2.476v4.71h5.115l-5.115-4.71zm13.219 0l-5.115 4.71h5.115v-4.71z" />
       </svg>
     ),
   },
