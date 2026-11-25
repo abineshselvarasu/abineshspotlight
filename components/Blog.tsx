@@ -78,11 +78,11 @@ const articles: Article[] = [
 
 export default function Blog() {
   return (
-    <section id="blog" className="bg-paper text-ink py-16 md:py-24 border-b border-rule">
+    <section id="blog" className="bg-accent text-ink py-16 md:py-24 border-b border-ink/15">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between md:items-end mb-10 gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-forest mb-2">
+            <p className="text-xs font-semibold uppercase tracking-wider text-ink/80 mb-2">
               Publications
             </p>
             <h2 className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-ink leading-tight">
@@ -94,7 +94,7 @@ export default function Blog() {
             href="https://fueint.com/authors/abinesh-s"
             target="_blank"
             rel="noopener noreferrer nofollow"
-            className="group inline-flex items-center gap-1.5 text-sm font-semibold text-forest hover:text-ink transition-colors"
+            className="group inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-ink-deep border-b border-ink/30 hover:border-ink transition-colors pb-0.5"
           >
             View all articles
             <ForwardArrowIcon className="w-4 h-4" />
@@ -108,10 +108,10 @@ export default function Blog() {
               href={article.url}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="group flex flex-col h-full rounded-xl border border-rule bg-surface overflow-hidden hover:border-forest/50 transition-colors"
+              className="group flex flex-col h-full rounded-xl border border-ink/15 bg-surface overflow-hidden shadow-sm hover:shadow-lg hover:border-ink/40 transition-all"
               draggable={false}
             >
-              <div className="relative aspect-[16/9] w-full bg-paper overflow-hidden border-b border-rule">
+              <div className="relative aspect-[16/9] w-full bg-canvas overflow-hidden border-b border-ink/10">
                 <Image
                   src={article.image}
                   alt={article.title}
@@ -125,7 +125,7 @@ export default function Blog() {
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-forest/10 text-forest">
+                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-ink/10 text-ink">
                       {article.category}
                     </span>
                     <span className="text-xs text-mist">
@@ -138,7 +138,7 @@ export default function Blog() {
                   </h3>
                 </div>
 
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-forest">
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ink group-hover:text-forest">
                   Read article
                   <ForwardArrowIcon className="w-3.5 h-3.5" />
                 </span>

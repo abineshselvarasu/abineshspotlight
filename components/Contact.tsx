@@ -1,8 +1,13 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import ScrambleText from './ScrambleText'
 import ShootingStarsGrid from './ShootingStarsGrid'
-import { GitHubIcon, LinkedInIcon, MailIcon, WhatsAppIcon, WordPressIcon } from './icons'
+import { ForwardArrowIcon, GitHubIcon, LinkedInIcon, MailIcon, WhatsAppIcon, WordPressIcon } from './icons'
+
+const EMAIL_ADDRESS = 'mailtoabineshselva@gmail.com'
 
 const navLinks = [
   { label: 'Home',     href: '#hero' },
@@ -13,7 +18,7 @@ const navLinks = [
 ]
 
 const socials = [
-  { label: 'Email',         href: 'mailto:mailtoabineshselva@gmail.com',                Icon: MailIcon,      external: false, title: 'mailtoabineshselva@gmail.com' },
+  { label: 'Email',         href: `mailto:${EMAIL_ADDRESS}`,                             Icon: MailIcon,      external: false, title: EMAIL_ADDRESS },
   { label: 'WordPress.org', href: 'https://profiles.wordpress.org/abineshselvarasu/',   Icon: WordPressIcon, external: true },
   { label: 'LinkedIn',      href: 'https://linkedin.com/in/abineshselvarasu/',           Icon: LinkedInIcon,  external: true },
   { label: 'GitHub',        href: 'https://github.com/abineshselvarasu',                 Icon: GitHubIcon,    external: true },
@@ -90,125 +95,189 @@ const aiProviders = [
 ]
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL_ADDRESS)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Clipboard API unavailable in restricted contexts; mailto link remains active.
+    }
+  }
+
   return (
-    <footer id="contact" className="relative overflow-hidden bg-ink text-canvas border-t-4 border-accent">
-      <ShootingStarsGrid />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
-          {/* Identity & Contact */}
-          <div className="md:col-span-5 space-y-5">
-            <div>
-              <Image
-                src="/logo.png"
-                alt="Abinesh Selvarasu"
-                width={140}
-                height={42}
-                className="h-9 w-auto object-contain mb-4"
-              />
-              <h3 className="font-display text-2xl sm:text-3xl text-canvas font-normal">
-                <ScrambleText text="Abinesh Selvarasu" />
-              </h3>
-              <p className="text-sm text-accent font-medium mt-1">
-                Senior WordPress Developer · WordPress, Drupal, Craft CMS &amp; Next.js
-              </p>
-            </div>
+    <>
+      {/* Dedicated Contact CTA Section */}
+      <section id="contact" className="bg-surface text-ink py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="relative max-w-5xl lg:max-w-6xl mx-auto rounded-2xl border border-canvas/15 bg-ink text-canvas p-8 sm:p-12 lg:p-14 text-center shadow-[0_24px_60px_-15px_rgba(10,38,27,0.28)] overflow-hidden">
+            <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-accent via-accent/60 to-transparent" aria-hidden="true" />
 
-            <div className="space-y-2.5 text-sm sm:text-base text-canvas/80">
-              <p className="flex items-center gap-3">
-                <svg className="w-4 h-4 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
-                  <circle cx="12" cy="9" r="2.5" />
-                </svg>
-                <span>Coimbatore, Tamil Nadu, India</span>
-              </p>
-            </div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
+              Contact
+            </p>
+            <h2 className="font-display font-normal text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-canvas leading-tight lg:whitespace-nowrap">
+              Ready to bring your next web build to life.
+            </h2>
+            <div className="mt-4 mx-auto h-[3px] w-14 rounded-full bg-accent" aria-hidden="true" />
 
-            <div className="pt-2">
-              <Link
-                href="/resume"
-                prefetch={true}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-ink text-sm font-semibold hover:bg-canvas transition-colors"
+            <p className="mt-5 text-base text-canvas/80 leading-relaxed max-w-2xl mx-auto">
+              Available immediately for full-time WordPress &amp; CMS engineering roles and selective
+              freelance builds under{' '}
+              <a
+                href="https://gradiolex.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent hover:underline font-medium"
               >
-                View Resume
-              </Link>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <div className="md:col-span-3 md:col-start-7">
-            <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-5">
-              Navigation
+                Gradiolex
+              </a>
+              .
             </p>
-            <nav className="space-y-3" aria-label="Footer navigation">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="block text-sm sm:text-base text-canvas/80 hover:text-accent transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-          </div>
 
-          {/* Connect */}
-          <div className="md:col-span-3">
-            <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-5">
-              Connect
-            </p>
-            <div className="space-y-3">
-              {socials.map(({ label, href, Icon, external, title }) => (
-                <a
-                  key={label}
-                  href={href}
-                  {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                  title={title}
-                  aria-label={title ? `${label}: ${title}` : label}
-                  className="flex items-center gap-3 text-sm sm:text-base text-canvas/80 hover:text-accent transition-colors"
-                >
-                  <Icon className="w-4 h-4 text-accent shrink-0" />
-                  <span>{label}</span>
-                </a>
-              ))}
+            {/* Email CTA */}
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href={`mailto:${EMAIL_ADDRESS}`}
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-ink text-sm font-semibold hover:bg-canvas transition-colors"
+              >
+                <MailIcon className="w-4 h-4 shrink-0" />
+                Email me
+                <ForwardArrowIcon className="w-4 h-4" />
+              </a>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-canvas/20 bg-ink-deep/80 text-sm font-medium text-canvas/90 hover:border-accent/60 hover:text-accent transition-colors"
+              >
+                {copied ? 'Copied!' : 'Copy email'}
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Bottom Copyright Bar + Inline MySupportInfo-style Ask AI icons */}
-      <div className="relative z-10 border-t border-canvas/10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-canvas/75">
-          <p className="text-center sm:text-left">
-            © {new Date().getFullYear()} Abinesh Selvarasu ·{' '}
-            <a href="#hero" className="hover:text-accent transition-colors">
-              abineshspotlight.online
-            </a>
-          </p>
+      <footer className="relative overflow-hidden bg-ink text-canvas border-t-4 border-accent">
+        <ShootingStarsGrid />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-20">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
+            {/* Identity & Contact */}
+            <div className="md:col-span-5 space-y-5">
+              <div>
+                <Image
+                  src="/logo.png"
+                  alt="Abinesh Selvarasu"
+                  width={140}
+                  height={42}
+                  className="h-9 w-auto object-contain mb-4"
+                />
+                <h3 className="font-display text-2xl sm:text-3xl text-canvas font-normal">
+                  <ScrambleText text="Abinesh Selvarasu" />
+                </h3>
+                <p className="text-sm text-accent font-medium mt-1">
+                  Architecting high-performance CMS platforms &amp; modern web experiences.
+                </p>
+              </div>
 
-          <div className="flex items-center gap-2.5 flex-wrap justify-center sm:pr-14">
-            <span className="text-xs font-medium text-canvas/70">Ask AI about me</span>
-            <ul className="flex items-center gap-1.5 flex-wrap" role="list" aria-label="Ask AI about Abinesh Selvarasu">
-              {aiProviders.map((ai) => (
-                <li key={ai.name}>
+              <div className="space-y-2.5 text-sm sm:text-base text-canvas/80">
+                <p className="flex items-center gap-3">
+                  <svg className="w-4 h-4 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                    <circle cx="12" cy="9" r="2.5" />
+                  </svg>
+                  <span>Coimbatore, Tamil Nadu, India</span>
+                </p>
+              </div>
+
+              <div className="pt-2">
+                <Link
+                  href="/resume"
+                  prefetch={true}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-ink text-sm font-semibold hover:bg-canvas transition-colors"
+                >
+                  View Resume
+                </Link>
+              </div>
+            </div>
+
+            {/* Navigation */}
+            <div className="md:col-span-3 md:col-start-7">
+              <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-5">
+                Navigation
+              </p>
+              <nav className="space-y-3" aria-label="Footer navigation">
+                {navLinks.map((link) => (
                   <a
-                    href={ai.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={ai.title}
-                    aria-label={ai.ariaLabel}
-                    className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all duration-200 bg-white/[0.08] ring-1 ring-white/15 text-white hover:bg-white/20 hover:ring-accent/60 hover:-translate-y-0.5"
+                    key={link.label}
+                    href={link.href}
+                    className="block text-sm sm:text-base text-canvas/80 hover:text-accent transition-colors"
                   >
-                    <span className="scale-75 flex items-center justify-center">
-                      {ai.icon}
-                    </span>
+                    {link.label}
                   </a>
-                </li>
-              ))}
-            </ul>
+                ))}
+              </nav>
+            </div>
+
+            {/* Connect */}
+            <div className="md:col-span-3">
+              <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-5">
+                Connect
+              </p>
+              <div className="space-y-3">
+                {socials.map(({ label, href, Icon, external, title }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    title={title}
+                    aria-label={title ? `${label}: ${title}` : label}
+                    className="flex items-center gap-3 text-sm sm:text-base text-canvas/80 hover:text-accent transition-colors"
+                  >
+                    <Icon className="w-4 h-4 text-accent shrink-0" />
+                    <span>{label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
+
+        {/* Bottom Copyright Bar + Inline MySupportInfo-style Ask AI icons */}
+        <div className="relative z-10 border-t border-canvas/10">
+          <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-canvas/75">
+            <p className="text-center sm:text-left">
+              © {new Date().getFullYear()} Abinesh Selvarasu ·{' '}
+              <a href="#hero" className="hover:text-accent transition-colors">
+                abineshspotlight.online
+              </a>
+            </p>
+
+            <div className="flex items-center gap-2.5 flex-wrap justify-center sm:pr-14">
+              <span className="text-xs font-medium text-canvas/70">Ask AI about me</span>
+              <ul className="flex items-center gap-1.5 flex-wrap" role="list" aria-label="Ask AI about Abinesh Selvarasu">
+                {aiProviders.map((ai) => (
+                  <li key={ai.name}>
+                    <a
+                      href={ai.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={ai.title}
+                      aria-label={ai.ariaLabel}
+                      className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full transition-all duration-200 bg-white/[0.08] ring-1 ring-white/15 text-white hover:bg-white/20 hover:ring-accent/60 hover:-translate-y-0.5"
+                    >
+                      <span className="scale-75 flex items-center justify-center">
+                        {ai.icon}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
   )
 }

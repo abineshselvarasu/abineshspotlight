@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
+      images: [`${SITE_URL}/images/Abinesh-Selvarasu.jpg`],
     },
     {
       url: `${SITE_URL}/resume`,

@@ -9,7 +9,7 @@ import Contact from '@/components/Contact'
 import BackToTop from '@/components/BackToTop'
 import JsonLd from '@/components/JsonLd'
 import { SITE_URL } from '@/lib/site'
-import { ID, JOB_TITLE, PERSON_NAME, businessNode, jsonLdGraph, pageMetadata, personNode, websiteNode } from '@/lib/seo'
+import { ID, JOB_TITLE, PERSON_IMAGE, PERSON_NAME, businessNode, jsonLdGraph, pageMetadata, personNode, websiteNode } from '@/lib/seo'
 
 const TITLE = `${JOB_TITLE} | ${PERSON_NAME}`
 const DESCRIPTION =
@@ -33,6 +33,7 @@ const schema = jsonLdGraph(
       `Portfolio of ${PERSON_NAME} — ${JOB_TITLE}. Showcases WordPress plugins, independent web builds, technical capabilities, career background, and contact details.`,
     isPartOf: { '@id': ID.website },
     mainEntity: { '@id': ID.person },
+    primaryImageOfPage: { '@id': PERSON_IMAGE['@id'] },
     inLanguage: 'en-US',
     dateCreated: '2023-01-01T08:00:00+05:30',
     dateModified: new Date().toISOString(),

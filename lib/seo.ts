@@ -16,6 +16,16 @@ export const OG_IMAGE = {
   type: 'image/png',
 }
 
+export const PERSON_IMAGE = {
+  '@type': 'ImageObject',
+  '@id': `${SITE_URL}/#person-image`,
+  url: `${SITE_URL}/images/Abinesh-Selvarasu.jpg`,
+  contentUrl: `${SITE_URL}/images/Abinesh-Selvarasu.jpg`,
+  width: 1254,
+  height: 1254,
+  caption: `${PERSON_NAME} — ${JOB_TITLE}`,
+}
+
 // Indexable pages only — the 404 gets Next's automatic `noindex` with nothing conflicting
 export const INDEXABLE_ROBOTS: Metadata['robots'] = {
   index: true,
@@ -82,7 +92,7 @@ export const personNode = {
   name: PERSON_NAME,
   alternateName: 'Abinesh S',
   url: SITE_URL,
-  image: `${SITE_URL}${OG_IMAGE.url}`,
+  image: PERSON_IMAGE,
   email: 'mailtoabineshselva@gmail.com',
   telephone: '+919042972156',
   jobTitle: JOB_TITLE,

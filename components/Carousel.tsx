@@ -253,8 +253,8 @@ export default function Carousel({ children, label = 'Carousel' }: CarouselProps
                 <span
                   className={`block rounded-full transition-all duration-300 ${
                     isActive
-                      ? 'w-8 h-2 bg-forest'
-                      : 'w-2 h-2 bg-mist/35 group-hover/dot:bg-forest/70'
+                      ? 'w-8 h-2 bg-ink'
+                      : 'w-2 h-2 bg-ink/35 group-hover/dot:bg-ink/70'
                   }`}
                 />
               </button>
