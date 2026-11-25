@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-const UPPER_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ'
-const LOWER_CHARS = 'abcdefghijkmnopqrstuvwxyz0123456789'
+const UPPER_CHARS = 'ABCDEFGHJKLNPQRSTUVXYZ'
+const LOWER_CHARS = 'acdefgijnorstuvxyz'
 
 interface ScrambleTextProps {
   text: string
@@ -14,7 +14,7 @@ interface ScrambleTextProps {
  * Plays a single decode animation the first time the text enters the viewport.
  * Respects `prefers-reduced-motion` and avoids re-triggering on hover.
  */
-export default function ScrambleText({ text, speed = 0.4 }: ScrambleTextProps) {
+export default function ScrambleText({ text, speed = 0.25 }: ScrambleTextProps) {
   const [displayText, setDisplayText] = useState(text)
   const hostRef = useRef<HTMLSpanElement>(null)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -58,7 +58,7 @@ export default function ScrambleText({ text, speed = 0.4 }: ScrambleTextProps) {
         setDisplayText(text)
       }
       iteration += speed
-    }, 38)
+    }, 80)
   }, [clearTimer, speed, text])
 
   useEffect(() => {
