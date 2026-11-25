@@ -32,13 +32,13 @@ export default function Hero() {
 
           <h1 className="font-display font-normal text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] text-canvas tracking-tight leading-[1.08]">
             <span className="inline-block md:whitespace-nowrap">
-              <ScrambleText text="Senior WordPress Developer" />
+              Senior <ScrambleText text="WordPress" speed={0.125} /> Developer
             </span>{' '}
             <span className="block text-accent">built for speed &amp; clarity.</span>
           </h1>
 
           <p className="mt-6 text-base sm:text-lg text-canvas/80 leading-relaxed max-w-2xl mx-auto">
-            I&apos;m <strong className="text-canvas font-semibold"><ScrambleText text="Abinesh Selvarasu" /></strong> — 3 years 10 months of experience architecting
+            I&apos;m <strong className="text-canvas font-semibold">Abinesh Selvarasu</strong> — 3 years 10 months of experience architecting
             custom WordPress themes, plugins, Drupal, Craft CMS, and Next.js sites for enterprise SaaS,
             nonprofit organizations, and growing businesses.
           </p>
