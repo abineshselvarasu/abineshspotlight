@@ -93,9 +93,9 @@ export default function ResumePage() {
           <ResumeActions />
 
           {/* Main Resume Sheet (Screen: dark card layout; Print: clean 1-column 2-page ATS format) */}
-          <main className="bg-ink-deep border border-canvas/15 rounded-2xl p-5 sm:p-8 lg:p-12 shadow-xl text-base leading-relaxed print:bg-white print:text-black print:border-none print:p-0 print:shadow-none print:text-[11px] print:leading-[1.42]">
+          <main className="bg-ink-deep border border-canvas/15 rounded-2xl p-5 sm:p-8 lg:p-12 shadow-xl text-base leading-relaxed print:bg-white print:text-black print:border-none print:p-0 print:shadow-none print:text-base print:leading-[1.45]">
             {/* ── HEADER ── */}
-            <header className="border-b border-canvas/15 pb-6 sm:pb-8 mb-6 sm:mb-8 print:border-neutral-300 print:pb-2.5 print:mb-3">
+            <header className="border-b border-canvas/15 pb-6 sm:pb-8 mb-6 sm:mb-8 print:border-neutral-300 print:pb-3 print:mb-4">
               <div className="flex flex-col md:flex-row print:flex-row md:items-end print:items-end justify-between gap-5 sm:gap-6 print:gap-4">
                 <div>
                   <span className="text-xs uppercase tracking-wider text-accent font-semibold block mb-1.5 print:hidden">
@@ -104,13 +104,13 @@ export default function ResumePage() {
                   <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-normal text-canvas tracking-tight print:text-black print:text-3xl print:font-bold">
                     Abinesh <span className="text-accent print:text-black font-semibold">Selvarasu</span>
                   </h1>
-                  <p className="text-sm sm:text-base lg:text-lg text-canvas/85 mt-1.5 font-medium print:text-neutral-800 print:text-xs print:mt-0.5">
+                  <p className="text-base lg:text-lg text-canvas/85 mt-1.5 font-medium print:text-neutral-800 print:text-sm print:mt-1">
                     WordPress Developer · WordPress, Drupal, Craft CMS &amp; React / Next.js
                   </p>
                 </div>
 
                 {/* Contact Details */}
-                <div className="text-sm sm:text-base space-y-1.5 text-canvas/75 md:text-right print:text-right print:text-neutral-700 print:text-[10.5px] print:space-y-0.5">
+                <div className="text-base space-y-1.5 text-canvas/75 md:text-right print:text-right print:text-neutral-700 print:text-sm print:space-y-0.5">
                   <p>Coimbatore, Tamil Nadu, India</p>
                   <p>
                     <a href="tel:+919042972156" className="hover:text-accent transition-colors print:text-black">
@@ -148,18 +148,18 @@ export default function ResumePage() {
             </header>
 
             {/* ── PROFESSIONAL SUMMARY ── */}
-            <section className="mb-8 sm:mb-10 print:mb-3">
-              <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold mb-3 print:mb-1 print:text-xs print:text-black">
+            <section className="mb-8 sm:mb-10 print:mb-4">
+              <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold mb-3 print:mb-1.5 print:text-sm print:text-black">
                 Professional Summary
               </h2>
-              <p className="text-canvas/85 text-base leading-relaxed print:text-neutral-800 print:text-[11px] print:leading-[1.42]">
+              <p className="text-canvas/85 text-base leading-relaxed print:text-neutral-800 print:text-base print:leading-[1.45]">
                 WordPress Developer with <strong>3 years 10 months</strong> of experience delivering production websites across WordPress, Drupal, Craft CMS, and React/Next.js for international enterprise SaaS, nonprofit organizations, and independent businesses. Experienced in PHP 8 upgrades, WordPress theme and plugin architecture, Gutenberg blocks, ACF Pro modular builds, REST API integrations, and Agile/Scrum delivery. Measurable impact across 20+ enterprise sites: <strong>−30% LCP</strong>, <strong>+15% organic CTR</strong>, resolved critical sitemap indexing bugs across <strong>1,700+ URLs</strong>, and scaled integration UIs from 16 to 57+ items with zero regressions.
               </p>
             </section>
 
             {/* ── TECHNICAL SKILLS (Screen: 2-col visual cards; Print: 1-col linear ATS list) ── */}
-            <section className="mb-8 sm:mb-10 print:mb-3">
-              <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold mb-3.5 print:mb-1.5 print:text-xs print:text-black">
+            <section className="mb-8 sm:mb-10 print:mb-4">
+              <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold mb-3.5 print:mb-2 print:text-sm print:text-black">
                 Technical Competencies
               </h2>
 
@@ -185,7 +185,7 @@ export default function ResumePage() {
               </div>
 
               {/* Single-column linear text for ATS PDF parsing */}
-              <ul className="hidden print:block space-y-1 text-[11px] text-neutral-800 leading-[1.4]">
+              <ul className="hidden print:block space-y-1.5 text-base text-neutral-800 leading-[1.45]">
                 {skills.map((group) => (
                   <li key={group.category}>
                     <strong className="text-black">{group.category}:</strong> {group.items.join(', ')}
@@ -195,19 +195,19 @@ export default function ResumePage() {
             </section>
 
             {/* ── WORK EXPERIENCE ── */}
-            <section className="mb-8 sm:mb-10 print:mb-3">
-              <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold mb-4 print:mb-1.5 print:text-xs print:text-black">
+            <section className="mb-8 sm:mb-10 print:mb-4">
+              <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold mb-4 print:mb-2 print:text-sm print:text-black">
                 Professional Experience
               </h2>
 
-              <div className="space-y-6 sm:space-y-8 print:space-y-3">
+              <div className="space-y-6 sm:space-y-8 print:space-y-4">
                 {/* FueInt Technologies */}
                 <div className="border-l-2 border-accent/40 pl-4 sm:pl-6 relative print:border-none print:pl-0">
-                  <div className="flex flex-col sm:flex-row print:flex-row sm:items-baseline print:items-baseline justify-between gap-1 mb-1 print:mb-0.5">
-                    <h3 className="font-display text-xl sm:text-2xl text-canvas font-normal print:text-black print:text-sm print:font-bold">
+                  <div className="flex flex-col sm:flex-row print:flex-row sm:items-baseline print:items-baseline justify-between gap-1 mb-1 print:mb-1">
+                    <h3 className="font-display text-xl sm:text-2xl text-canvas font-normal print:text-black print:text-base print:font-bold">
                       Engineer – Web Apps <span className="hidden print:inline font-normal text-neutral-700">· FueInt Technologies, Coimbatore</span>
                     </h3>
-                    <span className="text-xs text-accent font-semibold print:text-neutral-700 print:text-[10.5px]">
+                    <span className="text-xs text-accent font-semibold print:text-neutral-700 print:text-sm">
                       July 2022 – May 2026 (Full-time)
                     </span>
                   </div>
@@ -216,7 +216,7 @@ export default function ResumePage() {
                     FueInt Technologies · Coimbatore, Tamil Nadu, India
                   </p>
 
-                  <ul className="space-y-2 text-base text-canvas/85 leading-relaxed list-disc list-outside ml-4 print:text-[11px] print:text-neutral-800 print:space-y-1 print:leading-[1.38]">
+                  <ul className="space-y-2 text-base text-canvas/85 leading-relaxed list-disc list-outside ml-4 print:text-base print:text-neutral-800 print:space-y-1.5 print:leading-[1.45]">
                     <li>
                       <strong>WordPress Themes, ACF Pro &amp; Gutenberg:</strong> Built custom themes, plugins, reusable React/PHP Gutenberg block suites (Data, CTA, FAQ, Video Popup), and 50+ ACF Pro modular layouts across <strong>20+ international enterprise SaaS and nonprofit sites</strong>, reducing repeat-project build time by ~25%.
                     </li>
@@ -234,11 +234,11 @@ export default function ResumePage() {
 
                 {/* Freelance / Gradiolex */}
                 <div className="border-l-2 border-accent/40 pl-4 sm:pl-6 relative print:border-none print:pl-0 print:break-inside-avoid">
-                  <div className="flex flex-col sm:flex-row print:flex-row sm:items-baseline print:items-baseline justify-between gap-1 mb-1 print:mb-0.5">
-                    <h3 className="font-display text-xl sm:text-2xl text-canvas font-normal print:text-black print:text-sm print:font-bold">
+                  <div className="flex flex-col sm:flex-row print:flex-row sm:items-baseline print:items-baseline justify-between gap-1 mb-1 print:mb-1">
+                    <h3 className="font-display text-xl sm:text-2xl text-canvas font-normal print:text-black print:text-base print:font-bold">
                       Freelance Web Developer <span className="hidden print:inline font-normal text-neutral-700">· Gradiolex</span>
                     </h3>
-                    <span className="text-xs text-accent font-semibold print:text-neutral-700 print:text-[10.5px]">
+                    <span className="text-xs text-accent font-semibold print:text-neutral-700 print:text-sm">
                       May 2025 – Present
                     </span>
                   </div>
@@ -247,7 +247,7 @@ export default function ResumePage() {
                     Gradiolex · Independent Client &amp; Utility Engineering
                   </p>
 
-                  <ul className="space-y-1.5 text-base text-canvas/85 leading-relaxed list-disc list-outside ml-4 print:text-[11px] print:text-neutral-800 print:space-y-0.5 print:leading-[1.38]">
+                  <ul className="space-y-1.5 text-base text-canvas/85 leading-relaxed list-disc list-outside ml-4 print:text-base print:text-neutral-800 print:space-y-1 print:leading-[1.45]">
                     <li><strong>NILAM Ventures:</strong> WordPress platform for an aquaculture &amp; farmtech advisory firm (Kadence, ACF Pro, Fluent Forms, WhatsApp lead routing on Pantheon).</li>
                     <li><strong>Card About Me:</strong> Next.js, React &amp; TypeScript link-in-bio SaaS with appointment bookings, WhatsApp chat, and 0%-commission direct UPI payments (<a href="https://www.cardabout.me/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline print:text-black">cardabout.me</a>).</li>
                     <li><strong>MySupportInfo:</strong> Next.js, React &amp; TypeScript client-side device diagnostics tool inspecting browser, OS, WebRTC leaks, and bufferbloat latency (<a href="https://mysupportinfo.com/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline print:text-black">mysupportinfo.com</a>).</li>
@@ -259,9 +259,9 @@ export default function ResumePage() {
             </section>
 
             {/* ── PUBLISHED WORDPRESS PLUGINS ── */}
-            <section className="mb-8 sm:mb-10 print:mb-3 print:break-inside-avoid">
-              <div className="flex items-center justify-between mb-3.5 print:mb-1">
-                <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold print:text-xs print:text-black">
+            <section className="mb-8 sm:mb-10 print:mb-4 print:break-inside-avoid">
+              <div className="flex items-center justify-between mb-3.5 print:mb-1.5">
+                <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold print:text-sm print:text-black">
                   Published WordPress.org Plugins
                 </h2>
                 <span className="text-xs text-canvas/60 hidden xs:inline print:hidden">Official Plugin Author</span>
@@ -279,7 +279,7 @@ export default function ResumePage() {
                         Live on WP.org
                       </span>
                     </div>
-                    <p className="text-sm text-accent/90 font-medium mb-2 leading-snug">{plugin.tagline}</p>
+                    <p className="text-base text-accent/90 font-medium mb-2 leading-snug">{plugin.tagline}</p>
                     <p className="text-base text-canvas/75 leading-relaxed mb-4">{plugin.description}</p>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2.5 border-t border-canvas/10">
                       <div className="flex flex-wrap gap-1.5">
@@ -304,7 +304,7 @@ export default function ResumePage() {
               </div>
 
               {/* Print: compact 1-column ATS list */}
-              <ul className="hidden print:block space-y-1 text-[11px] text-neutral-800 leading-[1.38] list-disc list-outside ml-4">
+              <ul className="hidden print:block space-y-1.5 text-base text-neutral-800 leading-[1.45] list-disc list-outside ml-4">
                 {plugins.map((plugin) => (
                   <li key={plugin.name}>
                     <strong className="text-black">{plugin.name}:</strong> {plugin.description} ({plugin.url})
@@ -314,17 +314,17 @@ export default function ResumePage() {
             </section>
 
             {/* ── EDUCATION ── */}
-            <section className="border-t border-canvas/15 pt-6 sm:pt-8 print:border-neutral-300 print:pt-2.5 print:break-inside-avoid">
-              <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold mb-3 print:mb-1 print:text-xs print:text-black">
+            <section className="border-t border-canvas/15 pt-6 sm:pt-8 print:border-neutral-300 print:pt-3 print:break-inside-avoid">
+              <h2 className="text-xs sm:text-sm uppercase tracking-wider text-accent font-bold mb-3 print:mb-1.5 print:text-sm print:text-black">
                 Education
               </h2>
               <div className="flex flex-col sm:flex-row print:flex-row sm:items-baseline print:items-baseline justify-between gap-1">
                 <div>
-                  <h3 className="font-display text-lg sm:text-xl text-canvas font-normal print:text-black print:text-xs print:font-bold">
+                  <h3 className="font-display text-lg sm:text-xl text-canvas font-normal print:text-black print:text-base print:font-bold">
                     B.E. Computer Science &amp; Engineering · <span className="font-normal">Vidyaa Vikas College of Engineering (Anna University)</span>
                   </h3>
                 </div>
-                <div className="text-sm sm:text-base text-accent font-semibold sm:text-right print:text-neutral-700 print:text-[10.5px]">
+                <div className="text-base text-accent font-semibold sm:text-right print:text-neutral-700 print:text-sm shrink-0 print:whitespace-nowrap">
                   2016 – 2020 · CGPA: 7.04 / 10
                 </div>
               </div>
