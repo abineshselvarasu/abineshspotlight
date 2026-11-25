@@ -207,10 +207,6 @@ export default function Skills() {
           {/* Left Column: Daily Stack & Platforms */}
           <div className="relative rounded-2xl border border-forest/20 bg-gradient-to-br from-[#F1F9F4] via-surface to-[#FDF8EB] p-6 sm:p-7 overflow-hidden shadow-sm flex flex-col">
             <div
-              className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-forest via-emerald-500 to-accent"
-              aria-hidden="true"
-            />
-            <div
               className="pointer-events-none absolute -top-14 -right-14 w-44 h-44 rounded-full bg-emerald-400/15 blur-2xl"
               aria-hidden="true"
             />
@@ -243,14 +239,15 @@ export default function Skills() {
                 <ToolBadge key={tool.name} tool={tool} variant="light" />
               ))}
             </div>
+
+            <div
+              className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-forest via-emerald-500 to-accent"
+              aria-hidden="true"
+            />
           </div>
 
           {/* Right Column: Hosting, DevOps & Integrations */}
           <div className="relative rounded-2xl border border-forest/60 bg-gradient-to-br from-ink via-ink-deep to-[#082117] text-canvas p-6 sm:p-7 overflow-hidden shadow-md flex flex-col">
-            <div
-              className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-accent via-[#E9C985] to-emerald-400"
-              aria-hidden="true"
-            />
             <div
               className="pointer-events-none absolute -top-14 -right-14 w-44 h-44 rounded-full bg-accent/15 blur-2xl"
               aria-hidden="true"
@@ -285,6 +282,11 @@ export default function Skills() {
                 <ToolBadge key={tool.name} tool={tool} variant="dark" />
               ))}
             </div>
+
+            <div
+              className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-accent via-[#E9C985] to-emerald-400"
+              aria-hidden="true"
+            />
           </div>
         </div>
       </div>
