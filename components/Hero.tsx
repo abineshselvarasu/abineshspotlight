@@ -32,9 +32,7 @@ export default function Hero() {
 
           <h1 className="font-display font-normal text-4xl sm:text-5xl md:text-6xl lg:text-[64px] text-canvas tracking-tight leading-[1.08]">
             <ScrambleText text="Senior WordPress Developer" />{' '}
-            <span className="block text-accent">
-              <ScrambleText text="built for speed & clarity." speed={0.75} />
-            </span>
+            <span className="block text-accent">built for speed &amp; clarity.</span>
           </h1>
 
           <p className="mt-6 text-base sm:text-lg text-canvas/80 leading-relaxed max-w-2xl mx-auto">

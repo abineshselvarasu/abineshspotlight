@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 const skills = [
   {
     category: 'WordPress & CMS Architecture',
-    items: ['Custom Themes & Plugins', 'Gutenberg Blocks (React & PHP)', 'ACF Pro (Modular Layouts)', 'Custom Post Types & Taxonomies', 'Hooks & Filters', 'WooCommerce', 'Multisite', 'Drupal 7/9/10 (Custom Modules, Twig & Views)', 'Craft CMS'],
+    items: ['Custom Themes & Plugins', 'Gutenberg Blocks (React & PHP)', 'ACF Pro (Modular Layouts)', 'Custom Post Types & Taxonomies', 'Hooks & Filters', 'Multisite', 'Drupal 7/9/10 (Upgrades, Security Patching & Twig)', 'Craft CMS'],
   },
   {
     category: 'Languages & Frontend',

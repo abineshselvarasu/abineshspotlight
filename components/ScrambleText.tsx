@@ -14,7 +14,7 @@ interface ScrambleTextProps {
  * Plays a single decode animation the first time the text enters the viewport.
  * Respects `prefers-reduced-motion` and avoids re-triggering on hover.
  */
-export default function ScrambleText({ text, speed = 0.65 }: ScrambleTextProps) {
+export default function ScrambleText({ text, speed = 0.4 }: ScrambleTextProps) {
   const [displayText, setDisplayText] = useState(text)
   const hostRef = useRef<HTMLSpanElement>(null)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -58,7 +58,7 @@ export default function ScrambleText({ text, speed = 0.65 }: ScrambleTextProps) 
         setDisplayText(text)
       }
       iteration += speed
-    }, 28)
+    }, 38)
   }, [clearTimer, speed, text])
 
   useEffect(() => {

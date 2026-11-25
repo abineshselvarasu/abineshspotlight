@@ -53,7 +53,7 @@ Builds and delivers end-to-end WordPress platforms, WordPress.org plugins, and R
 ## Core Technical Skills
 
 - **PHP & APIs:** PHP 8.x (OOP / MVC), WP REST API, Webhook & CRM Wiring, MySQL, Node.js
-- **WordPress:** Custom Themes & Plugins, Gutenberg Blocks (React & PHP), ACF Pro, CPT, Hooks & Filters, WooCommerce, Multisite, Headless WordPress
+- **WordPress:** Custom Themes & Plugins, Gutenberg Blocks (React & PHP), ACF Pro, CPT, Hooks & Filters, Multisite, Headless WordPress
 - **Drupal & Craft CMS:** Drupal 7/9/10 Upgrades & Security Patching, Twig Templates, Craft CMS Maintenance, WCAG Accessibility
 - **Frontend & Mobile:** JavaScript (ES6+), TypeScript, React 19, Next.js 15 App Router, Expo / React Native, Tailwind CSS, SCSS/CSS3, jQuery
 - **Servers, DevOps & Hosting:** Agile/Scrum Delivery, Git, GitHub Actions CI/CD, SSH, Ubuntu Server, Virtualmin, CapRover, Docker, Malware & Incident Recovery, Pantheon, WP Engine, Kinsta, Servd, Vercel

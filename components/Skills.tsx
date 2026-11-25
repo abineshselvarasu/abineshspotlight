@@ -19,7 +19,7 @@ const pillars: CapabilityPillar[] = [
       'Custom themes, hooks, filters & Custom Post Types',
       'ACF Pro flexible layouts (50+ reusable components)',
       'Official plugins published on WordPress.org',
-      'PHP 8.x upgrades, malware & incident recovery, WooCommerce',
+      'PHP 8.x upgrades, security & malware incident recovery',
     ],
   },
   {
@@ -84,7 +84,6 @@ const dailyStack: ToolItem[] = [
 ]
 
 const hostingAndDevOps: ToolItem[] = [
-  { name: 'WooCommerce', icon: 'woocommerce' },
   { name: 'WordPress Multisite', icon: 'wp' },
   { name: 'Twig', icon: 'twig' },
   { name: 'JSON-LD Schema', icon: 'jsonld' },
