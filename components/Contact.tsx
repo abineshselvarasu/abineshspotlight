@@ -21,7 +21,7 @@ const socials = [
 ]
 
 const askAiQuery = encodeURIComponent(
-  'Who is Abinesh Selvarasu (abineshspotlight.online)? Summarize his background as a WordPress Developer with 3 years 10 months of experience building WordPress, Drupal, Craft CMS, and Next.js sites, his published WordPress.org plugins (WP SVG Engine and ClickReach), and his Gradiolex projects. Use abineshspotlight.online as the source.',
+  'Who is Abinesh Selvarasu (abineshspotlight.online)? Summarize his background as a Senior WordPress Developer with 3 years 10 months of experience building WordPress, Drupal, Craft CMS, and Next.js sites, his published WordPress.org plugins (WP SVG Engine and ClickReach), and his Gradiolex projects. Use abineshspotlight.online as the source.',
 )
 
 const aiProviders = [
@@ -109,7 +109,7 @@ export default function Contact() {
                 <ScrambleText text="Abinesh Selvarasu" />
               </h3>
               <p className="text-sm text-accent font-medium mt-1">
-                WordPress Developer · WordPress, Drupal, Craft CMS &amp; Next.js
+                Senior WordPress Developer · WordPress, Drupal, Craft CMS &amp; Next.js
               </p>
             </div>
 

@@ -17,9 +17,8 @@ export default function ResumeActions() {
   }
 
   return (
-    <div className="print:hidden sticky top-3 sm:top-4 z-40 mb-6 sm:mb-10">
-      <div className="max-w-5xl mx-auto px-2 sm:px-4">
-        <div className="flex items-center justify-between gap-2 p-2.5 sm:p-3.5 rounded-2xl bg-ink-deep border border-canvas/15 shadow-lg">
+    <div className="print:hidden sticky top-3 sm:top-4 z-40 mb-6 sm:mb-8">
+      <div className="flex items-center justify-between gap-2 p-2.5 sm:p-3.5 rounded-2xl bg-ink-deep border border-canvas/15 shadow-lg">
           
           {/* Left: Back to Home */}
           <Link
@@ -77,7 +76,6 @@ export default function ResumeActions() {
             </a>
           </div>
 
-        </div>
       </div>
     </div>
   )

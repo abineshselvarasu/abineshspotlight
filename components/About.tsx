@@ -61,7 +61,7 @@ export default function About() {
 
             <div className="space-y-4 text-base text-mist leading-relaxed">
               <p>
-                I&apos;m Abinesh Selvarasu — a <strong className="text-ink font-semibold">WordPress Developer</strong> with
+                I&apos;m Abinesh Selvarasu — a <strong className="text-ink font-semibold">Senior WordPress Developer</strong> with
                 3 years 10 months of production experience across WordPress, Drupal, Craft CMS, and modern React/Next.js frontends.
               </p>
               <p>

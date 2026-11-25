@@ -13,7 +13,7 @@ import { ID, JOB_TITLE, PERSON_NAME, businessNode, jsonLdGraph, pageMetadata, pe
 
 const TITLE = `${JOB_TITLE} | ${PERSON_NAME}`
 const DESCRIPTION =
-  'WordPress Developer with 3 years 10 months of experience building production WordPress, Drupal, Craft CMS, and Next.js websites for enterprise SaaS and nonprofit teams.'
+  'Senior WordPress Developer with 3 years 10 months of experience building production WordPress, Drupal, Craft CMS, and Next.js websites for enterprise SaaS and nonprofit teams.'
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },

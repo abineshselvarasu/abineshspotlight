@@ -6,9 +6,9 @@ import { ForwardArrowIcon } from '@/components/icons'
 import { SITE_URL } from '@/lib/site'
 import { ID, PERSON_NAME, breadcrumbNode, jsonLdGraph, pageMetadata, personNode, websiteNode } from '@/lib/seo'
 
-const TITLE = 'Resume – WordPress Developer'
+const TITLE = 'Resume – Senior WordPress Developer'
 const DESCRIPTION =
-  'Resume of Abinesh Selvarasu, WordPress Developer — 3 years 10 months delivering enterprise WordPress, Drupal, Craft CMS, and React/Next.js websites.'
+  'Resume of Abinesh Selvarasu, Senior WordPress Developer — 3 years 10 months delivering enterprise WordPress, Drupal, Craft CMS, and React/Next.js websites.'
 
 export const metadata: Metadata = {
   // Template appends "| Abinesh Selvarasu"
@@ -87,8 +87,8 @@ export default function ResumePage() {
     <>
       <JsonLd data={schema} />
 
-      <div className="relative min-h-screen bg-ink text-canvas py-6 sm:py-10 lg:py-12 px-3 sm:px-6 lg:px-8 overflow-x-clip print:bg-white print:text-black print:py-0 print:px-0 print:min-h-0">
-        <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative min-h-screen bg-ink text-canvas py-6 sm:py-10 lg:py-12 overflow-x-clip print:bg-white print:text-black print:py-0 print:min-h-0">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 print:px-0 print:max-w-none">
           {/* Floating Action Bar */}
           <ResumeActions />
 
@@ -105,7 +105,7 @@ export default function ResumePage() {
                     Abinesh <span className="text-accent print:text-black font-semibold">Selvarasu</span>
                   </h1>
                   <p className="text-base lg:text-lg text-canvas/85 mt-1.5 font-medium print:text-neutral-800 print:text-sm print:mt-1">
-                    WordPress Developer · WordPress, Drupal, Craft CMS &amp; React / Next.js
+                    Senior WordPress Developer · WordPress, Drupal, Craft CMS &amp; React / Next.js
                   </p>
                 </div>
 
@@ -153,7 +153,7 @@ export default function ResumePage() {
                 Professional Summary
               </h2>
               <p className="text-canvas/85 text-base leading-relaxed print:text-neutral-800 print:text-base print:leading-[1.45]">
-                WordPress Developer with <strong>3 years 10 months</strong> of experience delivering production websites across WordPress, Drupal, Craft CMS, and React/Next.js for international enterprise SaaS, nonprofit organizations, and independent businesses. Experienced in PHP 8 upgrades, WordPress theme and plugin architecture, Gutenberg blocks, ACF Pro modular builds, REST API integrations, and Agile/Scrum delivery. Measurable impact across 20+ enterprise sites: <strong>−30% LCP</strong>, <strong>+15% organic CTR</strong>, resolved critical sitemap indexing bugs across <strong>1,700+ URLs</strong>, and scaled integration UIs from 16 to 57+ items with zero regressions.
+                Senior WordPress Developer with <strong>3 years 10 months</strong> of experience delivering production websites across WordPress, Drupal, Craft CMS, and React/Next.js for international enterprise SaaS, nonprofit organizations, and independent businesses. Experienced in PHP 8 upgrades, WordPress theme and plugin architecture, Gutenberg blocks, ACF Pro modular builds, REST API integrations, and Agile/Scrum delivery. Measurable impact across 20+ enterprise sites: <strong>−30% LCP</strong>, <strong>+15% organic CTR</strong>, resolved critical sitemap indexing bugs across <strong>1,700+ URLs</strong>, and scaled integration UIs from 16 to 57+ items with zero regressions.
               </p>
             </section>
 

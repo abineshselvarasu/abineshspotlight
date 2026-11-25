@@ -6,7 +6,7 @@ import { SITE_URL, SOCIAL_PROFILES } from './site'
 // per route, so each page builds its own from these helpers.
 
 export const PERSON_NAME = 'Abinesh Selvarasu'
-export const JOB_TITLE = 'WordPress Developer'
+export const JOB_TITLE = 'Senior WordPress Developer'
 export const SITE_NAME = `${PERSON_NAME} — ${JOB_TITLE}`
 export const OG_IMAGE = {
   url: '/og-image.png',
@@ -87,7 +87,7 @@ export const personNode = {
   telephone: '+919042972156',
   jobTitle: JOB_TITLE,
   description:
-    'WordPress Developer with 3 years 10 months of experience building production websites across WordPress, Drupal, Craft CMS, and Next.js for enterprise SaaS, nonprofit organizations, and independent businesses.',
+    'Senior WordPress Developer with 3 years 10 months of experience building production websites across WordPress, Drupal, Craft CMS, and Next.js for enterprise SaaS, nonprofit organizations, and independent businesses.',
   knowsAbout: [
     'WordPress Development',
     'WordPress Plugin Development',
