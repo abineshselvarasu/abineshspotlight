@@ -1,6 +1,7 @@
 'use client'
 
 import { useId, useState } from 'react'
+import SectionReveal, { RevealItem } from './SectionReveal'
 import { ForwardArrowIcon } from './icons'
 
 type ProjectCategory = 'WordPress' | 'WP Plugin' | 'Next.js'
@@ -235,19 +236,20 @@ export default function Projects() {
 
   return (
     <section id="projects" className="bg-ink text-canvas py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-6">
+      <SectionReveal>
+        <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-8">
           <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
+            <RevealItem index={0} as="p" className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
               Selected Work
-            </p>
-            <h2 className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-canvas leading-tight">
+            </RevealItem>
+            <RevealItem index={1} as="h2" className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-canvas leading-tight">
               Independent builds &amp; published plugins.
-            </h2>
+            </RevealItem>
             <div className="mt-4 h-[3px] w-14 rounded-full bg-accent" aria-hidden="true" />
           </div>
-          <p className="text-sm text-canvas/75 max-w-sm leading-relaxed">
+          <RevealItem index={2} as="p" className="text-sm text-canvas/75 max-w-sm leading-relaxed">
             Client websites, utility products, and official WordPress.org plugins shipped under{' '}
             <a
               href="https://gradiolex.vercel.app/"
@@ -258,21 +260,22 @@ export default function Projects() {
               Gradiolex
             </a>
             .
-          </p>
+          </RevealItem>
         </div>
 
         {/* NDA-safe enterprise context note */}
-        <div className="mb-8 rounded-xl border border-accent/25 bg-ink-deep/90 px-5 py-4 text-sm text-canvas/80 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <RevealItem index={3} className="mb-8 rounded-xl border border-accent/25 bg-ink-deep/90 px-5 py-4 text-sm text-canvas/80 leading-relaxed flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <p>
             <span className="font-semibold text-accent">Enterprise Track Note:</span>{' '}
             Previously delivered 20+ production WordPress, Drupal, and Craft CMS builds for
             enterprise SaaS and nonprofit organizations (2022–2026). Agency client brands are
             omitted here to respect client confidentiality.
           </p>
-        </div>
+        </RevealItem>
 
         {/* Interactive Filter Tabs */}
-        <div
+        <RevealItem
+          index={4}
           className="flex flex-wrap items-center gap-2.5 mb-10"
           role="group"
           aria-label="Filter projects by technology"
@@ -302,11 +305,12 @@ export default function Projects() {
               </button>
             )
           })}
-        </div>
+        </RevealItem>
 
         {/* Featured Paired Showcase Panel (Elastic Path paired showcase pattern) */}
         {featuredProject && (
-          <article className="mb-8 rounded-2xl border border-accent/35 bg-ink-deep overflow-hidden shadow-lg">
+          <RevealItem index={5}>
+            <article className="mb-8 rounded-2xl border border-accent/35 bg-ink-deep overflow-hidden shadow-lg">
             <div className="h-[3px] w-full bg-gradient-to-r from-accent via-accent/60 to-transparent" />
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-6 sm:p-8 lg:p-10 items-center">
               {/* Left Narrative Column */}
@@ -429,15 +433,16 @@ export default function Projects() {
               </div>
             </div>
           </article>
+        </RevealItem>
         )}
 
         {/* Modular Bento Case-Study Grid (Elastic Path feature-card styling) */}
         <div className={`grid ${gridColsClass} gap-6 items-stretch`}>
-          {gridProjects.map((project) => (
-            <article
-              key={project.name}
-              className="group relative flex flex-col justify-between rounded-2xl border border-canvas/15 bg-ink-deep overflow-hidden hover:border-accent/60 transition-colors"
-            >
+          {gridProjects.map((project, idx) => (
+            <RevealItem key={project.name} index={6 + idx} className="h-full">
+              <article
+                className="group relative flex flex-col justify-between rounded-2xl border border-canvas/15 bg-ink-deep overflow-hidden hover:border-accent/60 transition-colors h-full"
+              >
               <div className="flex-1 flex flex-col">
                 {/* Header Band with Category Icon & Role */}
                 <div className="px-6 pt-5 pb-4 border-b border-canvas/10 flex items-center justify-between gap-3">
@@ -532,9 +537,11 @@ export default function Projects() {
                 />
               </div>
             </article>
+          </RevealItem>
           ))}
         </div>
       </div>
+      </SectionReveal>
     </section>
   )
 }

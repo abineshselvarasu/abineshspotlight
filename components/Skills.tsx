@@ -1,3 +1,5 @@
+import SectionReveal, { RevealItem } from './SectionReveal'
+
 interface CapabilityPillar {
   title: string
   icon: string
@@ -148,149 +150,158 @@ function ToolBadge({
 export default function Skills() {
   return (
     <section id="skills" className="bg-surface text-ink pt-14 pb-16 md:pt-20 md:pb-24 border-b border-rule">
-      <div className="max-w-7xl mx-auto px-6">
+      <SectionReveal>
+        <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="max-w-2xl mb-12">
-          <p className="text-xs font-semibold uppercase tracking-wider text-forest mb-2">
+          <RevealItem index={0} as="p" className="text-xs font-semibold uppercase tracking-wider text-forest mb-2">
             Core Capabilities
-          </p>
-          <h2 className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-ink leading-tight">
+          </RevealItem>
+          <RevealItem index={1} as="h2" className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-ink leading-tight">
             Built for reliable delivery, not clutter.
-          </h2>
-          <p className="mt-4 text-base text-mist leading-relaxed">
+          </RevealItem>
+          <RevealItem index={2} as="p" className="mt-4 text-base text-mist leading-relaxed">
             Every stack decision focuses on fast load times, clean API and PHP architecture, and an editor experience anyone on your team can manage.
-          </p>
+          </RevealItem>
         </div>
 
         {/* Static 4-Column Capability Grid (Elastic Path style) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pillars.map((pillar) => (
-            <div
+          {pillars.map((pillar, idx) => (
+            <RevealItem
               key={pillar.title}
-              className="rounded-xl border border-rule bg-paper/50 p-6 flex flex-col"
+              index={3 + idx}
+              className="h-full"
             >
-              <div className="flex items-center gap-3 pb-4 border-b border-rule">
-                <span className="w-10 h-10 rounded-lg bg-ink text-canvas flex items-center justify-center shrink-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={`/icons/${pillar.icon}.svg`}
-                    alt=""
-                    width={22}
-                    height={22}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-5 h-5 object-contain brightness-0 invert"
-                  />
-                </span>
-                <h3 className="font-display text-xl text-ink leading-snug">
-                  {pillar.title}
-                </h3>
+              <div className="rounded-xl border border-rule bg-paper/50 p-6 flex flex-col h-full">
+                <div className="flex items-center gap-3 pb-4 border-b border-rule">
+                  <span className="w-10 h-10 rounded-lg bg-ink text-canvas flex items-center justify-center shrink-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/icons/${pillar.icon}.svg`}
+                      alt=""
+                      width={22}
+                      height={22}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-5 h-5 object-contain brightness-0 invert"
+                    />
+                  </span>
+                  <h3 className="font-display text-xl text-ink leading-snug">
+                    {pillar.title}
+                  </h3>
+                </div>
+
+                <p className="mt-4 text-sm text-mist leading-relaxed">
+                  {pillar.summary}
+                </p>
+
+                <ul className="mt-4 space-y-2.5 text-sm text-ink/90 flex-1">
+                  {pillar.points.map((point) => (
+                    <li key={point} className="flex items-start gap-2.5 leading-snug">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-forest shrink-0" aria-hidden="true" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <p className="mt-4 text-sm text-mist leading-relaxed">
-                {pillar.summary}
-              </p>
-
-              <ul className="mt-4 space-y-2.5 text-sm text-ink/90 flex-1">
-                {pillar.points.map((point) => (
-                  <li key={point} className="flex items-start gap-2.5 leading-snug">
-                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-forest shrink-0" aria-hidden="true" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            </RevealItem>
           ))}
         </div>
 
         {/* Vibrant Side-by-Side 2-Column Tech Showcase */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
           {/* Left Column: Daily Stack & Platforms */}
-          <div className="relative rounded-2xl border border-forest/20 bg-gradient-to-br from-[#F1F9F4] via-surface to-[#FDF8EB] p-6 sm:p-7 overflow-hidden shadow-sm flex flex-col">
-            <div
-              className="pointer-events-none absolute -top-14 -right-14 w-44 h-44 rounded-full bg-emerald-400/15 blur-2xl"
-              aria-hidden="true"
-            />
+          <RevealItem index={7} className="h-full">
+            <div className="relative rounded-2xl border border-forest/20 bg-gradient-to-br from-[#F1F9F4] via-surface to-[#FDF8EB] p-6 sm:p-7 overflow-hidden shadow-sm flex flex-col h-full">
+              <div
+                className="pointer-events-none absolute -top-14 -right-14 w-44 h-44 rounded-full bg-emerald-400/15 blur-2xl"
+                aria-hidden="true"
+              />
 
-            <div className="relative z-10 flex items-start justify-between gap-3 pb-4 mb-5 border-b border-forest/15">
-              <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-forest to-ink text-accent flex items-center justify-center shrink-0 shadow-sm">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <polygon points="12 2 2 7 12 12 22 7 12 2" />
-                    <polyline points="2 17 12 22 22 17" />
-                    <polyline points="2 12 12 17 22 12" />
-                  </svg>
-                </span>
-                <div>
-                  <h3 className="font-display text-xl sm:text-2xl text-ink leading-tight">
-                    Daily Stack &amp; Platforms
-                  </h3>
-                  <p className="text-xs sm:text-sm text-mist mt-0.5">
-                    CMS engines, languages &amp; modern frontend UI
-                  </p>
+              <div className="relative z-10 flex items-start justify-between gap-3 pb-4 mb-5 border-b border-forest/15">
+                <div className="flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-xl bg-gradient-to-br from-forest to-ink text-accent flex items-center justify-center shrink-0 shadow-sm">
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                      <polyline points="2 17 12 22 22 17" />
+                      <polyline points="2 12 12 17 22 12" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 className="font-display text-xl sm:text-2xl text-ink leading-tight">
+                      Daily Stack &amp; Platforms
+                    </h3>
+                    <p className="text-xs sm:text-sm text-mist mt-0.5">
+                      CMS engines, languages &amp; modern frontend UI
+                    </p>
+                  </div>
                 </div>
+                <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100/90 text-forest border border-emerald-200 tabular-nums">
+                  {dailyStack.length} tools
+                </span>
               </div>
-              <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-100/90 text-forest border border-emerald-200 tabular-nums">
-                {dailyStack.length} tools
-              </span>
-            </div>
 
-            <div className="relative z-10 flex flex-wrap gap-2">
-              {dailyStack.map((tool) => (
-                <ToolBadge key={tool.name} tool={tool} variant="light" />
-              ))}
-            </div>
+              <div className="relative z-10 flex flex-wrap gap-2">
+                {dailyStack.map((tool) => (
+                  <ToolBadge key={tool.name} tool={tool} variant="light" />
+                ))}
+              </div>
 
-            <div
-              className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-forest via-emerald-500 to-accent"
-              aria-hidden="true"
-            />
-          </div>
+              <div
+                className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-forest via-emerald-500 to-accent"
+                aria-hidden="true"
+              />
+            </div>
+          </RevealItem>
 
           {/* Right Column: Hosting, DevOps & Integrations */}
-          <div className="relative rounded-2xl border border-forest/60 bg-gradient-to-br from-ink via-ink-deep to-[#082117] text-canvas p-6 sm:p-7 overflow-hidden shadow-md flex flex-col">
-            <div
-              className="pointer-events-none absolute -top-14 -right-14 w-44 h-44 rounded-full bg-accent/15 blur-2xl"
-              aria-hidden="true"
-            />
+          <RevealItem index={8} className="h-full">
+            <div className="relative rounded-2xl border border-forest/60 bg-gradient-to-br from-ink via-ink-deep to-[#082117] text-canvas p-6 sm:p-7 overflow-hidden shadow-md flex flex-col h-full">
+              <div
+                className="pointer-events-none absolute -top-14 -right-14 w-44 h-44 rounded-full bg-accent/15 blur-2xl"
+                aria-hidden="true"
+              />
 
-            <div className="relative z-10 flex items-start justify-between gap-3 pb-4 mb-5 border-b border-canvas/15">
-              <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-xl bg-accent/15 border border-accent/35 text-accent flex items-center justify-center shrink-0">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
-                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
-                    <line x1="6" y1="6" x2="6.01" y2="6" />
-                    <line x1="6" y1="18" x2="6.01" y2="18" />
-                  </svg>
-                </span>
-                <div>
-                  <h3 className="font-display text-xl sm:text-2xl text-canvas leading-tight">
-                    Hosting, DevOps &amp; Integrations
-                  </h3>
-                  <p className="text-xs sm:text-sm text-canvas/70 mt-0.5">
-                    Cloud platforms, CI/CD automation &amp; backend services
-                  </p>
+              <div className="relative z-10 flex items-start justify-between gap-3 pb-4 mb-5 border-b border-canvas/15">
+                <div className="flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-xl bg-accent/15 border border-accent/35 text-accent flex items-center justify-center shrink-0">
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <rect x="2" y="2" width="20" height="8" rx="2" ry="2" />
+                      <rect x="2" y="14" width="20" height="8" rx="2" ry="2" />
+                      <line x1="6" y1="6" x2="6.01" y2="6" />
+                      <line x1="6" y1="18" x2="6.01" y2="18" />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 className="font-display text-xl sm:text-2xl text-canvas leading-tight">
+                      Hosting, DevOps &amp; Integrations
+                    </h3>
+                    <p className="text-xs sm:text-sm text-canvas/70 mt-0.5">
+                      Cloud platforms, CI/CD automation &amp; backend services
+                    </p>
+                  </div>
                 </div>
+                <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-accent/20 text-accent border border-accent/35 tabular-nums">
+                  {hostingAndDevOps.length} tools
+                </span>
               </div>
-              <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-accent/20 text-accent border border-accent/35 tabular-nums">
-                {hostingAndDevOps.length} tools
-              </span>
-            </div>
 
-            <div className="relative z-10 flex flex-wrap gap-2">
-              {hostingAndDevOps.map((tool) => (
-                <ToolBadge key={tool.name} tool={tool} variant="dark" />
-              ))}
-            </div>
+              <div className="relative z-10 flex flex-wrap gap-2">
+                {hostingAndDevOps.map((tool) => (
+                  <ToolBadge key={tool.name} tool={tool} variant="dark" />
+                ))}
+              </div>
 
-            <div
-              className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-accent via-[#E9C985] to-emerald-400"
-              aria-hidden="true"
-            />
-          </div>
+              <div
+                className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-accent via-[#E9C985] to-emerald-400"
+                aria-hidden="true"
+              />
+            </div>
+          </RevealItem>
         </div>
       </div>
+      </SectionReveal>
     </section>
   )
 }

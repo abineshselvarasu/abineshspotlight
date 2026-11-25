@@ -1,3 +1,4 @@
+import SectionReveal, { RevealItem } from './SectionReveal'
 import { GitHubIcon, LinkedInIcon, WordPressIcon } from './icons'
 
 interface ExperienceItem {
@@ -46,37 +47,40 @@ const experienceList: ExperienceItem[] = [
 export default function About() {
   return (
     <section id="about" className="bg-surface text-ink py-16 md:py-24 border-b border-rule">
-      <div className="max-w-7xl mx-auto px-6">
+      <SectionReveal>
+        <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Narrative & Profiles */}
           <div className="lg:col-span-5">
-            <p className="text-xs font-semibold uppercase tracking-wider text-forest mb-2">
+            <RevealItem index={0} as="p" className="text-xs font-semibold uppercase tracking-wider text-forest mb-2">
               About &amp; Background
-            </p>
-            <h2 className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-ink leading-tight">
+            </RevealItem>
+            <RevealItem index={1} as="h2" className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-ink leading-tight">
               Simple for editors. Fast for visitors.
-            </h2>
+            </RevealItem>
             {/* Elastic Path signature short underline bar */}
             <div className="mt-4 mb-6 h-1 w-14 rounded-full bg-forest" aria-hidden="true" />
 
             <div className="space-y-4 text-base text-mist leading-relaxed">
-              <p>
+              <RevealItem index={2} as="p">
                 I&apos;m Abinesh Selvarasu — a <strong className="text-ink font-semibold">Senior WordPress Developer</strong> with
                 3 years 10 months of production experience across WordPress, Drupal, Craft CMS, and modern React/Next.js frontends.
-              </p>
-              <p>
+              </RevealItem>
+              <RevealItem index={3} as="p">
                 During my tenure at FueInt Technologies, I worked in Agile/Scrum teams across 20+ enterprise SaaS and nonprofit
                 platforms — delivering PHP 8 maintenance upgrades, REST API integrations, clean ACF Pro &amp; Gutenberg systems,
                 and fast, search-friendly websites.
-              </p>
+              </RevealItem>
             </div>
 
-            <blockquote className="mt-6 border-l-2 border-accent pl-4 text-ink font-display text-xl italic leading-relaxed">
-              &ldquo;Fast, maintainable websites shouldn&apos;t feel complicated — they should just work.&rdquo;
-            </blockquote>
+            <RevealItem index={4}>
+              <blockquote className="mt-6 border-l-2 border-accent pl-4 text-ink font-display text-xl italic leading-relaxed">
+                &ldquo;Fast, maintainable websites shouldn&apos;t feel complicated — they should just work.&rdquo;
+              </blockquote>
+            </RevealItem>
 
             {/* Profile Pills */}
-            <div className="mt-8 flex flex-wrap gap-3">
+            <RevealItem index={5} className="mt-8 flex flex-wrap gap-3">
               <a
                 href="https://profiles.wordpress.org/abineshselvarasu/"
                 target="_blank"
@@ -104,49 +108,52 @@ export default function About() {
                 <GitHubIcon className="w-4 h-4 text-forest" />
                 GitHub
               </a>
-            </div>
+            </RevealItem>
           </div>
 
           {/* Right Column: Straightforward Experience Timeline */}
           <div className="lg:col-span-7 space-y-6">
-            {experienceList.map((item) => (
-              <div
+            {experienceList.map((item, idx) => (
+              <RevealItem
                 key={item.role + item.period}
-                className="rounded-xl border border-rule bg-paper/40 p-6 sm:p-7"
+                index={6 + idx}
               >
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-3 border-b border-rule">
-                  <div>
-                    <h3 className="font-display text-2xl text-ink font-normal">
-                      {item.role}
-                    </h3>
-                    <p className="text-sm font-medium text-forest mt-0.5">
-                      {item.company}
-                    </p>
+                <div className="rounded-xl border border-rule bg-paper/40 p-6 sm:p-7">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-3 border-b border-rule">
+                    <div>
+                      <h3 className="font-display text-2xl text-ink font-normal">
+                        {item.role}
+                      </h3>
+                      <p className="text-sm font-medium text-forest mt-0.5">
+                        {item.company}
+                      </p>
+                    </div>
+                    <span className="text-xs font-semibold text-mist shrink-0">
+                      {item.period}
+                    </span>
                   </div>
-                  <span className="text-xs font-semibold text-mist shrink-0">
-                    {item.period}
-                  </span>
+
+                  <p className="mt-3 text-sm text-mist leading-relaxed">
+                    {item.summary}
+                  </p>
+
+                  {item.highlights.length > 0 && (
+                    <ul className="mt-4 space-y-2 text-sm text-ink/90">
+                      {item.highlights.map((bullet) => (
+                        <li key={bullet} className="flex items-start gap-2.5 leading-snug">
+                          <span className="text-forest font-bold shrink-0" aria-hidden="true">✓</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-
-                <p className="mt-3 text-sm text-mist leading-relaxed">
-                  {item.summary}
-                </p>
-
-                {item.highlights.length > 0 && (
-                  <ul className="mt-4 space-y-2 text-sm text-ink/90">
-                    {item.highlights.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-2.5 leading-snug">
-                        <span className="text-forest font-bold shrink-0" aria-hidden="true">✓</span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+              </RevealItem>
             ))}
           </div>
         </div>
       </div>
+      </SectionReveal>
     </section>
   )
 }

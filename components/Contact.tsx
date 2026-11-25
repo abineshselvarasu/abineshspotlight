@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import ScrambleText from './ScrambleText'
+import SectionReveal, { RevealItem } from './SectionReveal'
 import ShootingStarsGrid from './ShootingStarsGrid'
 import { ForwardArrowIcon, GitHubIcon, LinkedInIcon, MailIcon, WhatsAppIcon, WordPressIcon } from './icons'
 
@@ -111,60 +112,63 @@ export default function Contact() {
     <>
       {/* Dedicated Contact CTA Section */}
       <section id="contact" className="bg-surface text-ink py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="relative max-w-5xl lg:max-w-6xl mx-auto rounded-2xl border border-canvas/15 bg-ink text-canvas p-8 sm:p-12 lg:p-14 text-center shadow-[0_24px_60px_-15px_rgba(10,38,27,0.28)] overflow-hidden">
-            <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-accent via-accent/60 to-transparent" aria-hidden="true" />
+        <SectionReveal>
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="relative max-w-5xl lg:max-w-6xl mx-auto rounded-2xl border border-canvas/15 bg-ink text-canvas p-8 sm:p-12 lg:p-14 text-center shadow-[0_24px_60px_-15px_rgba(10,38,27,0.28)] overflow-hidden">
+              <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-accent via-accent/60 to-transparent" aria-hidden="true" />
 
-            <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
-              Contact
-            </p>
-            <h2 className="font-display font-normal text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-canvas leading-tight lg:whitespace-nowrap">
-              Ready to bring your next web build to life.
-            </h2>
-            <div className="mt-4 mx-auto h-[3px] w-14 rounded-full bg-accent" aria-hidden="true" />
+              <RevealItem index={0} as="p" className="text-xs font-semibold uppercase tracking-wider text-accent mb-2">
+                Contact
+              </RevealItem>
+              <RevealItem index={1} as="h2" className="font-display font-normal text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-canvas leading-tight lg:whitespace-nowrap">
+                Ready to bring your next web build to life.
+              </RevealItem>
+              <div className="mt-4 mx-auto h-[3px] w-14 rounded-full bg-accent" aria-hidden="true" />
 
-            <p className="mt-5 text-base text-canvas/80 leading-relaxed max-w-2xl mx-auto">
-              Available immediately for full-time WordPress &amp; CMS engineering roles and selective
-              freelance builds under{' '}
-              <a
-                href="https://gradiolex.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent hover:underline font-medium"
-              >
-                Gradiolex
-              </a>
-              .
-            </p>
+              <RevealItem index={2} as="p" className="mt-5 text-base text-canvas/80 leading-relaxed max-w-2xl mx-auto">
+                Available immediately for full-time WordPress &amp; CMS engineering roles and selective
+                freelance builds under{' '}
+                <a
+                  href="https://gradiolex.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent hover:underline font-medium"
+                >
+                  Gradiolex
+                </a>
+                .
+              </RevealItem>
 
-            {/* Email CTA */}
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href={`mailto:${EMAIL_ADDRESS}`}
-                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-ink text-sm font-semibold hover:bg-canvas transition-colors"
-              >
-                <MailIcon className="w-4 h-4 shrink-0" />
-                Email me
-                <ForwardArrowIcon className="w-4 h-4" />
-              </a>
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-canvas/20 bg-ink-deep/80 text-sm font-medium text-canvas/90 hover:border-accent/60 hover:text-accent transition-colors"
-              >
-                {copied ? 'Copied!' : 'Copy email'}
-              </button>
+              {/* Email CTA */}
+              <RevealItem index={3} className="mt-7 flex flex-wrap items-center justify-center gap-3">
+                <a
+                  href={`mailto:${EMAIL_ADDRESS}`}
+                  className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-ink text-sm font-semibold hover:bg-canvas transition-colors"
+                >
+                  <MailIcon className="w-4 h-4 shrink-0" />
+                  Email me
+                  <ForwardArrowIcon className="w-4 h-4" />
+                </a>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-canvas/20 bg-ink-deep/80 text-sm font-medium text-canvas/90 hover:border-accent/60 hover:text-accent transition-colors"
+                >
+                  {copied ? 'Copied!' : 'Copy email'}
+                </button>
+              </RevealItem>
             </div>
           </div>
-        </div>
+        </SectionReveal>
       </section>
 
       <footer className="relative overflow-hidden bg-ink text-canvas border-t-4 border-accent">
         <ShootingStarsGrid />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-20">
+        <SectionReveal>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
             {/* Identity & Contact */}
-            <div className="md:col-span-5 space-y-5">
+            <RevealItem index={4} className="md:col-span-5 space-y-5">
               <div>
                 <Image
                   src="/logo.png"
@@ -200,10 +204,10 @@ export default function Contact() {
                   View Resume
                 </Link>
               </div>
-            </div>
+            </RevealItem>
 
             {/* Navigation */}
-            <div className="md:col-span-3 md:col-start-7">
+            <RevealItem index={5} className="md:col-span-3 md:col-start-7">
               <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-5">
                 Navigation
               </p>
@@ -218,10 +222,10 @@ export default function Contact() {
                   </a>
                 ))}
               </nav>
-            </div>
+            </RevealItem>
 
             {/* Connect */}
-            <div className="md:col-span-3">
+            <RevealItem index={6} className="md:col-span-3">
               <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-5">
                 Connect
               </p>
@@ -240,12 +244,12 @@ export default function Contact() {
                   </a>
                 ))}
               </div>
-            </div>
+            </RevealItem>
           </div>
         </div>
 
         {/* Bottom Copyright Bar + Inline MySupportInfo-style Ask AI icons */}
-        <div className="relative z-10 border-t border-canvas/10">
+        <RevealItem index={7} className="relative z-10 border-t border-canvas/10">
           <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-canvas/75">
             <p className="text-center sm:text-left">
               © {new Date().getFullYear()} Abinesh Selvarasu ·{' '}
@@ -276,7 +280,8 @@ export default function Contact() {
               </ul>
             </div>
           </div>
-        </div>
+        </RevealItem>
+        </SectionReveal>
       </footer>
     </>
   )

@@ -26,10 +26,6 @@ export default function Hero() {
       {/* Centered Editorial Hero */}
       <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-canvas/15 bg-forest/50 text-xs font-medium text-accent mb-6">
-            Coimbatore, India · Open to WordPress &amp; CMS Roles
-          </p>
-
           <h1 className="font-display font-normal text-4xl sm:text-5xl md:text-[56px] lg:text-[64px] text-canvas tracking-tight leading-[1.08]">
             <span className="inline-block md:whitespace-nowrap">
               Senior <ScrambleText text="WordPress" speed={0.125} /> Developer

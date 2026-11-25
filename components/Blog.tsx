@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Carousel from './Carousel'
+import SectionReveal, { RevealItem } from './SectionReveal'
 import { ForwardArrowIcon } from './icons'
 
 type Article = {
@@ -79,74 +80,80 @@ const articles: Article[] = [
 export default function Blog() {
   return (
     <section id="blog" className="bg-accent text-ink py-16 md:py-24 border-b border-ink/15">
-      <div className="max-w-7xl mx-auto px-6">
+      <SectionReveal>
+        <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between md:items-end mb-10 gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-ink/80 mb-2">
+            <RevealItem index={0} as="p" className="text-xs font-semibold uppercase tracking-wider text-ink/80 mb-2">
               Publications
-            </p>
-            <h2 className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-ink leading-tight">
+            </RevealItem>
+            <RevealItem index={1} as="h2" className="font-display font-normal text-3xl sm:text-4xl md:text-5xl text-ink leading-tight">
               Articles &amp; technical guides.
-            </h2>
+            </RevealItem>
           </div>
 
-          <a
-            href="https://fueint.com/authors/abinesh-s"
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-            className="group inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-ink-deep border-b border-ink/30 hover:border-ink transition-colors pb-0.5"
-          >
-            View all articles
-            <ForwardArrowIcon className="w-4 h-4" />
-          </a>
-        </div>
-
-        <Carousel label="Published technical articles">
-          {articles.map((article) => (
+          <RevealItem index={2}>
             <a
-              key={article.title}
-              href={article.url}
+              href="https://fueint.com/authors/abinesh-s"
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="group flex flex-col h-full rounded-xl border border-ink/15 bg-surface overflow-hidden shadow-sm hover:shadow-lg hover:border-ink/40 transition-all"
-              draggable={false}
+              className="group inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-ink-deep border-b border-ink/30 hover:border-ink transition-colors pb-0.5"
             >
-              <div className="relative aspect-[16/9] w-full bg-canvas overflow-hidden border-b border-ink/10">
-                <Image
-                  src={article.image}
-                  alt={article.title}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
-                  draggable={false}
-                />
-              </div>
+              View all articles
+              <ForwardArrowIcon className="w-4 h-4" />
+            </a>
+          </RevealItem>
+        </div>
 
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-ink/10 text-ink">
-                      {article.category}
-                    </span>
-                    <span className="text-xs text-mist">
-                      {article.readTime} read
-                    </span>
-                  </div>
-
-                  <h3 className="font-display font-normal text-xl text-ink leading-snug group-hover:text-forest transition-colors">
-                    {article.title}
-                  </h3>
+        <RevealItem index={3}>
+          <Carousel label="Published technical articles">
+            {articles.map((article) => (
+              <a
+                key={article.title}
+                href={article.url}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="group flex flex-col h-full rounded-xl border border-ink/15 bg-surface overflow-hidden shadow-sm hover:shadow-lg hover:border-ink/40 transition-all"
+                draggable={false}
+              >
+                <div className="relative aspect-[16/9] w-full bg-canvas overflow-hidden border-b border-ink/10">
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover"
+                    draggable={false}
+                  />
                 </div>
 
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ink group-hover:text-forest">
-                  Read article
-                  <ForwardArrowIcon className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </a>
-          ))}
-        </Carousel>
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-ink/10 text-ink">
+                        {article.category}
+                      </span>
+                      <span className="text-xs text-mist">
+                        {article.readTime} read
+                      </span>
+                    </div>
+
+                    <h3 className="font-display font-normal text-xl text-ink leading-snug group-hover:text-forest transition-colors">
+                      {article.title}
+                    </h3>
+                  </div>
+
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-ink group-hover:text-forest">
+                    Read article
+                    <ForwardArrowIcon className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </a>
+            ))}
+          </Carousel>
+        </RevealItem>
       </div>
+      </SectionReveal>
     </section>
   )
 }
