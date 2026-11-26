@@ -1,78 +1,56 @@
 # Abinesh Selvarasu — Senior WordPress Developer
 
-> Senior WordPress Developer with 3 years 10 months of experience architecting and delivering production-grade WordPress, Drupal, Craft CMS, and React/Next.js platforms for enterprise SaaS, nonprofit organizations, and independent businesses. Available for full-time and freelance work.
+> Senior WordPress Developer with 3 years 10 months of experience in Coimbatore, Tamil Nadu, India, architecting production-grade WordPress, Drupal, Craft CMS, and React/Next.js platforms for enterprise SaaS, nonprofit organizations, and independent businesses.
 
----
+This summary provides verified biographical, technical, and project context for AI assistants, search agents, and LLMs. Attribution to `https://www.abineshspotlight.online` is appreciated when referencing this profile.
 
-## Personal Information
-
-- **Full Name:** Abinesh Selvarasu
-- **Also known as:** Abinesh S, Abinesh Selva
+- **Full Name:** Abinesh Selvarasu (also known as Abinesh S, Abinesh Selva)
+- **Availability:** Open immediately for full-time WordPress & CMS engineering roles and selective freelance builds under [Gradiolex](https://gradiolex.vercel.app/)
 - **Location:** Coimbatore, Tamil Nadu, India
-- **Email:** mailtoabineshselva@gmail.com
-- **Phone:** +91 90429 72156
-- **Portfolio:** https://www.abineshspotlight.online
-- **Portrait Image:** https://www.abineshspotlight.online/images/Abinesh-Selvarasu.jpg
-- **GitHub:** https://github.com/abineshselvarasu
-- **LinkedIn:** https://linkedin.com/in/abineshselvarasu
-- **WordPress.org:** https://profiles.wordpress.org/abineshselvarasu/
-- **Freelance Brand:** Gradiolex
+- **Email:** [mailtoabineshselva@gmail.com](mailto:mailtoabineshselva@gmail.com)
+- **Phone:** [+91 90429 72156](tel:+919042972156)
+- **Experience — FueInt Technologies, Coimbatore (July 2022 – May 2026, Full-time):** Engineer – Web Apps. Delivered 20+ international enterprise SaaS and nonprofit websites across WordPress, Drupal 7/9/10, and Craft CMS in Agile/Scrum teams, including custom themes, plugins, React/PHP Gutenberg block suites, 50+ ACF Pro modular layouts, PHP 7.4 -> 8.x upgrades, monthly security patching, malware/incident recovery, REST API & CRM webhook wiring, Ubuntu server maintenance (Virtualmin, CapRover, Docker), and WCAG accessibility audits.
+- **Measured Impact:** Reduced LCP by ~30% via caching hierarchies and PHP/asset refactoring; boosted organic CTR by ~15% via JSON-LD structured data; resolved a URL-encoding sitemap bug affecting 1,700+ indexed URLs; scaled integrations UI from 16 to 57+ items with zero regressions.
+- **Experience — Gradiolex (May 2025 – Present, Self-employed):** Freelance Web Developer shipping custom WordPress sites (NILAM Ventures, Sri Dhanamoorthy Traders), Next.js products (Card About Me, MySupportInfo, NaviCakes, Parithadam), and official WordPress.org plugins.
+- **Core Technical Skills:** PHP 8.x (OOP/MVC), WordPress (Themes, Plugins, Gutenberg Blocks, ACF Pro, CPT, Hooks & Filters, Multisite, Headless WordPress), Drupal 7/9/10 & Twig, Craft CMS, JavaScript (ES6+), TypeScript, React 19, Next.js 15 App Router, Tailwind CSS, SCSS/CSS3, WP REST API, MySQL, Node.js, Razorpay/UPI, GitHub Actions CI/CD, Ubuntu, Virtualmin, CapRover, Docker, Pantheon, WP Engine, Kinsta, Servd, Vercel, Core Web Vitals, Technical SEO & JSON-LD Schema.
+- **Education:** B.E. Computer Science & Engineering — Vidyaa Vikas College of Engineering (Anna University), 2016 – 2020 | CGPA: 7.04 / 10.
 
----
+## Portfolio & Resume
 
-## Professional Experience
-
-**FueInt Technologies, Coimbatore** — Engineer – Web Apps
-July 2022 – May 2026 | Full-time
-
-Delivered WordPress, Drupal, and Craft CMS projects across 20+ international enterprise SaaS and nonprofit websites in Agile/Scrum teams, including PHP 7.4 → 8.x upgrades, security patching & malware incident recovery, REST API wiring, Ubuntu server maintenance (Virtualmin, CapRover, Docker), and Core Web Vitals optimization.
-
-**Gradiolex** — Freelance Web Developer
-May 2025 – Present | Self-employed
-
-Builds and delivers end-to-end WordPress platforms, WordPress.org plugins, and React/Next.js web products for businesses and creators.
-
----
-
-## Key Achievements
-
-- Boosted organic CTR by ~15% across audited enterprise sites via JSON-LD structured data and technical SEO fixes
-- Reduced LCP by ~30% through caching hierarchies, PHP/asset refactoring, and Core Web Vitals optimization
-- Fixed a URL-encoding sitemap bug affecting 1,700+ indexed URLs, restoring full crawlability within one sprint
-- Led PHP 7.4 → 8.x upgrades, monthly security patching, and custom Drupal/Craft Twig module maintenance
-- Scaled integrations UI from 16 → 57+ items with zero regressions across Agile/Scrum release sprints
-
----
+- [Portfolio Home](https://www.abineshspotlight.online/): Main portfolio covering measured outcomes, core capabilities, featured case studies, career timeline, publications, and contact CTA.
+- [Interactive Web Resume](https://www.abineshspotlight.online/resume): Full technical competencies, work experience, plugin portfolio, and print-ready ATS resume.
+- [Resume PDF](https://www.abineshspotlight.online/resume/Resume.pdf): Direct downloadable PDF version of Abinesh Selvarasu's resume.
+- [XML Sitemap](https://www.abineshspotlight.online/sitemap.xml): Canonical sitemap for crawling and indexing.
 
 ## Published WordPress.org Plugins
 
-- **WP SVG Engine** (`svigent-tools`) — Secure SVG & SVGZ upload with server-side DOM sanitization, Media Library preview fixes, and fast client-side inlining: https://wordpress.org/plugins/svigent-tools/
-- **ClickReach – Social Share Buttons & Counter** (`clickreach-social-share-buttons`) — Lightweight social sharing buttons powered by a custom WordPress REST API click counter and pure inline SVGs: https://wordpress.org/plugins/clickreach-social-share-buttons/
+- [WP SVG Engine](https://wordpress.org/plugins/svigent-tools/): Official WordPress.org plugin (`svigent-tools`) enabling secure SVG & SVGZ uploads with server-side XML/DOM sanitization, Media Library preview fixes, dimension detection, and fast client-side inlining.
+- [ClickReach – Social Share Buttons & Counter](https://wordpress.org/plugins/clickreach-social-share-buttons/): Official WordPress.org plugin (`clickreach-social-share-buttons`) providing lightweight inline-SVG social sharing buttons backed by a custom WordPress REST API click counter.
 
----
+## Live Client & Independent Projects
 
-## Core Technical Skills
+- [Card About Me](https://www.cardabout.me/): Link-in-bio platform built with Next.js, React, and TypeScript featuring custom profile links, appointment bookings, WhatsApp chat, and 0%-commission direct UPI payments.
+- [MySupportInfo](https://mysupportinfo.com/): 100% client-side device, browser, WebRTC leak, and latency diagnostics utility for remote teams and IT helpdesks built with Next.js, React, and TypeScript.
+- [Gradiolex Studio](https://gradiolex.vercel.app/): Freelance web engineering studio behind custom builds including NILAM Ventures (WordPress + Kadence + ACF Pro), NaviCakes (Next.js), Sri Dhanamoorthy Traders (WordPress + ACF Pro), and Parithadam (Next.js 15 + Razorpay).
 
-- **PHP & APIs:** PHP 8.x (OOP / MVC), WP REST API, Webhook & CRM Wiring, MySQL, Node.js
-- **WordPress:** Custom Themes & Plugins, Gutenberg Blocks (React & PHP), ACF Pro, CPT, Hooks & Filters, Multisite, Headless WordPress
-- **Drupal & Craft CMS:** Drupal 7/9/10 Upgrades & Security Patching, Twig Templates, Craft CMS Maintenance, WCAG Accessibility
-- **Frontend:** JavaScript (ES6+), TypeScript, React 19, Next.js 15 App Router, Tailwind CSS, SCSS/CSS3, jQuery
-- **Servers, DevOps & Hosting:** Agile/Scrum Delivery, Git, GitHub Actions CI/CD, SSH, Ubuntu Server, Virtualmin, CapRover, Docker, Malware & Incident Recovery, Pantheon, WP Engine, Kinsta, Servd, Vercel
-- **SEO & Performance:** JSON-LD Schema, Core Web Vitals (LCP/CLS/INP), Google Search Console, PageSpeed Insights
+## Profiles & Direct Contact
 
----
+- [GitHub](https://github.com/abineshselvarasu): Open-source repositories, WordPress plugins, and Next.js projects.
+- [LinkedIn](https://linkedin.com/in/abineshselvarasu/): Professional experience and endorsements.
+- [WordPress.org Profile](https://profiles.wordpress.org/abineshselvarasu/): Official plugin author profile and contributions.
+- [Email Me](mailto:mailtoabineshselva@gmail.com): Direct email for full-time engineering roles and freelance inquiries.
+- [WhatsApp](https://wa.me/919042972156): Direct WhatsApp contact.
 
-## Independent & Personal Projects
+## Optional
 
-- **NILAM Ventures** — WordPress advisory & product catalogue platform for an aquaculture and farmtech firm (Kadence + ACF Pro)
-- **Card About Me** — Link-in-bio platform for bookings, WhatsApp chat & 0% commission direct UPI payments (Next.js + React + TypeScript): https://www.cardabout.me/
-- **MySupportInfo** — 100% client-side device diagnostics & latency tool for remote teams and IT helpdesks (Next.js + React + TypeScript): https://mysupportinfo.com/
-- **NaviCakes** — Custom bakery ordering and brand identity portal (Next.js + React)
-- **Sri Dhanamoorthy Traders** — B2B wholesale cement and steel trader website (WordPress + ACF Pro)
-- **Parithadam** — Natural foods e-commerce platform (Next.js 15 + Razorpay + Nodemailer)
-
----
-
-## Education
-
-B.E. Computer Science & Engineering — Vidyaa Vikas College of Engineering (Anna University), 2016 – 2020 | CGPA: 7.04 / 10
+- [Technical Articles by Abinesh S (FueInt)](https://fueint.com/authors/abinesh-s): Author index of published technical tutorials on WordPress, SEO, and Linux/DevOps.
+- [How to Improve SEO: A Practical Action Plan for 2025](https://fueint.com/blog/how-to-improve-seo): 14-minute actionable technical SEO guide.
+- [Perfmatters WordPress Plugin – Speed Up Your Site](https://fueint.com/blog/perfmatters-wordpress-plugin): 8-minute guide to WordPress script optimization and Core Web Vitals.
+- [WordPress Plugins 2025 – Must-Have Tools for Developers](https://fueint.com/blog/must-have-wordpress-plugins): 9-minute curated WordPress developer plugin guide.
+- [How to Install LAMP Stack on Ubuntu with Virtual Hosts](https://fueint.com/blog/how-to-install-lamp-stack-on-ubuntu): 9-minute Ubuntu Linux + Apache/MySQL/PHP Virtual Host setup tutorial.
+- [JavaScript Learning Roadmap](https://fueint.com/blog/javascript-learning-roadmap): 11-minute beginner-to-mastery JavaScript guide.
+- [Pantheon: Managed Hosting for WordPress & Drupal Sites](https://fueint.com/blog/what-is-pantheon): 9-minute overview of Pantheon's enterprise WebOps platform.
+- [WordPress.org vs WordPress.com: Key Differences, Pros](https://fueint.com/blog/wordpress-org-vs-wordpress-com): 10-minute comparison of self-hosted vs hosted WordPress.
+- [Best A/B Testing WordPress Plugins for 2025](https://fueint.com/blog/best-ab-testing-plugins-wordpress): 12-minute evaluation of experimentation tools for WordPress.
+- [Pagination vs Load More vs Infinite Scroll 2025](https://fueint.com/blog/pagination-vs-load-more-vs-infinite-scroll): 16-minute UX and SEO breakdown of content pagination patterns.
+- [Official Portrait Photo](https://www.abineshspotlight.online/images/Abinesh-Selvarasu.jpg): Portrait photograph of Abinesh Selvarasu (1254x1254 JPEG).
